@@ -17,6 +17,7 @@ import { post_request } from "./assets/js/utils/services";
 import { save_to_session } from "./sections/footer";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import Verify_email from "./pages/Verify_email";
 
 const emitter = new Emitter();
 
@@ -208,6 +209,7 @@ class Seminar extends React.Component {
                 <Route path="contact" element={<Contact />} />
                 <Route path="login" element={<Login />} />
                 <Route path="signup" element={<Signup />} />
+                <Route path="verify_email" element={<Verify_email />} />
                 <Route path="forgot_password" element={<Forgot_password />} />
                 <Route path="adminstrator" element={<Adminstrator />} />
                 <Route path="*" element={<Page_not_found />} />

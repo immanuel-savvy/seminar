@@ -1,12 +1,12 @@
-const DEV = false;
+const DEV = true;
 
 const hostname = DEV
   ? `http://${"localhost"}`
   : "https://api.voucherafrica.com:2559";
 
-const client_domain = DEV ? `${hostname}:3000` : `https://voucherafrica.com`;
+const client_domain = DEV ? `${hostname}:1415` : `https://voucherafrica.com`;
 
-const domain = DEV ? `${hostname}:1449` : `https://api.voucherafrica.com:2559`;
+const domain = DEV ? `${hostname}:1450` : `https://api.voucherafrica.com:2559`;
 
 const developer_domain = `${domain}/docs`;
 
