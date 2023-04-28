@@ -47,7 +47,7 @@ const dow_index_inverse = new Object({
   sunday: 7,
 });
 
-const organisation_name = "Voucher Africa";
+const organisation_name = "Seminar";
 
 export {
   domain,

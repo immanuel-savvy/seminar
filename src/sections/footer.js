@@ -69,11 +69,13 @@ class Footer extends React.Component {
               <div className="col-lg-5 col-md-5">
                 <div className="footer_widget">
                   <Link to="/">
-                    <img
+                    {/* <img
                       src={require(`../assets/img/logo_light.png`)}
                       className="img-footer small mb-2"
                       alt=""
-                    />
+                    /> */}
+
+                    <h2>Seminar</h2>
                   </Link>
 
                   <h6 className="extream text-light mb-3">Nigeria</h6>

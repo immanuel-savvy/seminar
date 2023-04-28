@@ -87,13 +87,13 @@ class Custom_nav extends React.Component {
                         >
                           <Navbar light expand="lg">
                             <NavbarBrand href="/" className="nav-brand">
-                              <img
+                              {/* <img
                                 src={require(`../assets/img/logo_dark.png`)}
                                 className="logo"
                                 id="logo_white"
                                 alt=""
-                              />
-                              {/* <h2 className="text-dark">Voucher Africa</h2> */}
+                              /> */}
+                              <h2 className="text-dark">Seminar</h2>
                             </NavbarBrand>
                             <NavbarToggler
                               style={{ color: "#000" }}
