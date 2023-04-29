@@ -1,10 +1,10 @@
 import React from "react";
 import Explore_more from "./explore_more";
 import Loadindicator from "./loadindicator";
-import Event from "./event";
+import Seminar from "./seminar";
 import { post_request } from "../assets/js/utils/services";
 
-class Upcoming_events extends React.Component {
+class Upcoming_seminars extends React.Component {
   constructor(props) {
     super(props);
 
@@ -12,13 +12,17 @@ class Upcoming_events extends React.Component {
   }
 
   componentDidMount = async () => {
-    let upcoming_events = await post_request("upcoming_events/10");
-    this.setState({ upcoming_events });
+    let upcoming_seminars = await post_request("seminars", {
+      query: { date: { $gt: Date.now() } },
+      limit: 10,
+    });
+    this.setState({ upcoming_seminars });
   };
 
   render() {
-    let { upcoming_events } = this.state;
-    if (upcoming_events && !upcoming_events.length) return;
+    let { loggeduser } = this.props;
+    let { upcoming_seminars } = this.state;
+    if (upcoming_seminars && !upcoming_seminars.length) return;
 
     return (
       <section>
@@ -27,17 +31,21 @@ class Upcoming_events extends React.Component {
             <div className="col-lg-7 col-md-8">
               <div className="sec-heading center">
                 <h2>
-                  upcoming <span className="theme-cl">Events</span>
+                  upcoming <span className="theme-cl">Seminars</span>
                 </h2>
-                <p>The best events' happening now</p>
+                <p>The best lectures' happening now</p>
               </div>
             </div>
           </div>
           <div className="row justify-content-center">
             <>
-              {upcoming_events ? (
-                upcoming_events.map((event) => (
-                  <Event event={event} key={event._id} />
+              {upcoming_seminars ? (
+                upcoming_seminars.map((seminar) => (
+                  <Seminar
+                    loggeduser={loggeduser}
+                    seminar={seminar}
+                    key={seminar._id}
+                  />
                 ))
               ) : (
                 <div
@@ -49,13 +57,13 @@ class Upcoming_events extends React.Component {
               )}
             </>
           </div>
-          {upcoming_events && upcoming_events.length ? (
-            <Explore_more to="events" />
-          ) : null}
+          {/* {upcoming_seminars && upcoming_seminars.length ? (
+            <Explore_more to="seminars" />
+          ) : null} */}
         </div>
       </section>
     );
   }
 }
 
-export default Upcoming_events;
+export default Upcoming_seminars;

@@ -16,18 +16,9 @@ class Dashboard_nav_menu extends React.Component {
           icon: "fa-th",
         },
         {
-          title: "users",
+          title: "manage_seminars",
           icon: "fa-th",
         },
-        { title: "pending_users_verification" },
-        {
-          title: "vendors",
-        },
-        { title: "unverified_vendors" },
-
-        { title: "running_vouchers" },
-        { title: "redeemed_vouchers" },
-
         {
           title: "about_statement",
         }

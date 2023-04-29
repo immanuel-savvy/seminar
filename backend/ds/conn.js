@@ -2,7 +2,7 @@ import GDS from "generalised-datastore";
 
 let gds;
 
-let USERS, ADMINSTRATORS, ADMIN_HASH, USERS_HASH, GLOBALS;
+let USERS, ADMINSTRATORS, ADMIN_HASH, USERS_HASH, GLOBALS, ATTENDANT, SEMINARS;
 
 const ds_conn = () => {
   gds = new GDS(
@@ -16,8 +16,19 @@ const ds_conn = () => {
   USERS = gds.folder("users");
   ADMIN_HASH = gds.folder("admin_hash", "admin");
   GLOBALS = gds.folder("globals", "global");
+  SEMINARS = gds.folder("seminars");
+  ATTENDANT = gds.folder("attendant", "seminar", "user");
   USERS_HASH = gds.folder("user_hash", "user");
 };
 
-export { gds, USERS, ADMIN_HASH, ADMINSTRATORS, GLOBALS, USERS_HASH };
+export {
+  gds,
+  USERS,
+  ADMIN_HASH,
+  ADMINSTRATORS,
+  GLOBALS,
+  USERS_HASH,
+  SEMINARS,
+  ATTENDANT,
+};
 export default ds_conn;

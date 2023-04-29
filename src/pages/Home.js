@@ -1,7 +1,7 @@
 import React from "react";
 import { Carousel } from "react-bootstrap";
 import Loadindicator from "../components/loadindicator";
-import Upcoming_events from "../components/upcoming_events";
+import Upcoming_seminars from "../components/upcoming_seminars";
 import { Loggeduser } from "../Contexts";
 import Footer from "../sections/footer";
 import Hero_banner from "../sections/hero_banner";
@@ -53,7 +53,7 @@ class Home extends React.Component {
                   <Loadindicator />
                 )}
 
-                <Upcoming_events />
+                <Upcoming_seminars loggeduser={loggeduser} />
               </div>
               <Footer />
             </div>

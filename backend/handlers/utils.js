@@ -2,7 +2,7 @@ import fs from "fs";
 import { generate_random_string } from "generalised-datastore/utils/functions";
 
 let strip_length = 8,
-  prefix = "voucher_africa";
+  prefix = "seminar";
 
 const Paystack_public_key = "pk_test_88c19524a2abc3ad156a72952316e0f77ca87f4e";
 const Paystack_private_key = "sk_test_8f53d8f0d9303a18a856d4aeba97603d0795fdcb";

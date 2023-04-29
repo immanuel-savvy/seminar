@@ -14,20 +14,25 @@ import Attendees from "./attendees";
 import { post_request } from "../assets/js/utils/services";
 import Login from "./login";
 
-class Event extends React.Component {
+class Seminar extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {};
   }
 
-  handle_vendor = () => {
-    let { event } = this.props;
+  componentDidMount = async () => {
+    let { loggeduser, seminar } = this.props;
 
-    save_to_session("vendor", event.vendor);
+    if (loggeduser) {
+      let in_attendance = await post_request("in_attendance", {
+        user: loggeduser._id,
+        seminar: seminar._id,
+      });
+
+      this.setState({ in_attendance });
+    }
   };
-
-  toggle_tickets = () => this.tickets?.toggle();
 
   parse_datetime = (datetime) => {
     let date = new Date(datetime).getTime();
@@ -35,47 +40,54 @@ class Event extends React.Component {
     return `${date_string(date)}, ${time_string(date)}`;
   };
 
-  save_to_wishlist = async (loggeduser) => {
-    if (!loggeduser)
-      return <Login no_redirect action={this.save_to_wishlist} />;
+  toggle_Attendees = () => this.attendees?.toggle();
 
-    let { product } = this.props;
+  toggle_login = () => this.login?.toggle();
 
-    await post_request("add_to_wishlist", {
-      product: product._id,
+  register_attendance = async (loggeduser) => {
+    let { seminar } = this.props;
+
+    if (!loggeduser) return this.toggle_login();
+
+    let result = await post_request("register_attendance", {
+      seminar: seminar._id,
       user: loggeduser._id,
     });
-    return;
+
+    result && this.setState({ in_attendance: true });
   };
 
-  toggle_Attendees = () => this.codes?.toggle();
-
   render() {
-    let { full } = this.state;
-    let { event, edit, ticket, class_name, in_events, in_vendor, ticket_code } =
-      this.props;
-    if (!event) return;
+    let { full, in_attendance } = this.state;
+    let {
+      seminar,
+      edit,
+      ticket,
+      class_name,
+      in_seminars,
+      loggeduser,
+      ticket_code,
+    } = this.props;
+    if (!seminar) return;
 
     let {
       title,
+      speaker,
+      speaker_linkedin,
       images,
       short_description,
-      vendor,
-      total_sales,
-      state,
-      value,
-      location,
-      event_date_time,
-    } = event;
-    if (!vendor) return;
-
-    let { category, name, logo, logo_hash } = vendor;
+      date,
+      category,
+      speaker_image,
+      speaker_image_hash,
+      attendees,
+    } = seminar;
 
     return (
       <div
         className={
           class_name ||
-          (in_events
+          (in_seminars
             ? "col-xl-6 col-lg-6 col-md-6 col-sm-12"
             : "col-xl-4 col-lg-4 col-md-6 col-sm-12")
         }
@@ -83,15 +95,14 @@ class Event extends React.Component {
         <div className="crs_grid">
           <div className="crs_grid_thumb">
             <Link
-              to="/event"
+              to="/seminar"
               onClick={() => {
-                save_to_session("event", {
-                  ...event,
-                  total_sales,
+                save_to_session("seminar", {
+                  ...seminar,
+                  attendees,
                   ticket_code,
                   ticket,
                 });
-                save_to_session("vendor", vendor);
                 scroll_to_top();
               }}
               className="crs_detail_link"
@@ -113,32 +124,31 @@ class Event extends React.Component {
             <div className="crs_flex">
               <div className="crs_fl_first">
                 <div className="crs_cates cl_8">
-                  <span>{category || "Entertainment"}</span>
+                  <span>{category}</span>
                 </div>
               </div>
               <div className="crs_fl_last">
                 <div
-                  onClick={edit ? this.toggle_tickets : null}
+                  onClick={edit ? this.toggle_Attendees : null}
                   style={edit ? { cursor: "pointer" } : null}
                   className="crs_inrolled"
                 >
-                  <strong>{commalise_figures(total_sales || 0, true)}</strong>
-                  Tickets sold
+                  <strong>{commalise_figures(attendees || 0, true)}</strong>
+                  Attendants
                 </div>
               </div>
             </div>
             <div className="crs_title">
               <h4>
                 <Link
-                  to="/event"
+                  to="/seminar"
                   onClick={() => {
-                    save_to_session("event", {
-                      ...event,
-                      total_sales,
+                    save_to_session("seminar", {
+                      ...seminar,
+                      attendees,
                       ticket_code,
                       ticket,
                     });
-                    save_to_session("vendor", vendor);
                     scroll_to_top();
                   }}
                   className="crs_title_link"
@@ -154,55 +164,13 @@ class Event extends React.Component {
               {full ? short_description : short_description.slice(0, 70)}
             </p>
             <p>
-              <i style={{}} className="fas fa-map-marker"></i> <b>{location}</b>
+              <i className="fas fa-map-marker"></i> <b>Google Meet</b>
             </p>
-            {ticket_code ? (
-              <div className="crs_info_detail">
-                {Array.isArray(ticket_code) && ticket_code.length > 1 ? (
-                  <>
-                    <span style={{ fontSize: 18 }}>
-                      <span>Quantity:</span>{" "}
-                      <span>
-                        <b>{ticket_code.length}</b>
-                      </span>
-                    </span>
-                    &nbsp; &nbsp;
-                    <div>
-                      <Text_btn
-                        text="View ticket codes"
-                        style={{ fontWeight: "bold" }}
-                        action={this.toggle_Attendees}
-                      />
-                    </div>
-                    <br />
-                  </>
-                ) : (
-                  <CopyToClipboard text={ticket_code}>
-                    <span style={{ cursor: "pointer" }}>
-                      {ticket_code}{" "}
-                      {state && state !== "unused" ? (
-                        <div className="crs_cates cl_1">
-                          <span>{state}</span>
-                        </div>
-                      ) : (
-                        <i
-                          style={{
-                            color: "rgb(30, 144, 255, 0.8)",
-                            fontSize: 22,
-                          }}
-                          className="fas fa-copy"
-                        ></i>
-                      )}
-                    </span>
-                  </CopyToClipboard>
-                )}
-              </div>
-            ) : null}
 
             <div class="crs_info_detail">
               <ul>
                 <i class="fa fa-clock text-danger"></i>&nbsp;&nbsp;
-                <span>{this.parse_datetime(event_date_time)}</span>
+                <span>{this.parse_datetime(date)}</span>
               </ul>
             </div>
           </div>
@@ -212,45 +180,56 @@ class Event extends React.Component {
               <div className="crs_fl_first">
                 <div className="crs_tutor">
                   <div className="crs_tutor_thumb">
-                    <Link
-                      to={`/vendor?${vendor._id}`}
-                      onClick={this.handle_vendor}
-                    >
+                    <a href={speaker_linkedin} target="_blank">
                       <Preview_image
                         class_name="img-fluid circle"
                         style={{ height: 30, width: 30 }}
-                        image={logo}
-                        image_hash={logo_hash}
+                        image={
+                          speaker_image ||
+                          require("../assets/img/user_image_placeholder.png")
+                        }
+                        image_hash={speaker_image_hash}
                       />
-                    </Link>
+                    </a>
                   </div>
                   <div className="crs_tutor_name">
-                    <Link
-                      to={`/vendor?${vendor._id}`}
-                      onClick={this.handle_vendor}
-                    >
-                      {name}
-                    </Link>
+                    <a href={speaker_linkedin} target="_blank">
+                      {speaker}
+                    </a>
                   </div>
                 </div>
               </div>
               <div className="crs_fl_last">
                 <div className="crs_price">
-                  <h2>
-                    <span className="currency">&#8358;</span>
-                    <span className="theme-cl">
-                      {commalise_figures(Number(value), true)}
-                    </span>
-                  </h2>
+                  {in_attendance ? (
+                    <h3 className="cursor-pointer">
+                      <span className="theme-cl">00:00:00</span>
+                    </h3>
+                  ) : (
+                    <h3
+                      className="cursor-pointer"
+                      onClick={() => this.register_attendance(loggeduser)}
+                    >
+                      <span className="theme-cl">Register</span>
+                    </h3>
+                  )}
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <Modal ref={(codes) => (this.codes = codes)}>
+        <Modal ref={(login) => (this.login = login)}>
+          <Login
+            toggle={this.toggle_login}
+            action={this.register_attendance}
+            no_redirect
+          />
+        </Modal>
+
+        <Modal ref={(attendees) => (this.attendees = attendees)}>
           <Attendees
-            event={event}
+            seminar={seminar}
             ticket={ticket}
             ticket_code={ticket_code}
             toggle={this.toggle_Attendees}
@@ -261,4 +240,4 @@ class Event extends React.Component {
   }
 }
 
-export default Event;
+export default Seminar;

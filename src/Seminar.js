@@ -18,6 +18,7 @@ import { save_to_session } from "./sections/footer";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Verify_email from "./pages/Verify_email";
+import New_seminar from "./pages/New_seminar";
 
 const emitter = new Emitter();
 
@@ -79,30 +80,14 @@ class Seminar extends React.Component {
       }
     }, 60 * 1000);
 
-    this.edit_voucher = ({ voucher, vendor }) =>
-      this.setState({ voucher_in_edit: voucher }, () => {
-        save_to_session("voucher_in_edit", voucher);
-        save_to_session("vendor", vendor);
-        window.location.assign(`${client_domain}/edit_offer_voucher`);
+    this.edit_seminar = (seminar) =>
+      this.setState({ seminar_in_edit: seminar }, () => {
+        save_to_session("seminar_in_edit", seminar);
+
+        window.location.assign(`${client_domain}/edit_seminar`);
       });
 
-    this.edit_event = ({ event, vendor }) =>
-      this.setState({ event_in_edit: event }, () => {
-        save_to_session("event_in_edit", event);
-        save_to_session("vendor", vendor);
-        window.location.assign(`${client_domain}/edit_event`);
-      });
-
-    this.edit_product = ({ product, vendor }) =>
-      this.setState({ product_in_edit: product }, () => {
-        save_to_session("product_in_edit", product);
-        save_to_session("vendor", vendor);
-        window.location.assign(`${client_domain}/edit_product_et_service`);
-      });
-
-    emitter.listen("edit_event", this.edit_event);
-    emitter.listen("edit_product", this.edit_product);
-    emitter.listen("edit_voucher", this.edit_voucher);
+    emitter.listen("edit_seminar", this.edit_seminar);
   };
 
   componentWillUnmount = () => {
@@ -169,16 +154,8 @@ class Seminar extends React.Component {
     });
 
   render = () => {
-    let {
-      loggeduser,
-      navs,
-      subnavs,
-      submenus,
-      admin_logged,
-      event_in_edit,
-      voucher_in_edit,
-      product_in_edit,
-    } = this.state;
+    let { loggeduser, navs, subnavs, submenus, admin_logged, seminar_in_edit } =
+      this.state;
 
     return (
       <Loggeduser.Provider
@@ -207,6 +184,11 @@ class Seminar extends React.Component {
                 <Route index element={<Home />} />
                 <Route path="about" element={<About />} />
                 <Route path="contact" element={<Contact />} />
+                <Route path="new_seminar" element={<New_seminar />} />
+                <Route
+                  path="edit_seminar"
+                  element={<New_seminar seminar={seminar_in_edit} />}
+                />
                 <Route path="login" element={<Login />} />
                 <Route path="signup" element={<Signup />} />
                 <Route path="verify_email" element={<Verify_email />} />

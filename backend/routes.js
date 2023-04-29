@@ -9,6 +9,14 @@ import {
 } from "./handlers/users";
 
 import { admin_login, create_admin, get_admins, stats } from "./handlers/admin";
+import {
+  in_attendance,
+  new_seminar,
+  register_attendance,
+  remove_seminar,
+  seminars,
+  update_seminar,
+} from "./handlers/seminar";
 
 const router = (app) => {
   app.get("/user/:user_id", user);
@@ -23,6 +31,12 @@ const router = (app) => {
   app.post("/update_user/:user", update_user);
   app.post("/verify_email", verify_email);
   app.post("/admin_login", admin_login);
+  app.post("/new_seminar", new_seminar);
+  app.post("/seminars", seminars);
+  app.post("/update_seminar", update_seminar);
+  app.post("/remove_seminar/:seminar", remove_seminar);
+  app.post("/register_attendance", register_attendance);
+  app.post("/in_attendance", in_attendance);
 };
 
 export default router;

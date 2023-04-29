@@ -4,6 +4,7 @@ import Padder from "../components/padder";
 import { Logged_admin } from "../Contexts";
 import Admin_login from "../sections/dashboard/admin_login";
 import Dashboard_navbar from "../sections/dashboard/dashboard_navbar";
+import Manage_seminars from "../sections/dashboard/manage_seminars";
 import Footer, { scroll_to_top } from "../sections/footer";
 import Nav from "../sections/nav";
 import { emitter } from "../Seminar";
@@ -36,7 +37,10 @@ class Adminstrator extends React.Component {
     emitter.remove_listener("dash_nav_click", this.dash_nav_click);
   };
 
-  nav_et_component = () => new Object({});
+  nav_et_component = () =>
+    new Object({
+      manage_seminars: <Manage_seminars />,
+    });
 
   render() {
     let { current_nav } = this.state;
