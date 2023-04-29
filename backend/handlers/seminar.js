@@ -18,6 +18,7 @@ const new_seminar = (req, res) => {
 
     return img;
   });
+  seminar.attendees = 0;
 
   let result = SEMINARS.write(seminar);
   seminar._id = result._id;
@@ -60,7 +61,7 @@ const remove_seminar = (req, res) => {
 const register_attendance = (req, res) => {
   let { user, seminar } = req.body;
 
-  ATTENDANT.write({ user, seminar });
+  ATTENDANT.write({ user, seminar, attended: false });
   SEMINARS.update(seminar, { attendees: { $inc: 1 } });
 
   res.end();
@@ -72,11 +73,30 @@ const in_attendance = (req, res) => {
   res.json({ ok: true, data: ATTENDANT.readone({ user, seminar }) });
 };
 
+const attended = (req, res) => {
+  let { user, seminar } = req.body;
+
+  ATTENDANT.update({ user, seminar }, { attended: true });
+
+  res.end();
+};
+
+const attendees = (req, res) => {
+  let { seminar, query, limit, skip } = req.body;
+
+  res.json({
+    ok: true,
+    data: ATTENDANT.read({ seminar, ...query }, { limit, skip }),
+  });
+};
+
 export {
   seminars,
   new_seminar,
   update_seminar,
   remove_seminar,
   in_attendance,
+  attendees,
+  attended,
   register_attendance,
 };

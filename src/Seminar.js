@@ -46,7 +46,9 @@ class Seminar extends React.Component {
         {
           title: "seminars",
           path: "/seminars",
-          submenu: new Array(),
+          submenu: new Array({
+            title: "my seminars",
+          }),
         },
         {
           title: "login",

@@ -228,12 +228,7 @@ class Seminar extends React.Component {
         </Modal>
 
         <Modal ref={(attendees) => (this.attendees = attendees)}>
-          <Attendees
-            seminar={seminar}
-            ticket={ticket}
-            ticket_code={ticket_code}
-            toggle={this.toggle_Attendees}
-          />
+          <Attendees seminar={seminar} toggle={this.toggle_Attendees} />
         </Modal>
       </div>
     );

@@ -10,6 +10,8 @@ import {
 
 import { admin_login, create_admin, get_admins, stats } from "./handlers/admin";
 import {
+  attended,
+  attendees,
   in_attendance,
   new_seminar,
   register_attendance,
@@ -37,6 +39,8 @@ const router = (app) => {
   app.post("/remove_seminar/:seminar", remove_seminar);
   app.post("/register_attendance", register_attendance);
   app.post("/in_attendance", in_attendance);
+  app.post("/attendees", attendees);
+  app.post("/attended", attended);
 };
 
 export default router;
