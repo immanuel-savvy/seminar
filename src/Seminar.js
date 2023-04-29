@@ -19,6 +19,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Verify_email from "./pages/Verify_email";
 import New_seminar from "./pages/New_seminar";
+import My_seminars from "./pages/My_seminars";
 
 const emitter = new Emitter();
 
@@ -47,7 +48,7 @@ class Seminar extends React.Component {
           title: "seminars",
           path: "/seminars",
           submenu: new Array({
-            title: "my seminars",
+            title: "my_seminars",
           }),
         },
         {
@@ -186,6 +187,10 @@ class Seminar extends React.Component {
                 <Route index element={<Home />} />
                 <Route path="about" element={<About />} />
                 <Route path="contact" element={<Contact />} />
+                <Route
+                  path="my_seminars"
+                  element={<My_seminars loggeduser={loggeduser} />}
+                />
                 <Route path="new_seminar" element={<New_seminar />} />
                 <Route
                   path="edit_seminar"

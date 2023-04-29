@@ -12,7 +12,7 @@ import {
   DropdownToggle,
   DropdownMenu,
 } from "reactstrap";
-import { client_domain } from "../assets/js/utils/constants";
+import { client_domain, organisation_name } from "../assets/js/utils/constants";
 import { to_title } from "../assets/js/utils/functions";
 import Loadindicator from "../components/loadindicator";
 import Login from "../components/login";
@@ -44,6 +44,8 @@ class Custom_nav extends React.Component {
   quick_paths = new Object({});
 
   componentDidMount = () => {};
+
+  my_seminars = () => window.location.assign(`${client_domain}/my_seminars`);
 
   search = () => {
     let { search_param } = this.state;
@@ -402,7 +404,7 @@ class Custom_nav extends React.Component {
                                     type="text"
                                     className="form-control"
                                     autoFocus
-                                    placeholder="Search Voucher Africa"
+                                    placeholder={`Search ${organisation_name}`}
                                     value={search_param}
                                     onChange={({ target }) =>
                                       this.setState({

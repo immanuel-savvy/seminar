@@ -1,4 +1,4 @@
-import { ATTENDANT, SEMINARS } from "../ds/conn";
+import { ATTENDANT, SEMINARS, USER_SEMINARS } from "../ds/conn";
 import { save_image } from "./utils";
 
 const seminars = (req, res) => {
@@ -63,6 +63,7 @@ const register_attendance = (req, res) => {
 
   ATTENDANT.write({ user, seminar, attended: false });
   SEMINARS.update(seminar, { attendees: { $inc: 1 } });
+  USER_SEMINARS.write({ user, seminar });
 
   res.end();
 };
@@ -90,6 +91,15 @@ const attendees = (req, res) => {
   });
 };
 
+const user_seminars = (req, res) => {
+  let { user, limit, skip } = req.body;
+
+  res.json({
+    ok: true,
+    data: USER_SEMINARS.read({ user }, { limit, skip }),
+  });
+};
+
 export {
   seminars,
   new_seminar,
@@ -97,6 +107,7 @@ export {
   remove_seminar,
   in_attendance,
   attendees,
+  user_seminars,
   attended,
   register_attendance,
 };

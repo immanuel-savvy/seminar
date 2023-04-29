@@ -18,6 +18,7 @@ import {
   remove_seminar,
   seminars,
   update_seminar,
+  user_seminars,
 } from "./handlers/seminar";
 
 const router = (app) => {
@@ -41,6 +42,7 @@ const router = (app) => {
   app.post("/in_attendance", in_attendance);
   app.post("/attendees", attendees);
   app.post("/attended", attended);
+  app.post("/user_seminars", user_seminars);
 };
 
 export default router;

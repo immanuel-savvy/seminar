@@ -1,5 +1,4 @@
 import React from "react";
-import CopyToClipboard from "react-copy-to-clipboard";
 import { Link } from "react-router-dom";
 import {
   commalise_figures,
@@ -9,7 +8,6 @@ import {
 import { save_to_session, scroll_to_top } from "../sections/footer";
 import Modal from "./modal";
 import Preview_image from "./preview_image";
-import Text_btn from "./text_btn";
 import Attendees from "./attendees";
 import { post_request } from "../assets/js/utils/services";
 import Login from "./login";
@@ -18,7 +16,9 @@ class Seminar extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      in_attendance: "fetching",
+    };
   }
 
   componentDidMount = async () => {
@@ -201,7 +201,7 @@ class Seminar extends React.Component {
               </div>
               <div className="crs_fl_last">
                 <div className="crs_price">
-                  {in_attendance ? (
+                  {in_attendance === "fetching" ? null : in_attendance ? (
                     <h3 className="cursor-pointer">
                       <span className="theme-cl">00:00:00</span>
                     </h3>
