@@ -621,8 +621,6 @@ class New_seminar extends Handle_file_upload {
       seminar.created = response.created;
     }
 
-    console.log(response);
-
     if (response?._id) {
       this.setState({ new_seminar: seminar });
 
