@@ -588,6 +588,7 @@ class New_seminar extends Handle_file_upload {
       images,
       category,
       description,
+      meet_link,
     } = this.state;
 
     if (!this.is_set()) return;
@@ -598,12 +599,13 @@ class New_seminar extends Handle_file_upload {
       short_description,
       description,
       title,
+      meet_link,
       video,
       images,
       category,
       speaker,
       speaker_linkedin,
-      duration,
+      duration: Number(duration),
       date: new Date(date).getTime(),
     };
     if (things_to_know.length) seminar.things_to_know = things_to_know;

@@ -1,5 +1,4 @@
 import React from "react";
-import Explore_more from "./explore_more";
 import Loadindicator from "./loadindicator";
 import Seminar from "./seminar";
 import { post_request } from "../assets/js/utils/services";
@@ -13,7 +12,7 @@ class Upcoming_seminars extends React.Component {
 
   componentDidMount = async () => {
     let upcoming_seminars = await post_request("seminars", {
-      query: { date: { $gt: Date.now() } },
+      // query: { done: true },
       limit: 10,
     });
     this.setState({ upcoming_seminars });

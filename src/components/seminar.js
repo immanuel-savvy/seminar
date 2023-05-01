@@ -31,7 +31,7 @@ class Seminar extends React.Component {
         seminar: seminar._id,
       });
 
-      this.setState({ in_attendance });
+      this.setState({ in_attendance, in_meeting: in_attendance?.attended });
     } else this.setState({ in_attendance: null });
   };
 
@@ -58,8 +58,19 @@ class Seminar extends React.Component {
     result && this.setState({ in_attendance: true });
   };
 
+  join_meeting = async (loggeduser) => {
+    let { seminar } = this.props;
+    let { _id, meet_link } = seminar;
+
+    await post_request("attended", { user: loggeduser._id, seminar: _id });
+    this.setState({ in_meeting: true });
+    window.open(meet_link);
+  };
+
+  get_certificate = (loggeduser) => {};
+
   render() {
-    let { full, in_attendance } = this.state;
+    let { full, in_attendance, in_meeting } = this.state;
     let {
       seminar,
       edit,
@@ -78,6 +89,7 @@ class Seminar extends React.Component {
       images,
       short_description,
       date,
+      duration,
       category,
       speaker_image,
       speaker_image_hash,
@@ -203,9 +215,33 @@ class Seminar extends React.Component {
               <div className="crs_fl_last">
                 <div className="crs_price">
                   {in_attendance === "fetching" ? null : in_attendance ? (
-                    <h6 className="cursor-pointer">
-                      <Countdown date={date} callback={this.d_day} />
-                    </h6>
+                    date < Date.now() ? (
+                      date + duration * 60 * 1000 > Date.now() ? (
+                        in_meeting ? (
+                          <h5>
+                            <span className="theme-cl">Seminar in Session</span>
+                          </h5>
+                        ) : (
+                          <h5
+                            className="cursor-pointer"
+                            onClick={() => this.join_meeting(loggeduser)}
+                          >
+                            <span className="theme-cl">Join Meeting</span>
+                          </h5>
+                        )
+                      ) : (
+                        <h5
+                          className="cursor-pointer"
+                          onClick={() => this.get_certificate(loggeduser)}
+                        >
+                          <span className="theme-cl">Get Certificate</span>
+                        </h5>
+                      )
+                    ) : (
+                      <h6 className="cursor-pointer">
+                        <Countdown date={date} callback={this.d_day} />
+                      </h6>
+                    )
                   ) : (
                     <h3
                       className="cursor-pointer"
