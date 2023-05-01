@@ -61,6 +61,8 @@ const remove_seminar = (req, res) => {
 const register_attendance = (req, res) => {
   let { user, seminar } = req.body;
 
+  if (ATTENDANT.readone({ user, seminar })) return res.end();
+
   ATTENDANT.write({ user, seminar, attended: false });
   SEMINARS.update(seminar, { attendees: { $inc: 1 } });
   USER_SEMINARS.write({ user, seminar });

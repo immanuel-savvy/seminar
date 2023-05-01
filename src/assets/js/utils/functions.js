@@ -113,8 +113,6 @@ const next_quarter = () => {
   };
 };
 
-const countdown = (date) => {};
-
 const _id = (prefix) => {
   let random_value = "";
   for (let i = 0; i < gen_random_int(32, 12); i++)
@@ -174,6 +172,30 @@ const mask_id = (_id) => {
   _id[2] = _id[2].slice(0, 5);
 
   return _id.join("$");
+};
+
+const countdown = (end_date, return_function, callback, caller) => {
+  let end = new Date(end_date).getTime();
+
+  caller.countdown = setInterval(() => {
+    let now = new Date().getTime();
+    let distance = end - now;
+
+    if (distance < 0) {
+      clearInterval(caller.countdown);
+      callback && callback();
+      return;
+    }
+
+    let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    let hours = Math.floor(
+      (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
+    let mins = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    return_function && return_function({ days, hours, mins, seconds });
+  }, 1000);
 };
 
 export {

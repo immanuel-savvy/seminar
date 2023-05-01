@@ -4,6 +4,7 @@ import Padder from "../components/padder";
 import Seminar_header from "../components/seminar_header";
 import Seminar_overview from "../components/seminar_overview";
 import Seminar_sidebar from "../components/seminar_sidebar";
+import { Loggeduser } from "../Contexts";
 import Footer, { get_session } from "../sections/footer";
 import Custom_nav from "../sections/nav";
 
@@ -24,24 +25,33 @@ class Seminar_detail extends React.Component {
     if (!seminar) return <Loadindicator />;
 
     return (
-      <div>
-        <Custom_nav page="seminar" />
-        <Padder />
+      <Loggeduser.Consumer>
+        {({ loggeduser }) => {
+          return (
+            <div>
+              <Custom_nav page="seminar" />
+              <Padder />
 
-        <Seminar_header seminar={seminar} />
+              <Seminar_header seminar={seminar} />
 
-        <section class="gray pt-5">
-          <div class="container">
-            <div class="row">
-              <Seminar_overview seminar={seminar} />
+              <section class="gray pt-5">
+                <div class="container">
+                  <div class="row">
+                    <Seminar_overview seminar={seminar} />
 
-              <Seminar_sidebar seminar={seminar} />
+                    <Seminar_sidebar
+                      seminar={seminar}
+                      loggeduser={loggeduser}
+                    />
+                  </div>
+                </div>
+              </section>
+
+              <Footer />
             </div>
-          </div>
-        </section>
-
-        <Footer />
-      </div>
+          );
+        }}
+      </Loggeduser.Consumer>
     );
   }
 }

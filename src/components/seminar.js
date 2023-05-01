@@ -11,6 +11,7 @@ import Preview_image from "./preview_image";
 import Attendees from "./attendees";
 import { post_request } from "../assets/js/utils/services";
 import Login from "./login";
+import Countdown from "./countdown";
 
 class Seminar extends React.Component {
   constructor(props) {
@@ -31,7 +32,7 @@ class Seminar extends React.Component {
       });
 
       this.setState({ in_attendance });
-    }
+    } else this.setState({ in_attendance: null });
   };
 
   parse_datetime = (datetime) => {
@@ -202,9 +203,9 @@ class Seminar extends React.Component {
               <div className="crs_fl_last">
                 <div className="crs_price">
                   {in_attendance === "fetching" ? null : in_attendance ? (
-                    <h3 className="cursor-pointer">
-                      <span className="theme-cl">00:00:00</span>
-                    </h3>
+                    <h6 className="cursor-pointer">
+                      <Countdown date={date} callback={this.d_day} />
+                    </h6>
                   ) : (
                     <h3
                       className="cursor-pointer"
