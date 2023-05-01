@@ -21,6 +21,7 @@ import Verify_email from "./pages/Verify_email";
 import New_seminar from "./pages/New_seminar";
 import My_seminars from "./pages/My_seminars";
 import Seminar_detail from "./pages/Seminar_detail";
+import Certificate from "./pages/Certificate";
 
 const emitter = new Emitter();
 
@@ -191,6 +192,10 @@ class Seminar extends React.Component {
                 <Route
                   path="my_seminars"
                   element={<My_seminars loggeduser={loggeduser} />}
+                />
+                <Route
+                  path="certificate/:seminar/:user"
+                  element={<Certificate />}
                 />
                 <Route path="seminar" element={<Seminar_detail />} />
                 <Route path="new_seminar" element={<New_seminar />} />

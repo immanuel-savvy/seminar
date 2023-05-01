@@ -1,5 +1,5 @@
 import React from "react";
-import { to_title } from "../assets/js/utils/functions";
+import { search_object, to_title } from "../assets/js/utils/functions";
 import { post_request } from "../assets/js/utils/services";
 import Listempty from "./listempty";
 import Loadindicator from "./loadindicator";
@@ -22,6 +22,7 @@ class Attendees extends React.Component {
       seminar: seminar._id,
       query: { attended: active_tab === this.tabs[1] },
     });
+    this.og = attendees;
 
     this.setState({ attendees, active_tab });
   };
@@ -32,14 +33,48 @@ class Attendees extends React.Component {
 
   tabs = new Array("registered", "attended");
 
+  search = () => {
+    let { search_param, attendees } = this.state;
+
+    attendees = this.og.filter((a) => search_object(a, search_param || ""));
+
+    this.setState({ attendees });
+  };
+
   render() {
     let { toggle } = this.props;
-    let { attendees, active_tab } = this.state;
+    let { attendees, active_tab, search_param } = this.state;
 
     return (
       <div>
         <div class="modal-content overli" id="loginmodal">
           <Modal_form_title title="Attendees" toggle={toggle} />
+
+          <div className="row align-items-center m-4">
+            <div className="form-group mr-0 pr-0 col-8">
+              <div className="input-with-icon">
+                <input
+                  type="text"
+                  className="form-control"
+                  autoFocus
+                  placeholder={`Search`}
+                  value={search_param}
+                  onChange={({ target }) =>
+                    this.setState(
+                      {
+                        search_param: target.value,
+                      },
+                      this.search
+                    )
+                  }
+                />
+                <i className="ti-search"></i>
+              </div>
+            </div>
+            {/* <div className="form-group col-4">
+              <Small_btn title="Search" action={this.search} />
+            </div> */}
+          </div>
 
           <div class="modal-body">
             {this.tabs.map((tab) => (

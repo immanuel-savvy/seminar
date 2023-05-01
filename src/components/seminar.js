@@ -12,6 +12,7 @@ import Attendees from "./attendees";
 import { post_request } from "../assets/js/utils/services";
 import Login from "./login";
 import Countdown from "./countdown";
+import { client_domain } from "../assets/js/utils/constants";
 
 class Seminar extends React.Component {
   constructor(props) {
@@ -67,7 +68,11 @@ class Seminar extends React.Component {
     window.open(meet_link);
   };
 
-  get_certificate = (loggeduser) => {};
+  get_certificate = (loggeduser) => {
+    let { seminar } = this.props;
+
+    window.location.href = `${client_domain}/certificate/${seminar._id}/${loggeduser._id}`;
+  };
 
   render() {
     let { full, in_attendance, in_meeting } = this.state;
@@ -234,7 +239,9 @@ class Seminar extends React.Component {
                           className="cursor-pointer"
                           onClick={() => this.get_certificate(loggeduser)}
                         >
-                          <span className="theme-cl">Get Certificate</span>
+                          <span className="theme-cl">
+                            {in_attendance?.attended ? "Get Certificate" : null}
+                          </span>
                         </h5>
                       )
                     ) : (

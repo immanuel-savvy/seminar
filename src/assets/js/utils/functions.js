@@ -174,6 +174,27 @@ const mask_id = (_id) => {
   return _id.join("$");
 };
 
+const search_object = (object, param) => {
+  if (Array.isArray(object))
+    return object.filter((o) => search_object(o, param));
+
+  param = param && param.trim().split();
+
+  for (const prop in object) {
+    let value = object[prop];
+    if (typeof value === "string") {
+      value = value.toLowerCase().split(" ");
+      for (let p = 0; p < param.length; p++)
+        for (let v = 0; v < value.length; v++)
+          if (value[v].includes(param[p].trim().toLowerCase())) return object;
+    } else if (Array.isArray(value)) {
+      if (value.find((v) => search_object(v, param?.join(" ")))) return object;
+    } else if (typeof value === "object") {
+      if (search_object(value, param?.join(" "))) return object;
+    }
+  }
+};
+
 const countdown = (end_date, return_function, callback, caller) => {
   let end = new Date(end_date).getTime();
 
@@ -206,6 +227,7 @@ export {
   email_regex,
   phone_regex,
   date_string,
+  search_object,
   time_string,
   next_quarter,
   shuffle_array,

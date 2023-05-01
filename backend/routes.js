@@ -19,12 +19,14 @@ import {
   seminars,
   update_seminar,
   user_seminars,
+  seminar,
 } from "./handlers/seminar";
 
 const router = (app) => {
   app.get("/user/:user_id", user);
   app.get("/get_admins", get_admins);
   app.get("/stats", stats);
+  app.get("/seminar/:seminar_id", seminar);
 
   app.post("/signup", signup);
   app.post("/login", login);

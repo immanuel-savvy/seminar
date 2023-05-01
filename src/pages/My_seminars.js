@@ -19,7 +19,7 @@ class My_seminars extends React.Component {
 
   componentDidMount = async () => {
     let user_seminars = await post_request("user_seminars", {
-      user: this.loggeduser._id,
+      user: this.loggeduser?._id,
     });
 
     this.setState({ user_seminars });
