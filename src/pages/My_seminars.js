@@ -5,7 +5,7 @@ import Loadindicator from "../components/loadindicator";
 import Padder from "../components/padder";
 import Section_header from "../components/section_headers";
 import Breadcrumb_banner from "../sections/breadcrumb_banner";
-import Footer from "../sections/footer";
+import Footer, { get_session } from "../sections/footer";
 import Custom_nav from "../sections/nav";
 import Seminar from "../components/seminar";
 import { Loggeduser } from "../Contexts";
@@ -18,6 +18,8 @@ class My_seminars extends React.Component {
   }
 
   componentDidMount = async () => {
+    if (!this.loggeduser) this.loggeduser = get_session("loggeduser");
+
     let user_seminars = await post_request("user_seminars", {
       user: this.loggeduser?._id,
     });
@@ -74,7 +76,11 @@ class My_seminars extends React.Component {
                           {user_seminars
                             .filter((s) => s.seminar.date < Date.now())
                             .map((s) => (
-                              <Seminar key={s._id} seminar={s.seminar} />
+                              <Seminar
+                                key={s._id}
+                                loggeduser={loggeduser}
+                                seminar={s.seminar}
+                              />
                             ))}
                         </div>
                       </section>

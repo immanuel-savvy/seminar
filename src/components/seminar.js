@@ -83,6 +83,7 @@ class Seminar extends React.Component {
       class_name,
       in_seminars,
       loggeduser,
+      remove,
       ticket_code,
     } = this.props;
     if (!seminar) return;
@@ -132,6 +133,11 @@ class Seminar extends React.Component {
               />
             </Link>
 
+            {remove ? (
+              <div className="crs_locked_ico" onClick={remove}>
+                <i className={`fa fa-trash`}></i>
+              </div>
+            ) : null}
             {edit ? (
               <div className="crs_video_ico cursor-pointer" onClick={edit}>
                 <i className={`fa fa-edit`}></i>
@@ -249,14 +255,14 @@ class Seminar extends React.Component {
                         <Countdown date={date} callback={this.d_day} />
                       </h6>
                     )
-                  ) : (
+                  ) : date > Date.now() ? (
                     <h3
                       className="cursor-pointer"
                       onClick={() => this.register_attendance(loggeduser)}
                     >
                       <span className="theme-cl">Register</span>
                     </h3>
-                  )}
+                  ) : null}
                 </div>
               </div>
             </div>

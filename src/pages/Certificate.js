@@ -1,6 +1,10 @@
 import React from "react";
 import "../assets/css/cert.css";
-import { to_title } from "../assets/js/utils/functions";
+import {
+  date_string,
+  time_string,
+  to_title,
+} from "../assets/js/utils/functions";
 import { get_request } from "../assets/js/utils/services";
 import Loadindicator from "../components/loadindicator";
 
@@ -30,6 +34,7 @@ class Certificate extends React.Component {
     if (!user || !seminar) return <Loadindicator />;
 
     let { firstname, lastname } = user;
+    let { title, speaker, date } = seminar;
 
     return (
       <div className="cert_body">
@@ -40,15 +45,18 @@ class Certificate extends React.Component {
             <h2 className="recipient-name">
               {to_title(`${firstname} ${lastname}`)}
             </h2>
-            <p>has successfully completed the course on</p>
-            <h3 className="course-name">Web Development</h3>
+            <p>successfully took part in the seminar training</p>
+            <h3 className="course-name">{to_title(title)}</h3>
             <p>conducted by</p>
-            <h4 className="organization-name">ABC Company</h4>
+            <h4 className="organization-name">GIIT Africa</h4>
             <p>on</p>
-            <h5 className="completion-date">June 1, 2023</h5>
+            <h5 className="completion-date">
+              {date_string(date)}, {time_string(date)}
+            </h5>
           </div>
           <div className="certificate-footer">
             <p className="signature">Signature</p>
+            <small>{to_title(speaker)}</small>
           </div>
         </div>
       </div>

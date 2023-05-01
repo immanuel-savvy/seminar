@@ -1,16 +1,14 @@
-const DEV = true;
+const DEV = false;
 
 const hostname = DEV
   ? `http://${"localhost"}`
-  : "https://api.voucherafrica.com:2559";
+  : "https://seminar.udaralinksapp.com";
 
-const client_domain = DEV ? `${hostname}:1415` : `https://voucherafrica.com`;
+const client_domain = DEV ? `${hostname}:1415` : `http://giitfoundation.org/`;
 
-const domain = DEV ? `${hostname}:1450` : `https://api.voucherafrica.com:2559`;
+const domain = DEV ? `${hostname}:1450` : `https://seminar.udaralinksapp.com`;
 
-const developer_domain = `${domain}/docs`;
-
-const default_admin = "adminstrators~123voupon~1234567890123";
+const default_admin = "adminstrators~123seminar~1234567890123";
 
 const month_index = new Object({
   0: "jan",
@@ -59,5 +57,4 @@ export {
   DEV,
   dow_index,
   dow_index_inverse,
-  developer_domain,
 };

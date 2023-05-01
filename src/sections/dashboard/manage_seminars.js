@@ -25,6 +25,18 @@ class Manage_seminars extends React.Component {
     emitter.emit("edit_seminar", seminar);
   };
 
+  remove = async (seminar_id) => {
+    if (!window.confirm("Are you sure to remove seminar?")) return;
+
+    let { seminars } = this.state;
+
+    seminars = seminars.filter((s) => s._id !== seminar_id);
+
+    this.setState({ seminars });
+
+    await post_request(`remove_seminar/${seminar_id}`);
+  };
+
   render() {
     let { seminars } = this.state;
 
@@ -48,6 +60,7 @@ class Manage_seminars extends React.Component {
                 <Seminar
                   seminar={seminar}
                   in_seminars
+                  remove={() => this.remove(seminar._id)}
                   edit={() => this.edit(seminar)}
                   key={seminar._id}
                 />

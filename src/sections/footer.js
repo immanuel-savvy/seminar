@@ -1,9 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {
-  developer_domain,
-  organisation_name,
-} from "../assets/js/utils/constants";
+import { organisation_name } from "../assets/js/utils/constants";
 import Toaster from "../components/toast";
 import { emitter } from "../Seminar";
 let navs = new Array("seminar");
@@ -118,11 +115,6 @@ class Footer extends React.Component {
                         </li>
                         <li>
                           <Link to={`/contact`}>Contact</Link>
-                        </li>
-                        <li>
-                          <a href={developer_domain} target="_blank">
-                            Developer
-                          </a>
                         </li>
                       </ul>
                     </div>
