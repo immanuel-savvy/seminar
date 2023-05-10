@@ -95,7 +95,7 @@ class Custom_nav extends React.Component {
                                 id="logo_white"
                                 alt=""
                               /> */}
-                              <h2 className="text-dark">Seminar</h2>
+                              <h2 className="text-dark">GIIT Foundation</h2>
                             </NavbarBrand>
                             <NavbarToggler
                               style={{ color: "#000" }}
@@ -309,23 +309,22 @@ class Custom_nav extends React.Component {
                                         </DropdownMenu>
                                       ) : null}
                                     </UncontrolledDropdown>
-                                  ) : nav.title === "search" ? (
-                                    <li
-                                      onClick={() =>
-                                        this.setState({
-                                          show_search: !this.state.show_search,
-                                        })
-                                      }
-                                    >
-                                      <Link
-                                        to="#"
-                                        style={{ border: "none" }}
-                                        className="btn btn-action"
-                                      >
-                                        <i className="ti-search"></i>
-                                      </Link>
-                                    </li>
-                                  ) : nav.title === "logout" ? (
+                                  ) : nav.title === "search" ? null : // <li
+                                  //   onClick={() =>
+                                  //     this.setState({
+                                  //       show_search: !this.state.show_search,
+                                  //     })
+                                  //   }
+                                  // >
+                                  //   <Link
+                                  //     to="#"
+                                  //     style={{ border: "none" }}
+                                  //     className="btn btn-action"
+                                  //   >
+                                  //     <i className="ti-search"></i>
+                                  //   </Link>
+                                  // </li>
+                                  nav.title === "logout" ? (
                                     <li>
                                       <Link
                                         onClick={

@@ -7,6 +7,8 @@ import {
 } from "../assets/js/utils/functions";
 import { post_request } from "../assets/js/utils/services";
 import Countdown from "./countdown";
+import Login from "./login";
+import Modal from "./modal";
 
 class Seminar_sidebar extends React.Component {
   constructor(props) {
@@ -36,7 +38,7 @@ class Seminar_sidebar extends React.Component {
   register_attendance = async (loggeduser) => {
     let { seminar } = this.props;
 
-    if (!loggeduser) return this.toggle_login();
+    if (!loggeduser) return this.login?.toggle();
 
     let result = await post_request("register_attendance", {
       seminar: seminar._id,
@@ -64,9 +66,9 @@ class Seminar_sidebar extends React.Component {
 
   render() {
     let { in_attendance } = this.state;
-    let { seminar, in_meeting } = this.props;
+    let { seminar, in_meeting, loggeduser } = this.props;
 
-    let { date, attendees, duration, short_description } = seminar;
+    let { date, attendees, duration, short_description, meet_link } = seminar;
 
     return (
       <div className="col-lg-4 col-md-12 order-lg-last">
@@ -118,7 +120,7 @@ class Seminar_sidebar extends React.Component {
                 <div className="btn theme-light enroll-btn">
                   <h2
                     style={{ cursor: "pointer" }}
-                    onClick={this.register_attendance}
+                    onClick={() => this.register_attendance(loggeduser)}
                     className="theme-cl m-0"
                   >
                     Register
@@ -148,12 +150,24 @@ class Seminar_sidebar extends React.Component {
 
                 <li>
                   <i className="ti-map"></i>Location:
-                  <strong>{to_title("Google Meet")}</strong>
+                  <strong>
+                    {meet_link?.includes("youtube")
+                      ? to_title("Youtube Live")
+                      : to_title("Google Meet")}
+                  </strong>
                 </li>
               </ul>
             </div>
           </div>
         </div>
+
+        <Modal ref={(login) => (this.login = login)}>
+          <Login
+            no_redirect
+            action={this.register_attendance}
+            toggle={() => this.login?.toggle()}
+          />
+        </Modal>
       </div>
     );
   }

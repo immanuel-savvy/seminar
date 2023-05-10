@@ -22,9 +22,9 @@ class Contact_sidebar extends React.Component {
                 <h4>Reach Us</h4>
                 <h6>Ikeja - Head Office</h6>
                 <p>
-                  18, Afolabi Aina Street,
+                  3, Obafemi Awolowo way,
                   <br />
-                  Allen Avenue, Ikeja, Lagos.
+                  Opp Local Govt., Ikeja, Lagos.
                   <br />
                 </p>
               </div>
@@ -38,8 +38,8 @@ class Contact_sidebar extends React.Component {
               <div className="ml-3 ml-md-4">
                 <h4>Drop A Mail</h4>
                 <p>
-                  <a href="mailto://voucherafrica@digitaladplanet.com">
-                    voucherafrica@digitaladplanet.com
+                  <a href="mailto://contact@giitfoundation.org">
+                    contact@giitfoundation.org
                   </a>
                   {/* <br />
                   <a href="mailto://admissions@voucherafrica.com">
@@ -57,9 +57,9 @@ class Contact_sidebar extends React.Component {
               <div className="ml-3 ml-md-4">
                 <h4>Make a Call</h4>
                 <p>
-                  +(234) 911 597 6423
+                  +(234) 806 051 5686
                   <br />
-                  +(234) 809 944 1722
+                  +(234) 806 884 2903
                 </p>
               </div>
             </li>

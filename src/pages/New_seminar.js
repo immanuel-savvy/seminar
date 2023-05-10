@@ -487,13 +487,19 @@ class New_seminar extends Handle_file_upload {
   };
 
   handle_images = async (e) => {
-    this.handle_file(e, null, null, () => {
-      let { file, images, filename, file_hash } = this.state;
+    this.handle_file(
+      e,
+      null,
+      null,
+      () => {
+        let { file, images, filename, file_hash } = this.state;
 
-      images = new Array({ url: file, file_hash, filename }, ...images);
+        images = new Array({ url: file, file_hash, filename }, ...images);
 
-      this.setState({ images });
-    });
+        this.setState({ images });
+      },
+      true
+    );
   };
 
   remove_image = (img) => {
@@ -713,3 +719,4 @@ class New_seminar extends Handle_file_upload {
 }
 
 export default New_seminar;
+export { categories };

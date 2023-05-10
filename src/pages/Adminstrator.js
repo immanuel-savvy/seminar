@@ -4,7 +4,16 @@ import Padder from "../components/padder";
 import { Logged_admin } from "../Contexts";
 import Admin_login from "../sections/dashboard/admin_login";
 import Dashboard_navbar from "../sections/dashboard/dashboard_navbar";
+import Manage_about_statement from "../sections/dashboard/manage_about_statement";
+import Manage_articles from "../sections/dashboard/manage_articles";
 import Manage_seminars from "../sections/dashboard/manage_seminars";
+import Manage_speakers from "../sections/dashboard/manage_speakers";
+import Manage_team from "../sections/dashboard/manage_team";
+import Manage_testimonials from "../sections/dashboard/manage_testimonials";
+import Manage_vision_mission_statement from "../sections/dashboard/manage_vision_mission_statement";
+import New_article from "../sections/dashboard/new_article";
+import Pending_reviews from "../sections/dashboard/pending_reviews";
+import Pending_talks from "../sections/dashboard/pending_talks";
 import Footer, { scroll_to_top } from "../sections/footer";
 import Nav from "../sections/nav";
 import { emitter } from "../Seminar";
@@ -40,6 +49,15 @@ class Adminstrator extends React.Component {
   nav_et_component = () =>
     new Object({
       manage_seminars: <Manage_seminars />,
+      manage_speakers: <Manage_speakers />,
+      manage_team: <Manage_team />,
+      pending_talks: <Pending_talks />,
+      about_statement: <Manage_about_statement />,
+      manage_articles: <Manage_articles />,
+      new_article: <New_article />,
+      manage_testimonials: <Manage_testimonials />,
+      pending_testimonies: <Pending_reviews />,
+      vision_mission_statement: <Manage_vision_mission_statement />,
     });
 
   render() {

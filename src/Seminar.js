@@ -13,7 +13,7 @@ import Signup from "./pages/Signup";
 import Page_not_found from "./pages/404";
 import Adminstrator from "./pages/Adminstrator";
 import { client_domain } from "./assets/js/utils/constants";
-import { post_request } from "./assets/js/utils/services";
+import { get_request, post_request } from "./assets/js/utils/services";
 import { save_to_session } from "./sections/footer";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -22,6 +22,10 @@ import New_seminar from "./pages/New_seminar";
 import My_seminars from "./pages/My_seminars";
 import Seminar_detail from "./pages/Seminar_detail";
 import Certificate from "./pages/Certificate";
+import Speakers from "./pages/Speakers";
+import Blog from "./pages/Blog";
+import Testimonials from "./pages/Testimonials";
+import Article from "./pages/Article";
 
 const emitter = new Emitter();
 
@@ -54,6 +58,18 @@ class Seminar extends React.Component {
           }),
         },
         {
+          title: "speakers",
+          path: "/speakers",
+        },
+        {
+          title: "news room",
+          path: "/newsroom",
+        },
+        {
+          title: "testimonials",
+          path: "/testimonials",
+        },
+        {
           title: "login",
           path: "",
         },
@@ -65,7 +81,7 @@ class Seminar extends React.Component {
     };
   }
 
-  componentDidMount = () => {
+  componentDidMount = async () => {
     let loggeduser = window.sessionStorage.getItem("loggeduser");
     if (loggeduser) {
       try {
@@ -93,6 +109,9 @@ class Seminar extends React.Component {
       });
 
     emitter.listen("edit_seminar", this.edit_seminar);
+
+    let entry = await get_request("entry");
+    this.setState({ entry });
   };
 
   componentWillUnmount = () => {
@@ -159,8 +178,15 @@ class Seminar extends React.Component {
     });
 
   render = () => {
-    let { loggeduser, navs, subnavs, submenus, admin_logged, seminar_in_edit } =
-      this.state;
+    let {
+      loggeduser,
+      entry,
+      navs,
+      subnavs,
+      submenus,
+      admin_logged,
+      seminar_in_edit,
+    } = this.state;
 
     return (
       <Loggeduser.Provider
@@ -186,9 +212,10 @@ class Seminar extends React.Component {
           >
             <BrowserRouter>
               <Routes>
-                <Route index element={<Home />} />
+                <Route index element={<Home entry={entry} />} />
                 <Route path="about" element={<About />} />
                 <Route path="contact" element={<Contact />} />
+                <Route path="speakers" element={<Speakers />} />
                 <Route
                   path="my_seminars"
                   element={<My_seminars loggeduser={loggeduser} />}
@@ -198,6 +225,9 @@ class Seminar extends React.Component {
                   element={<Certificate />}
                 />
                 <Route path="seminar" element={<Seminar_detail />} />
+                <Route path="newsroom" element={<Blog />} />
+                <Route path="article" element={<Article />} />
+                <Route path="testimonials" element={<Testimonials />} />
                 <Route path="new_seminar" element={<New_seminar />} />
                 <Route
                   path="edit_seminar"

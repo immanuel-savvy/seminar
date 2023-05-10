@@ -20,7 +20,31 @@ class Dashboard_nav_menu extends React.Component {
           icon: "fa-th",
         },
         {
+          title: "pending_talks",
+        },
+        {
+          title: "manage_team",
+        },
+        {
+          title: "manage_speakers",
+        },
+        {
           title: "about_statement",
+        },
+        {
+          title: "vision_mission_statement",
+        },
+        {
+          title: "new_article",
+        },
+        {
+          title: "manage_articles",
+        },
+        {
+          title: "manage_testimonials",
+        },
+        {
+          title: "pending_testimonies",
         }
       ),
     };

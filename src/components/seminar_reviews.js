@@ -1,9 +1,8 @@
 import React from "react";
-import { post_request } from "../assets/js/utils/services";
+import { get_request, post_request } from "../assets/js/utils/services";
 import Comment from "./comment";
 import Listempty from "./listempty";
 import Loadindicator from "./loadindicator";
-// import Ratings from "./ratings";
 import Submit_review from "./submit_review";
 
 class Seminar_reviews extends React.Component {
@@ -20,11 +19,10 @@ class Seminar_reviews extends React.Component {
     let { seminar } = this.props;
     let { limit, page } = this.state;
 
-    let comments = await post_request("comments", {
-      item: seminar._id,
-      limit,
-      skip: limit * (page - 1),
-    });
+    let comments = await get_request(
+      `comments/${seminar._id}/${limit * (page - 1)}`
+    );
+    if (!Array.isArray(comments)) comments = new Array();
 
     this.setState({ comments });
   };
@@ -69,7 +67,7 @@ class Seminar_reviews extends React.Component {
           </div>
         </div>
 
-        <Submit_review seminar={seminar} on_comment={this.append_comment} />
+        <Submit_review item={seminar} on_comment={this.append_comment} />
       </>
     );
   }

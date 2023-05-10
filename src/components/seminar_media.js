@@ -42,7 +42,7 @@ class Seminar_media extends React.Component {
               >
                 <span class="bb-video-box-innerup">
                   <a
-                    href="https://www.youtube.com/watch?v=A8EI6JaFbv4"
+                    href={video}
                     data-toggle="modal"
                     data-target="#popup-video"
                     class="theme-cl"

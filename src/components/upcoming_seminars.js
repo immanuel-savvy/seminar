@@ -2,6 +2,7 @@ import React from "react";
 import Loadindicator from "./loadindicator";
 import Seminar from "./seminar";
 import { post_request } from "../assets/js/utils/services";
+import Section_header from "./section_headers";
 
 class Upcoming_seminars extends React.Component {
   constructor(props) {
@@ -24,43 +25,45 @@ class Upcoming_seminars extends React.Component {
     if (upcoming_seminars && !upcoming_seminars.length) return;
 
     return (
-      <section>
-        <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-lg-7 col-md-8">
-              <div className="sec-heading center">
-                <h2>
-                  upcoming <span className="theme-cl">Seminars</span>
-                </h2>
-                <p>The best lectures' happening now</p>
+      <>
+        <section>
+          <div className="container">
+            <div className="row justify-content-center">
+              <div className="col-lg-7 col-md-8">
+                <div className="sec-heading center">
+                  <h2>
+                    upcoming <span className="theme-cl">Seminars</span>
+                  </h2>
+                  <p>The best lectures' happening now</p>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="row justify-content-center">
-            <>
-              {upcoming_seminars ? (
-                upcoming_seminars.map((seminar) => (
-                  <Seminar
-                    loggeduser={loggeduser}
-                    seminar={seminar}
-                    key={seminar._id}
-                  />
-                ))
-              ) : (
-                <div
-                  style={{ width: "100%" }}
-                  className="justify-content-center"
-                >
-                  <Loadindicator />
-                </div>
-              )}
-            </>
-          </div>
-          {/* {upcoming_seminars && upcoming_seminars.length ? (
+            <div className="row justify-content-center">
+              <>
+                {upcoming_seminars ? (
+                  upcoming_seminars.map((seminar) => (
+                    <Seminar
+                      loggeduser={loggeduser}
+                      seminar={seminar}
+                      key={seminar._id}
+                    />
+                  ))
+                ) : (
+                  <div
+                    style={{ width: "100%" }}
+                    className="justify-content-center"
+                  >
+                    <Loadindicator />
+                  </div>
+                )}
+              </>
+            </div>
+            {/* {upcoming_seminars && upcoming_seminars.length ? (
             <Explore_more to="seminars" />
           ) : null} */}
-        </div>
-      </section>
+          </div>
+        </section>
+      </>
     );
   }
 }

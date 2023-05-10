@@ -72,12 +72,12 @@ class Footer extends React.Component {
                       alt=""
                     /> */}
 
-                    <h2>Seminar</h2>
+                    <h2 className="text-white">Giit Foundation</h2>
                   </Link>
 
                   <h6 className="extream text-light mb-3">Nigeria</h6>
                   <p className="text-light">
-                    18, Afolabi Aina Street, Allen Avenue, <br />
+                    3, Obafemi Awolowo way, Opp Local Govt, <br />
                     Ikeja, Lagos state.
                   </p>
                 </div>

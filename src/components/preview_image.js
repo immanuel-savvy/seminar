@@ -21,8 +21,11 @@ class Preview_image extends React.Component {
       class_name,
       image_hash,
       height,
+      onclick,
       width,
     } = this.props;
+
+    if (!action) action = onclick;
 
     return (
       <span>
