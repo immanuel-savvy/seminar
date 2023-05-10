@@ -18,6 +18,7 @@ let USERS,
   COMMENTS,
   REVIEWS,
   REPLIES,
+  CONFERENCES,
   TRENDING_ARTICLES;
 
 const ds_conn = () => {
@@ -30,6 +31,7 @@ const ds_conn = () => {
 
   REVIEWS = gds.folder("reviews");
   ARTICLES = gds.folder("articles", null, "categories");
+  CONFERENCES = gds.folder("conferences");
   ARTICLE_CATEGORIES = gds.folder("article_categories");
   TRENDING_ARTICLES = gds.folder("trending_articles", null, "article");
   ADMINSTRATORS = gds.folder("adminstrators");
@@ -53,6 +55,7 @@ export {
   ADMIN_HASH,
   ADMINSTRATORS,
   GLOBALS,
+  CONFERENCES,
   USER_SEMINARS,
   USERS_HASH,
   PENDING_TALKS,

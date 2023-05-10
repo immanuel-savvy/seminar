@@ -76,6 +76,7 @@ import {
   reviews,
   update_alumni_overview,
 } from "./handlers/reviews";
+import { conferences } from "./handlers/conferences";
 
 const router = (app) => {
   app.get("/user/:user_id", user);
@@ -114,6 +115,7 @@ const router = (app) => {
   app.post("/articles", articles);
   app.post("/update_testimonial_overview", update_alumni_overview);
   app.post("/user_seminars", user_seminars);
+  app.post("/conferences", conferences);
   app.post("/pending_talks", pending_talks);
   app.post("/approve_talk/:talk", approve_talk);
   app.post("/decline_talk/:talk", decline_talk);

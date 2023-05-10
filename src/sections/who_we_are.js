@@ -6,14 +6,20 @@ class Who_we_are extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    let { about } = this.props;
+    this.state = { about };
   }
 
-  render() {
-    let { home, about } = this.props;
+  componentDidMount = async () => {};
 
-    let { about_statement, image, image_file_hash, bullets } =
+  render() {
+    let { home } = this.props;
+    let { about } = this.state;
+
+    let { about_statement, datails_text, image, image_file_hash, bullets } =
       about || new Object();
+
+    datails_text = datails_text || "";
 
     return (
       <>
@@ -59,6 +65,13 @@ class Who_we_are extends React.Component {
               </div>
             </div>
           </div>
+          {home ? null : (
+            <div className="container mt-5">
+              {datails_text.split("\n").map((t, index) => (
+                <p key={index}>{t}</p>
+              ))}
+            </div>
+          )}
         </section>
       </>
     );
