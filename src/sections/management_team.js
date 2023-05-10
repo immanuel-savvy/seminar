@@ -26,9 +26,9 @@ class Management_team extends React.Component {
       <section class="min gray">
         <div class="container">
           <Section_header
-            title="Our Management"
-            color_title="Team"
-            description="Do ex proident aliqua id laboris dolor id. Ex id fugiat anim fugiat nostrud cillum deserunt aliquip voluptate reprehenderit eiusmod excepteur sit."
+            title="Meet our Expert"
+            color_title="Management Team"
+            description="Our management teams consist of experienced professionals with a wealth of knowledge and expertise in their respective fields."
           />
 
           <div class="row justify-content-center">

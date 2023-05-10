@@ -10,6 +10,7 @@ import Contact_us from "../components/contact_us_today";
 import Breadcrumb_banner from "../sections/breadcrumb_banner";
 import { organisation_name } from "../assets/js/utils/constants";
 import Section_header from "../components/section_headers";
+import Padder from "../components/padder";
 
 class Testimonials extends React.Component {
   constructor(props) {
@@ -43,7 +44,7 @@ class Testimonials extends React.Component {
     return (
       <div id="main-wrapper">
         <Custom_nav page="Testimonials" refs="header" />
-        <div className="clearfix"></div>
+        <Padder />
         <Breadcrumb_banner title="What we did?" no_gray page="Testimonials" />
 
         <section className="gray">

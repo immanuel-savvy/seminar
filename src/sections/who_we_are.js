@@ -11,7 +11,6 @@ class Who_we_are extends React.Component {
 
   render() {
     let { home, about } = this.props;
-    console.log(about);
 
     let { about_statement, image, image_file_hash, bullets } =
       about || new Object();
@@ -23,7 +22,7 @@ class Who_we_are extends React.Component {
             {home ? (
               <Section_header
                 title="Who we are"
-                description="Commodo commodo sint incididunt esse aliqua est eu laboris ea Lorem pariatur."
+                description="Discover who we are, our values, and how we can partner with you to navigate the ever-evolving landscape of business and technology."
               />
             ) : null}
 

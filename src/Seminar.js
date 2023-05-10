@@ -58,8 +58,16 @@ class Seminar extends React.Component {
           }),
         },
         {
+          title: "conferences",
+          path: "/conferences",
+        },
+        {
           title: "speakers",
           path: "/speakers",
+        },
+        {
+          title: "sponsors",
+          path: "/sponsors",
         },
         {
           title: "news room",

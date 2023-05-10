@@ -48,7 +48,7 @@ class Articles extends React.Component {
             )}
           </div>
           {lastest_articles ? (
-            <Explore_more title="articles" to="/newsroom" />
+            <Explore_more title="articles" to="newsroom" />
           ) : null}
         </div>
       </section>

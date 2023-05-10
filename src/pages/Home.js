@@ -10,6 +10,7 @@ import Footer from "../sections/footer";
 import Hero_banner from "../sections/hero_banner";
 import Management_team from "../sections/management_team";
 import Nav from "../sections/nav";
+import Testimonials from "../sections/testimonials";
 import Vision_mission_stuff from "../sections/vision_mission_stuff";
 import Who_we_are from "../sections/who_we_are";
 
@@ -76,6 +77,8 @@ class Home extends React.Component {
                 <Management_team />
 
                 <Donations />
+
+                <Testimonials />
 
                 <Articles />
 
