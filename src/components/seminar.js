@@ -101,6 +101,7 @@ class Seminar extends React.Component {
       category,
       speaker_image,
       speaker_image_hash,
+      meet_link,
       attendees,
     } = seminar;
 
@@ -196,7 +197,12 @@ class Seminar extends React.Component {
               }
             </p>
             <p>
-              <i className="fas fa-map-marker"></i> <b>Google Meet</b>
+              <i className="fas fa-map-marker"></i>{" "}
+              <b>
+                {meet_link?.includes("youtube")
+                  ? "Youtube Live"
+                  : "Google Meet"}
+              </b>
             </p>
 
             <div class="crs_info_detail">

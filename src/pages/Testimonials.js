@@ -5,12 +5,13 @@ import Listempty from "../components/listempty";
 import Review from "../components/review";
 import { post_request } from "../assets/js/utils/services";
 import Custom_nav from "../sections/nav";
-import Footer from "../sections/footer";
+import Footer, { scroll_to_top } from "../sections/footer";
 import Contact_us from "../components/contact_us_today";
 import Breadcrumb_banner from "../sections/breadcrumb_banner";
 import { organisation_name } from "../assets/js/utils/constants";
 import Section_header from "../components/section_headers";
 import Padder from "../components/padder";
+import Testimonials_header from "../components/testimonials_header";
 
 class Testimonials extends React.Component {
   constructor(props) {
@@ -23,6 +24,8 @@ class Testimonials extends React.Component {
   }
 
   componentDidMount = async () => {
+    scroll_to_top();
+
     document.title = `Testimonials | ${organisation_name}`;
 
     let { page_size, page } = this.state;
@@ -53,7 +56,12 @@ class Testimonials extends React.Component {
             color_title="Genuine Impact"
             description="From life-changing transformations to memorable moments of success, these stories serve as a testament to the quality and effectiveness of our offerings."
           />
+        </section>
+        <div className="container py-5">
+          <Testimonials_header />
+        </div>
 
+        <section className="gray">
           <div style={{ paddingTop: 20 }}>
             <div className="container">
               <div className="row justify-content-center">

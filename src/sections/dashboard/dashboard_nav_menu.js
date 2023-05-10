@@ -45,7 +45,8 @@ class Dashboard_nav_menu extends React.Component {
         },
         {
           title: "pending_testimonies",
-        }
+        },
+        { title: "testimonial_overview" }
       ),
     };
   }

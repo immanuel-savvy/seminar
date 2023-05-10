@@ -69,10 +69,12 @@ import {
   update_article_category,
 } from "./handlers/articles";
 import {
+  alumni_overview,
   approve_review,
   new_review,
   remove_review,
   reviews,
+  update_alumni_overview,
 } from "./handlers/reviews";
 
 const router = (app) => {
@@ -89,6 +91,8 @@ const router = (app) => {
   app.get("/article/:article", article);
   app.get("/comments/:article/:skip", comments);
   app.get("/article_categories", article_categories);
+  app.get("/article_categories", article_categories);
+  app.get("/testimonials", alumni_overview);
 
   app.post("/signup", signup);
   app.post("/login", login);
@@ -108,6 +112,7 @@ const router = (app) => {
   app.post("/attended", attended);
   app.post("/remove_trending_article/:trending", remove_trending_article);
   app.post("/articles", articles);
+  app.post("/update_testimonial_overview", update_alumni_overview);
   app.post("/user_seminars", user_seminars);
   app.post("/pending_talks", pending_talks);
   app.post("/approve_talk/:talk", approve_talk);

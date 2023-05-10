@@ -10,6 +10,7 @@ import Manage_seminars from "../sections/dashboard/manage_seminars";
 import Manage_speakers from "../sections/dashboard/manage_speakers";
 import Manage_team from "../sections/dashboard/manage_team";
 import Manage_testimonials from "../sections/dashboard/manage_testimonials";
+import Manage_testimonial_overview from "../sections/dashboard/manage_testimonial_overview";
 import Manage_vision_mission_statement from "../sections/dashboard/manage_vision_mission_statement";
 import New_article from "../sections/dashboard/new_article";
 import Pending_reviews from "../sections/dashboard/pending_reviews";
@@ -57,6 +58,7 @@ class Adminstrator extends React.Component {
       new_article: <New_article />,
       manage_testimonials: <Manage_testimonials />,
       pending_testimonies: <Pending_reviews />,
+      testimonial_overview: <Manage_testimonial_overview />,
       vision_mission_statement: <Manage_vision_mission_statement />,
     });
 

@@ -26,6 +26,8 @@ import Speakers from "./pages/Speakers";
 import Blog from "./pages/Blog";
 import Testimonials from "./pages/Testimonials";
 import Article from "./pages/Article";
+import Sponsors from "./pages/Sponsors";
+import Conferences from "./pages/Conferences";
 
 const emitter = new Emitter();
 
@@ -236,6 +238,8 @@ class Seminar extends React.Component {
                 <Route path="newsroom" element={<Blog />} />
                 <Route path="article" element={<Article />} />
                 <Route path="testimonials" element={<Testimonials />} />
+                <Route path="conferences" element={<Conferences />} />
+                <Route path="sponsors" element={<Sponsors />} />
                 <Route path="new_seminar" element={<New_seminar />} />
                 <Route
                   path="edit_seminar"

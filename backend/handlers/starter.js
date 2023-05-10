@@ -6,6 +6,7 @@ import {
   USERS_HASH,
 } from "../ds/conn";
 import { GLOBAL_trending_articles } from "./articles";
+import { GLOBAL_alumni_overview } from "./reviews";
 import {
   GLOBALS_about_statement,
   GLOBALS_mission_statement,
@@ -54,6 +55,9 @@ const create_default_admin = () => {
 
   !GLOBALS.readone({ global: GLOBAL_trending_articles }) &&
     GLOBALS.write({ global: GLOBAL_trending_articles, articles: new Array() });
+
+  !GLOBALS.readone({ global: GLOBAL_alumni_overview }) &&
+    GLOBALS.write({ global: GLOBAL_alumni_overview });
 };
 
 export { create_default_admin, default_user };

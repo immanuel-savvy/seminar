@@ -1,5 +1,5 @@
 import { GLOBALS, REVIEWS } from "../ds/conn";
-import { remove_image, save_image } from "./utils";
+import { remove_image, remove_video, save_image, save_video } from "./utils";
 
 const GLOBALS_verified_reviews = "verified_reviews";
 
@@ -84,4 +84,46 @@ const remove_review = (req, res) => {
   res.json({ ok: true, message: "review removed", data: review });
 };
 
-export { remove_review, new_review, approve_review, reviews };
+const GLOBAL_alumni_overview = "alumni_overview";
+
+const alumni_overview = (req, res) => {
+  let alumni_overview_ = GLOBALS.readone({ global: GLOBAL_alumni_overview });
+
+  res.json({ ok: true, message: "alumni overview", data: alumni_overview_ });
+};
+
+const update_alumni_overview = (req, res) => {
+  let { video, thumbnail, image_hash } = req.body;
+
+  (video = save_video(video)), (thumbnail = save_image(thumbnail));
+
+  let alumni_overview = GLOBALS.readone({ global: GLOBAL_alumni_overview });
+  alumni_overview &&
+    (thumbnail.startsWith("data") && remove_image(alumni_overview.thumbnail),
+    video.startsWith("data") && remove_video(alumni_overview.video));
+
+  GLOBALS.update(
+    { global: GLOBAL_alumni_overview },
+    {
+      video,
+      thumbnail,
+      image_hash,
+    }
+  );
+
+  res.json({
+    ok: true,
+    message: "alumni overview updated",
+    data: { video, thumbnail },
+  });
+};
+
+export {
+  update_alumni_overview,
+  alumni_overview,
+  GLOBAL_alumni_overview,
+  remove_review,
+  new_review,
+  approve_review,
+  reviews,
+};
