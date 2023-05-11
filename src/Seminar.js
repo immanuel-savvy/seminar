@@ -28,6 +28,10 @@ import Testimonials from "./pages/Testimonials";
 import Article from "./pages/Article";
 import Sponsors from "./pages/Sponsors";
 import Conferences from "./pages/Conferences";
+import New_conference from "./pages/New_conference";
+import My_conferences from "./pages/My_conferences";
+import Upcoming_conferences from "./pages/Upcoming_conferences";
+import Conference from "./pages/Conference";
 
 const emitter = new Emitter();
 
@@ -62,6 +66,15 @@ class Seminar extends React.Component {
         {
           title: "conferences",
           path: "/conferences",
+          submenu: new Array(
+            {
+              title: "upcoming_conferences",
+              path: "/upcoming_conferences",
+            },
+            {
+              title: "my_conferences",
+            }
+          ),
         },
         {
           title: "speakers",
@@ -239,8 +252,15 @@ class Seminar extends React.Component {
                 <Route path="article" element={<Article />} />
                 <Route path="testimonials" element={<Testimonials />} />
                 <Route path="conferences" element={<Conferences />} />
+                <Route path="conference" element={<Conference />} />
+                <Route path="new_conference" element={<New_conference />} />
                 <Route path="sponsors" element={<Sponsors />} />
                 <Route path="new_seminar" element={<New_seminar />} />
+                <Route
+                  path="upcoming_conferences"
+                  element={<Upcoming_conferences />}
+                />
+                <Route path="my_conferences" element={<My_conferences />} />
                 <Route
                   path="edit_seminar"
                   element={<New_seminar seminar={seminar_in_edit} />}

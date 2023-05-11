@@ -20,6 +20,10 @@ class Dashboard_nav_menu extends React.Component {
           icon: "fa-th",
         },
         {
+          title: "manage_conferences",
+          icon: "fa-th",
+        },
+        {
           title: "pending_talks",
         },
         {

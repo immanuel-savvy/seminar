@@ -19,7 +19,9 @@ let USERS,
   REVIEWS,
   REPLIES,
   CONFERENCES,
-  TRENDING_ARTICLES;
+  TRENDING_ARTICLES,
+  CONFERENCE_ATTENDANT,
+  USER_CONFERENCES;
 
 const ds_conn = () => {
   gds = new GDS(
@@ -44,8 +46,14 @@ const ds_conn = () => {
   ADMIN_HASH = gds.folder("admin_hash", "admin");
   GLOBALS = gds.folder("globals", "global");
   USER_SEMINARS = gds.folder("user_seminars", "user", "seminar");
+  USER_CONFERENCES = gds.folder("user_conferecnes", "user", "conference");
   SEMINARS = gds.folder("seminars");
   ATTENDANT = gds.folder("attendant", "seminar", "user");
+  CONFERENCE_ATTENDANT = gds.folder(
+    "conference_attendant",
+    "conference",
+    "user"
+  );
   USERS_HASH = gds.folder("user_hash", "user");
 };
 
@@ -68,6 +76,8 @@ export {
   COMMENTS,
   REPLIES,
   TRENDING_ARTICLES,
+  CONFERENCE_ATTENDANT,
+  USER_CONFERENCES,
   ATTENDANT,
 };
 export default ds_conn;

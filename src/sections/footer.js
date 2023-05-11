@@ -3,7 +3,14 @@ import { Link } from "react-router-dom";
 import { organisation_name } from "../assets/js/utils/constants";
 import Toaster from "../components/toast";
 import { emitter } from "../Seminar";
-let navs = new Array("seminar");
+
+let navs = new Array(
+  "seminar",
+  "conferences",
+  "speakers",
+  "newsroom",
+  "sponsors"
+);
 
 const rewards = new Object({
   create_voucher: 100,

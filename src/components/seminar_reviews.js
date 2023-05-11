@@ -59,7 +59,7 @@ class Seminar_reviews extends React.Component {
                   <Comment comment={comment} key={comment._id} />
                 ))
               ) : (
-                <Listempty text="Be the first to review this seminar" />
+                <Listempty text="Be the first to review this event" />
               )
             ) : (
               <Loadindicator />

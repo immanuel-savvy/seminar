@@ -18,12 +18,19 @@ class Seminar_sidebar extends React.Component {
   }
 
   componentDidMount = async () => {
-    let { loggeduser, seminar } = this.props;
+    let { loggeduser, seminar, conference } = this.props;
+    if (!seminar) seminar = conference;
+
+    let is_seminar = seminar?._id.startsWith("seminar");
+
     if (loggeduser) {
-      let in_attendance = await post_request("in_attendance", {
-        user: loggeduser._id,
-        seminar: seminar._id,
-      });
+      let in_attendance = await post_request(
+        is_seminar ? "in_attendance" : "in_conference_attendance",
+        {
+          user: loggeduser._id,
+          [is_seminar ? "seminar" : "conference"]: seminar._id,
+        }
+      );
 
       this.setState({ in_attendance, in_meeting: in_attendance?.attended });
     }
@@ -36,29 +43,43 @@ class Seminar_sidebar extends React.Component {
   };
 
   register_attendance = async (loggeduser) => {
-    let { seminar } = this.props;
+    let { seminar, conference } = this.props;
+    if (!seminar) seminar = conference;
+
+    let is_seminar = seminar?._id.startsWith("seminar");
 
     if (!loggeduser) return this.login?.toggle();
 
-    let result = await post_request("register_attendance", {
-      seminar: seminar._id,
-      user: loggeduser._id,
-    });
+    let result = await post_request(
+      is_seminar ? "register_attendance" : "register_conference_attendance",
+      {
+        [is_seminar ? "seminar" : "conference"]: seminar._id,
+        user: loggeduser._id,
+      }
+    );
 
     result && this.setState({ in_attendance: true });
   };
 
   join_meeting = async (loggeduser) => {
-    let { seminar } = this.props;
+    let { seminar, conference } = this.props;
+    if (!seminar) seminar = conference;
+
+    let is_seminar = seminar?._id.startsWith("seminar");
+
     let { _id, meet_link } = seminar;
 
-    await post_request("attended", { user: loggeduser._id, seminar: _id });
+    await post_request("attended", {
+      user: loggeduser._id,
+      [is_seminar ? "seminar" : "conference"]: _id,
+    });
     this.setState({ in_meeting: true });
     window.open(meet_link);
   };
 
   get_certificate = (loggeduser) => {
-    let { seminar } = this.props;
+    let { seminar, conference } = this.props;
+    if (!seminar) seminar = conference;
 
     if (loggeduser)
       window.location.href = `${client_domain}/certificate/${seminar._id}/${loggeduser._id}`;
@@ -66,9 +87,11 @@ class Seminar_sidebar extends React.Component {
 
   render() {
     let { in_attendance } = this.state;
-    let { seminar, in_meeting, loggeduser } = this.props;
+    let { seminar, conference, in_meeting, loggeduser } = this.props;
+    if (!seminar) seminar = conference;
 
-    let { date, attendees, duration, short_description, meet_link } = seminar;
+    let { date, attendees, duration, short_description, _id, meet_link } =
+      seminar;
 
     return (
       <div className="col-lg-4 col-md-12 order-lg-last">
@@ -132,7 +155,9 @@ class Seminar_sidebar extends React.Component {
 
           <div className="ed_view_features">
             <div className="eld mb-3">
-              <h5 className="font-medium">{"What this seminar is about:"}</h5>
+              <h5 className="font-medium">{`What this ${
+                _id?.startsWith("seminar") ? "seminar" : "conference"
+              } is about:`}</h5>
               <p>{short_description}</p>
             </div>
             <div className="eld mb-3">

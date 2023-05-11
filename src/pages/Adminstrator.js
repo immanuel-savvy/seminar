@@ -6,6 +6,7 @@ import Admin_login from "../sections/dashboard/admin_login";
 import Dashboard_navbar from "../sections/dashboard/dashboard_navbar";
 import Manage_about_statement from "../sections/dashboard/manage_about_statement";
 import Manage_articles from "../sections/dashboard/manage_articles";
+import Manage_conferences from "../sections/dashboard/manage_conferences";
 import Manage_seminars from "../sections/dashboard/manage_seminars";
 import Manage_speakers from "../sections/dashboard/manage_speakers";
 import Manage_team from "../sections/dashboard/manage_team";
@@ -58,6 +59,7 @@ class Adminstrator extends React.Component {
       new_article: <New_article />,
       manage_testimonials: <Manage_testimonials />,
       pending_testimonies: <Pending_reviews />,
+      manage_conferences: <Manage_conferences />,
       testimonial_overview: <Manage_testimonial_overview />,
       vision_mission_statement: <Manage_vision_mission_statement />,
     });

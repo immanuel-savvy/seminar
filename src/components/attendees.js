@@ -17,9 +17,12 @@ class Attendees extends React.Component {
   }
 
   fetch_attendees = async (active_tab) => {
-    let { seminar } = this.props;
+    let { seminar, conference } = this.props;
+    if (!seminar) seminar = conference;
+
     let attendees = await post_request("attendees", {
-      seminar: seminar._id,
+      [seminar._id.startsWith("seminar") ? "seminar" : "conference"]:
+        seminar._id,
       query: { attended: active_tab === this.tabs[1] },
     });
     this.og = attendees;

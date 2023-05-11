@@ -14,26 +14,32 @@ import Login from "./login";
 import Countdown from "./countdown";
 import { client_domain } from "../assets/js/utils/constants";
 
-class Seminar extends React.Component {
+class Conference extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      in_attendance: "fetching",
+      in_conference_attendance: "fetching",
     };
   }
 
   componentDidMount = async () => {
-    let { loggeduser, seminar } = this.props;
+    let { loggeduser, conference } = this.props;
 
     if (loggeduser) {
-      let in_attendance = await post_request("in_attendance", {
-        user: loggeduser._id,
-        seminar: seminar._id,
-      });
+      let in_conference_attendance = await post_request(
+        "in_conference_attendance",
+        {
+          user: loggeduser._id,
+          conference: conference._id,
+        }
+      );
 
-      this.setState({ in_attendance, in_meeting: in_attendance?.attended });
-    } else this.setState({ in_attendance: null });
+      this.setState({
+        in_conference_attendance,
+        in_meeting: in_conference_attendance?.conference_attended,
+      });
+    } else this.setState({ in_conference_attendance: null });
   };
 
   parse_datetime = (datetime) => {
@@ -46,49 +52,52 @@ class Seminar extends React.Component {
 
   toggle_login = () => this.login?.toggle();
 
-  register_attendance = async (loggeduser) => {
-    let { seminar } = this.props;
+  register_conference_attendance = async (loggeduser) => {
+    let { conference } = this.props;
 
     if (!loggeduser) return this.toggle_login();
 
-    let result = await post_request("register_attendance", {
-      seminar: seminar._id,
+    let result = await post_request("register_conference_attendance", {
+      conference: conference._id,
       user: loggeduser._id,
     });
 
-    result && this.setState({ in_attendance: true });
+    result && this.setState({ in_conference_attendance: true });
   };
 
   join_meeting = async (loggeduser) => {
-    let { seminar } = this.props;
-    let { _id, meet_link } = seminar;
+    let { conference } = this.props;
+    let { _id, meet_link } = conference;
 
-    await post_request("attended", { user: loggeduser._id, seminar: _id });
+    await post_request("conference_attended", {
+      user: loggeduser._id,
+      conference: _id,
+    });
     this.setState({ in_meeting: true });
     window.open(meet_link);
   };
 
   get_certificate = (loggeduser) => {
-    let { seminar } = this.props;
+    let { conference } = this.props;
 
-    window.location.href = `${client_domain}/certificate/${seminar._id}/${loggeduser._id}`;
+    window.location.href = `${client_domain}/certificate/${conference._id}/${loggeduser._id}`;
   };
 
   toggle_read_more = () => this.setState({ full: !this.state.full });
 
   render() {
-    let { full, in_attendance, in_meeting } = this.state;
+    let { full, in_conference_attendance, in_meeting } = this.state;
     let {
-      seminar,
+      conference,
       edit,
       ticket,
       class_name,
-      in_seminars,
+      in_conferences,
       loggeduser,
       remove,
       ticket_code,
     } = this.props;
-    if (!seminar) return;
+    if (!conference) return;
 
     let {
       title,
@@ -103,13 +112,14 @@ class Seminar extends React.Component {
       speaker_image_hash,
       meet_link,
       attendees,
-    } = seminar;
+      _id,
+    } = conference;
 
     return (
       <div
         className={
           class_name ||
-          (in_seminars
+          (in_conferences
             ? "col-xl-6 col-lg-6 col-md-6 col-sm-12"
             : "col-xl-4 col-lg-4 col-md-6 col-sm-12")
         }
@@ -117,10 +127,10 @@ class Seminar extends React.Component {
         <div className="crs_grid">
           <div className="crs_grid_thumb">
             <Link
-              to="/seminar"
+              to={`/conference?${_id}`}
               onClick={() => {
-                save_to_session("seminar", {
-                  ...seminar,
+                save_to_session("conference", {
+                  ...conference,
                   attendees,
                   ticket_code,
                   ticket,
@@ -168,10 +178,10 @@ class Seminar extends React.Component {
             <div className="crs_title">
               <h4>
                 <Link
-                  to="/seminar"
+                  to={`/conference?${_id}`}
                   onClick={() => {
-                    save_to_session("seminar", {
-                      ...seminar,
+                    save_to_session("conference", {
+                      ...conference,
                       attendees,
                       ticket_code,
                       ticket,
@@ -239,12 +249,15 @@ class Seminar extends React.Component {
               </div>
               <div className="crs_fl_last">
                 <div className="crs_price">
-                  {in_attendance === "fetching" ? null : in_attendance ? (
+                  {in_conference_attendance ===
+                  "fetching" ? null : in_conference_attendance ? (
                     date < Date.now() ? (
                       date + duration * 60 * 1000 > Date.now() ? (
                         in_meeting ? (
                           <h5>
-                            <span className="theme-cl">Seminar in Session</span>
+                            <span className="theme-cl">
+                              Conference in Session
+                            </span>
                           </h5>
                         ) : (
                           <h5
@@ -260,7 +273,9 @@ class Seminar extends React.Component {
                           onClick={() => this.get_certificate(loggeduser)}
                         >
                           <span className="theme-cl">
-                            {in_attendance?.attended ? "Get Certificate" : null}
+                            {in_conference_attendance?.conference_attended
+                              ? "Get Certificate"
+                              : null}
                           </span>
                         </h5>
                       )
@@ -272,7 +287,9 @@ class Seminar extends React.Component {
                   ) : date > Date.now() ? (
                     <h3
                       className="cursor-pointer"
-                      onClick={() => this.register_attendance(loggeduser)}
+                      onClick={() =>
+                        this.register_conference_attendance(loggeduser)
+                      }
                     >
                       <span className="theme-cl">Register</span>
                     </h3>
@@ -286,17 +303,17 @@ class Seminar extends React.Component {
         <Modal ref={(login) => (this.login = login)}>
           <Login
             toggle={this.toggle_login}
-            action={this.register_attendance}
+            action={this.register_conference_attendance}
             no_redirect
           />
         </Modal>
 
         <Modal ref={(attendees) => (this.attendees = attendees)}>
-          <Attendees seminar={seminar} toggle={this.toggle_Attendees} />
+          <Attendees conference={conference} toggle={this.toggle_Attendees} />
         </Modal>
       </div>
     );
   }
 }
 
-export default Seminar;
+export default Conference;

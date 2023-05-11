@@ -39,17 +39,21 @@ class Review extends React.Component {
                 />
               </div>
               <div className="_tsl_flex_capst">
-                <h5>{name}</h5>
+                <h5 style={{ fontSize: 16, marginBottom: 5 }}>{name}</h5>
                 <div className="_ovr_posts">
-                  <span>{to_title(`${position}, ${organisation}`)}</span>
+                  <span style={{ fontSize: 14 }}>
+                    {to_title(`${position}, ${organisation}`)}
+                  </span>
                 </div>
                 {review.verified ? (
-                  <div className="_ovr_rates">
-                    <span>
-                      <i className="fa fa-star"></i>
-                    </span>
-                    {`${rating || 1.0}`}
-                  </div>
+                  <></> || (
+                    <div className="_ovr_rates">
+                      <span>
+                        <i className="fa fa-star"></i>
+                      </span>
+                      {`${rating || 1.0}`}
+                    </div>
+                  )
                 ) : approve_review ? (
                   <Small_btn
                     action={() =>

@@ -76,7 +76,16 @@ import {
   reviews,
   update_alumni_overview,
 } from "./handlers/reviews";
-import { conferences } from "./handlers/conferences";
+import {
+  conference_attended,
+  conference_attendees,
+  in_conference_attendance,
+  register_conference_attendance,
+  remove_conference,
+  update_conference,
+  conferences,
+  new_conference,
+} from "./handlers/conference";
 
 const router = (app) => {
   app.get("/user/:user_id", user);
@@ -104,18 +113,25 @@ const router = (app) => {
   app.post("/verify_email", verify_email);
   app.post("/admin_login", admin_login);
   app.post("/new_seminar", new_seminar);
+  app.post("/new_conference", new_conference);
   app.post("/seminars", seminars);
+  app.post("/conferences", conferences);
   app.post("/update_seminar", update_seminar);
+  app.post("/update_conference", update_conference);
   app.post("/remove_seminar/:seminar", remove_seminar);
+  app.post("/remove_conference/:conference", remove_conference);
   app.post("/register_attendance", register_attendance);
+  app.post("/register_conference_attendance", register_conference_attendance);
   app.post("/in_attendance", in_attendance);
+  app.post("/in_conference_attendance", in_conference_attendance);
   app.post("/attendees", attendees);
+  app.post("/conference_attendees", conference_attendees);
   app.post("/attended", attended);
+  app.post("/conference_attended", conference_attended);
   app.post("/remove_trending_article/:trending", remove_trending_article);
   app.post("/articles", articles);
   app.post("/update_testimonial_overview", update_alumni_overview);
   app.post("/user_seminars", user_seminars);
-  app.post("/conferences", conferences);
   app.post("/pending_talks", pending_talks);
   app.post("/approve_talk/:talk", approve_talk);
   app.post("/decline_talk/:talk", decline_talk);

@@ -47,6 +47,12 @@ class Custom_nav extends React.Component {
 
   my_seminars = () => window.location.assign(`${client_domain}/my_seminars`);
 
+  upcoming_conferences = () =>
+    window.location.assign(`${client_domain}/upcoming_conferences`);
+
+  my_conferences = () =>
+    window.location.assign(`${client_domain}/my_conferences`);
+
   search = () => {
     let { search_param } = this.state;
     if (!search_param.trim()) return;
@@ -309,8 +315,8 @@ class Custom_nav extends React.Component {
                                         </DropdownMenu>
                                       ) : null}
                                     </UncontrolledDropdown>
-                                  ) : nav.title === "search" ? null : // <li
-                                  //   onClick={() =>
+                                  ) : nav.title ===
+                                    "search" ? null : //   onClick={() => // <li
                                   //     this.setState({
                                   //       show_search: !this.state.show_search,
                                   //     })

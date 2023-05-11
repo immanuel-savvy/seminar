@@ -1,5 +1,5 @@
 import React from "react";
-import { date_string } from "../assets/js/utils/functions";
+import { date_string, time_string } from "../assets/js/utils/functions";
 import Preview_image from "../components/preview_image";
 
 class Seminar_header extends React.Component {
@@ -27,7 +27,9 @@ class Seminar_header extends React.Component {
   };
 
   render() {
-    let { seminar } = this.props;
+    let { seminar, conference } = this.props;
+    if (!seminar) seminar = conference;
+
     let {
       title,
       attendees,
@@ -93,12 +95,17 @@ class Seminar_header extends React.Component {
                   <i className="fas fa-clock mr-1 text-success"></i>
                   <span>
                     {this.parse_duration(duration)}, <br />
-                    {date_string(date)}
                   </span>
                 </li>
                 <li className="col-lg-6 col-md-6 col-sm-6 pt-2 pb-2">
                   <i className="fas fa-user mr-1 text-info"></i>
                   <span>{attendees || 0} Attendants</span>
+                </li>
+                <li className="col-lg-6 col-md-6 col-sm-6 pt-2 pb-2">
+                  <i className="fas fa-calendar mr-1 text-success"></i>
+                  <span>
+                    {date_string(date)} {time_string(date)}
+                  </span>
                 </li>
               </ul>
             </div>

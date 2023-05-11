@@ -1,6 +1,8 @@
 import React from "react";
+import { client_domain } from "../assets/js/utils/constants";
 import Preview_image from "../components/preview_image";
 import Section_header from "../components/section_headers";
+import Small_btn from "../components/small_btn";
 
 class Who_we_are extends React.Component {
   constructor(props) {
@@ -19,7 +21,14 @@ class Who_we_are extends React.Component {
     let { about_statement, datails_text, image, image_file_hash, bullets } =
       about || new Object();
 
-    datails_text = datails_text || "";
+    if (!home)
+      datails_text =
+        datails_text ||
+        `With a focus on cutting-edge topics and emerging trends, our seminars provide attendees with valuable insights, practical skills, and transformative experiences. Whether you are a student, professional, entrepreneur, or lifelong learner, our foundation welcomes you to join our community of like-minded individuals driven by a thirst for knowledge and a desire to make a positive impact.
+
+    Through our commitment to excellence, we strive to deliver seminars that empower individuals to reach their full potential, challenge conventional thinking, and drive positive change in their lives and communities. We believe that education is the key to personal and societal growth, and our foundation is dedicated to providing a platform where learning becomes a transformative journey.
+    
+    Join us on this exciting quest for knowledge, as we embark together on a mission to build a brighter future through education and inspiration. Together, let's unlock the power of seminars and pave the way for meaningful change.`;
 
     return (
       <>
@@ -55,6 +64,15 @@ class Who_we_are extends React.Component {
                         </div>
                       ))
                     : null}
+
+                  {home ? (
+                    <Small_btn
+                      title="Learn More"
+                      action={() =>
+                        window.location.assign(`${client_domain}/about`)
+                      }
+                    />
+                  ) : null}
                 </div>
               </div>
 

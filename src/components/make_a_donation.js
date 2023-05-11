@@ -68,9 +68,12 @@ class Make_a_donation extends React.Component {
                   target="_blank"
                   href={`mailto://${"donations@giitfoundation.org"}`}
                 >
-                  donations@giitfoundation.org
+                  <span className="theme-cl">donations@giitfoundation.org</span>
                 </a>{" "}
-                or <Link to="/contact">Click here</Link>
+                or{" "}
+                <Link to="/contact">
+                  <span className="theme-cl">Click here</span>
+                </Link>
               </p>
             </div>
           </div>

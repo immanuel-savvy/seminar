@@ -1,4 +1,5 @@
 import React from "react";
+import { organisation_name } from "../assets/js/utils/constants";
 import { post_request } from "../assets/js/utils/services";
 import Contact_us from "../components/contact_us_today";
 import Listempty from "../components/listempty";
@@ -35,6 +36,7 @@ class Conferences extends React.Component {
   };
 
   componentDidMount = async () => {
+    document.title = `Conferences | ${organisation_name}`;
     await this.fetch_conferences();
   };
 
