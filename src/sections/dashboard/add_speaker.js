@@ -41,7 +41,7 @@ class Add_speaker extends Handle_file_upload {
       cat
     );
 
-    if (result && result._id) {
+    if (result?._id) {
       cat._id = result._id;
       cat.image = result.image;
       cat.created = result.created;
@@ -50,8 +50,7 @@ class Add_speaker extends Handle_file_upload {
       toggle();
     } else {
       this.setState({
-        message:
-          (result && result.message) || "Cannot create speaker at the moment.",
+        message: result?.message || "Cannot create speaker at the moment.",
         loading: false,
       });
     }
@@ -73,7 +72,7 @@ class Add_speaker extends Handle_file_upload {
     return (
       <div>
         <div class="modal-content overli" id="loginmodal">
-          <Modal_form_title title="Add Team Member" toggle={toggle} />
+          <Modal_form_title title="Add Speaker" toggle={toggle} />
 
           <div class="modal-body">
             <div class="login-form">

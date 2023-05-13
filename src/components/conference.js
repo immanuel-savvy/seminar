@@ -13,6 +13,7 @@ import { post_request } from "../assets/js/utils/services";
 import Login from "./login";
 import Countdown from "./countdown";
 import { client_domain } from "../assets/js/utils/constants";
+import Update_sponsors from "../sections/dashboard/update_sponsors";
 
 class Conference extends React.Component {
   constructor(props) {
@@ -84,6 +85,8 @@ class Conference extends React.Component {
   };
 
   toggle_read_more = () => this.setState({ full: !this.state.full });
+
+  update_sponsors = () => this.sponsors.toggle();
 
   render() {
     let { full, in_conference_attendance, in_meeting } = this.state;
@@ -249,8 +252,15 @@ class Conference extends React.Component {
               </div>
               <div className="crs_fl_last">
                 <div className="crs_price">
-                  {in_conference_attendance ===
-                  "fetching" ? null : in_conference_attendance ? (
+                  {edit ? (
+                    <h3
+                      className="cursor-pointer"
+                      onClick={() => this.update_sponsors()}
+                    >
+                      <span className="theme-cl">Add Sponsors</span>
+                    </h3>
+                  ) : in_conference_attendance ===
+                    "fetching" ? null : in_conference_attendance ? (
                     date < Date.now() ? (
                       date + duration * 60 * 1000 > Date.now() ? (
                         in_meeting ? (
@@ -306,6 +316,10 @@ class Conference extends React.Component {
             action={this.register_conference_attendance}
             no_redirect
           />
+        </Modal>
+
+        <Modal ref={(sponsors) => (this.sponsors = sponsors)}>
+          <Update_sponsors event={conference} toggle={this.update_sponsors} />
         </Modal>
 
         <Modal ref={(attendees) => (this.attendees = attendees)}>

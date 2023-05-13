@@ -21,7 +21,7 @@ class Seminar_overview extends React.Component {
 
         <Seminar_details seminar={seminar} />
 
-        <Sponsors seminar={seminar} />
+        <Sponsors event={seminar} />
 
         <Seminar_reviews seminar={seminar} />
       </div>

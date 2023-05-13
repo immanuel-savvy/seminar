@@ -21,15 +21,12 @@ let USERS,
   CONFERENCES,
   TRENDING_ARTICLES,
   CONFERENCE_ATTENDANT,
+  SPONSORS,
+  EVENT_SPONSORS,
   USER_CONFERENCES;
 
 const ds_conn = () => {
-  gds = new GDS(
-    "giit_seminar",
-    process.env["PWD"].includes("www")
-      ? process.env["PWD"].split("/").slice(0).join("/")
-      : null
-  ).sync();
+  gds = new GDS("giit_seminar").sync();
 
   REVIEWS = gds.folder("reviews");
   ARTICLES = gds.folder("articles", null, "categories");
@@ -38,6 +35,8 @@ const ds_conn = () => {
   TRENDING_ARTICLES = gds.folder("trending_articles", null, "article");
   ADMINSTRATORS = gds.folder("adminstrators");
   USERS = gds.folder("users");
+  SPONSORS = gds.folder("sponsors");
+  EVENT_SPONSORS = gds.folder("event_sponsors", "event");
   PENDING_TALKS = gds.folder("pending_talks", null, "user");
   TEAM_MEMBER = gds.folder("team_members");
   SPEAKERS = gds.folder("speakers");
@@ -78,6 +77,8 @@ export {
   TRENDING_ARTICLES,
   CONFERENCE_ATTENDANT,
   USER_CONFERENCES,
+  SPONSORS,
+  EVENT_SPONSORS,
   ATTENDANT,
 };
 export default ds_conn;

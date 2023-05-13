@@ -1,5 +1,5 @@
 import React from "react";
-import { post_request } from "../../assets/js/utils/services";
+import { get_request, post_request } from "../../assets/js/utils/services";
 import Listempty from "../../components/listempty";
 import Loadindicator from "../../components/loadindicator";
 import Modal from "../../components/modal";
@@ -8,14 +8,30 @@ import Sponsor from "../../components/sponsor";
 import Add_sponsor from "./add_sponsor";
 import Dashboard_breadcrumb from "./dashboard_breadcrumb";
 
-class Manage_sponsors extends Component {
+class Manage_sponsors extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {};
   }
 
+  componentDidMount = async () => {
+    let sponsors = await get_request("sponsors");
+
+    this.setState({ sponsors });
+  };
+
   toggle_add_sponsor = () => this.sponsor?.toggle();
+
+  on_add = (sponsor) => {
+    let { sponsor_in_edit, sponsors } = this.state;
+
+    if (sponsor_in_edit)
+      sponsors = sponsors.map((s) => (s._id === sponsor._id ? sponsor : s));
+    else sponsors = new Array(sponsor, ...sponsors);
+
+    this.setState({ sponsors });
+  };
 
   edit = (sponsor) => {
     this.setState({ sponsor_in_edit: sponsor }, this.toggle_add_sponsor);

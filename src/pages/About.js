@@ -8,6 +8,7 @@ import Breadcrumb_banner from "../sections/breadcrumb_banner";
 import Footer, { scroll_to_top } from "../sections/footer";
 import Management_team from "../sections/management_team";
 import Custom_nav from "../sections/nav";
+import Sponsors from "../sections/sponsors";
 import Testimonials from "../sections/testimonials";
 import Who_we_are from "../sections/who_we_are";
 
@@ -48,6 +49,8 @@ class About extends React.Component {
         <Management_team />
 
         <Testimonials />
+
+        <Sponsors />
 
         <Contact_us />
 

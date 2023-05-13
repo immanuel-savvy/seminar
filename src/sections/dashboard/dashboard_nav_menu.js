@@ -30,6 +30,9 @@ class Dashboard_nav_menu extends React.Component {
           title: "manage_team",
         },
         {
+          title: "manage_sponsors",
+        },
+        {
           title: "manage_speakers",
         },
         {

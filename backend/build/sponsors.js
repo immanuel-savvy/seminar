@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.update_team_member = exports.team_members = exports.remove_team_member = exports.add_team_member = void 0;
+exports.update_sponsor = exports.update_event_sponsors = exports.sponsors = exports.remove_sponsor = exports.new_sponsor = exports.event_sponsors = void 0;
 var _conn = require("../ds/conn");
 var _utils = require("./utils");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
@@ -12,45 +12,79 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-var add_team_member = function add_team_member(req, res) {
-  var data = req.body;
-  data.image = (0, _utils.save_image)(data.image);
-  var result = _conn.TEAM_MEMBER.write(data);
+var new_sponsor = function new_sponsor(req, res) {
+  var sponsor = req.body;
+  sponsor.logo = (0, _utils.save_image)(sponsor.logo);
+  var result = _conn.SPONSORS.write(sponsor);
   res.json({
     ok: true,
     data: {
       _id: result._id,
-      image: data.image,
+      logo: sponsor.logo,
       created: result.created
     }
   });
 };
-exports.add_team_member = add_team_member;
-var update_team_member = function update_team_member(req, res) {
-  var data = req.body;
-  data.image = (0, _utils.save_image)(data.image);
-  var result = _conn.TEAM_MEMBER.update(data._id, _objectSpread({}, data));
+exports.new_sponsor = new_sponsor;
+var update_sponsor = function update_sponsor(req, res) {
+  var sponsor = req.body;
+  sponsor.logo = (0, _utils.save_image)(sponsor.logo);
+  _conn.SPONSORS.update(sponsor._id, _objectSpread({}, sponsor));
   res.json({
     ok: true,
     data: {
-      _id: result._id,
-      image: data.image,
-      created: result.created
+      logo: sponsor.logo,
+      _id: sponsor._id,
+      created: sponsor.created
     }
   });
 };
-exports.update_team_member = update_team_member;
-var team_members = function team_members(req, res) {
+exports.update_sponsor = update_sponsor;
+var event_sponsors = function event_sponsors(req, res) {
+  var event = req.params.event;
+  var sponsors = _conn.EVENT_SPONSORS.readone({
+    event: event
+  });
+  if (!sponsors) sponsors = new Array();else sponsors = _conn.SPONSORS.read(sponsors.sponsors);
   res.json({
     ok: true,
-    data: _conn.TEAM_MEMBER.read()
+    data: sponsors
   });
 };
-exports.team_members = team_members;
-var remove_team_member = function remove_team_member(req, res) {
-  var member = req.params.member;
-  var result = _conn.TEAM_MEMBER.remove(member);
-  result && (0, _utils.remove_image)(result.image);
+exports.event_sponsors = event_sponsors;
+var sponsors = function sponsors(req, res) {
+  res.json({
+    ok: true,
+    data: _conn.SPONSORS.read()
+  });
+};
+exports.sponsors = sponsors;
+var update_event_sponsors = function update_event_sponsors(req, res) {
+  var _req$body = req.body,
+    event = _req$body.event,
+    sponsors = _req$body.sponsors;
+  var e_sponsor = _conn.EVENT_SPONSORS.readone({
+    event: event,
+    sponsors: sponsors
+  });
+  if (e_sponsor) {
+    _conn.EVENT_SPONSORS.update({
+      event: event,
+      _id: e_sponsor._id
+    }, {
+      sponsors: sponsors
+    });
+  } else _conn.EVENT_SPONSORS.write({
+    event: event,
+    sponsors: sponsors
+  });
   res.end();
 };
-exports.remove_team_member = remove_team_member;
+exports.update_event_sponsors = update_event_sponsors;
+var remove_sponsor = function remove_sponsor(req, res) {
+  var sponsor = req.params.sponsor;
+  var result = _conn.SPONSORS.remove(sponsor);
+  result && (0, _utils.remove_image)(sponsor.logo);
+  res.end();
+};
+exports.remove_sponsor = remove_sponsor;

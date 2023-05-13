@@ -13,6 +13,7 @@ import { post_request } from "../assets/js/utils/services";
 import Login from "./login";
 import Countdown from "./countdown";
 import { client_domain } from "../assets/js/utils/constants";
+import Update_sponsors from "../sections/dashboard/update_sponsors";
 
 class Seminar extends React.Component {
   constructor(props) {
@@ -75,6 +76,8 @@ class Seminar extends React.Component {
   };
 
   toggle_read_more = () => this.setState({ full: !this.state.full });
+
+  update_sponsors = () => this.sponsors.toggle();
 
   render() {
     let { full, in_attendance, in_meeting } = this.state;
@@ -239,7 +242,14 @@ class Seminar extends React.Component {
               </div>
               <div className="crs_fl_last">
                 <div className="crs_price">
-                  {in_attendance === "fetching" ? null : in_attendance ? (
+                  {edit ? (
+                    <h3
+                      className="cursor-pointer"
+                      onClick={() => this.update_sponsors()}
+                    >
+                      <span className="theme-cl">Add Sponsors</span>
+                    </h3>
+                  ) : in_attendance === "fetching" ? null : in_attendance ? (
                     date < Date.now() ? (
                       date + duration * 60 * 1000 > Date.now() ? (
                         in_meeting ? (
@@ -289,6 +299,10 @@ class Seminar extends React.Component {
             action={this.register_attendance}
             no_redirect
           />
+        </Modal>
+
+        <Modal ref={(sponsors) => (this.sponsors = sponsors)}>
+          <Update_sponsors event={seminar} toggle={this.update_sponsors} />
         </Modal>
 
         <Modal ref={(attendees) => (this.attendees = attendees)}>

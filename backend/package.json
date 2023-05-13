@@ -5,7 +5,7 @@
   "main": "Seminar.js",
   "scripts": {
     "start": "nodemon -r esm Seminar.js",
-    "build": "babel ./handlers/starter.js ./handlers/articles.js ./handlers/conferences.js ./handlers/reviews.js ./handlers/seminar.js ./handlers/team_members.js ./handlers/speakers.js ./handlers/settings.js ./ds/conn.js ./routes.js -d build",
+    "build": "babel ./handlers/conference.js -d build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Savvy",

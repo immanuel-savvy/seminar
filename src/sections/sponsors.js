@@ -12,19 +12,13 @@ class Sponsors extends React.Component {
   }
 
   componentDidMount = async () => {
-    let { seminar } = this.props;
+    let { event } = this.props;
 
     let sponsors;
-    if (!seminar) {
+    if (!event) {
       sponsors = await get_request("sponsors");
     } else {
-      sponsors = await get_request(
-        `${
-          seminar?._id?.startsWith("seminar")
-            ? "seminar_sponsors"
-            : "conference_sponsors"
-        }/${seminar._id}`
-      );
+      sponsors = await get_request(`event_sponsors/${event._id}`);
     }
 
     if (!Array.isArray(sponsors)) sponsors = new Array();
@@ -38,14 +32,14 @@ class Sponsors extends React.Component {
     if (sponsors && !sponsors.length) return;
 
     return (
-      <section>
+      <section className="ed_view_box">
         <div className="container">
           <Section_header
             title="sponsors"
             description="We are incredibly grateful for the support and contribution of our valued sponsors."
           />
 
-          <div className="row align-items-center justify-content-between">
+          <div className="row align-items-center justify-content-center">
             {sponsors ? (
               sponsors.map((sponsor) => (
                 <Sponsor sponsor={sponsor} key={sponsor._id} />

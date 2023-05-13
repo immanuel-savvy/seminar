@@ -1,4 +1,4 @@
-const DEV = true;
+const DEV = false;
 
 const hostname = DEV
   ? `http://${"localhost"}`
@@ -45,7 +45,7 @@ const dow_index_inverse = new Object({
   sunday: 7,
 });
 
-const organisation_name = "Seminar";
+const organisation_name = "GIIT Foundation";
 
 export {
   domain,

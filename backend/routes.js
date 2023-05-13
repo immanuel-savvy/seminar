@@ -86,6 +86,14 @@ import {
   conferences,
   new_conference,
 } from "./handlers/conference";
+import {
+  event_sponsors,
+  new_sponsor,
+  remove_sponsor,
+  sponsors,
+  update_event_sponsors,
+  update_sponsor,
+} from "./handlers/sponsors";
 
 const router = (app) => {
   app.get("/user/:user_id", user);
@@ -103,6 +111,8 @@ const router = (app) => {
   app.get("/article_categories", article_categories);
   app.get("/article_categories", article_categories);
   app.get("/testimonials", alumni_overview);
+  app.get("/sponsors", sponsors);
+  app.get("/event_sponsors/:event", event_sponsors);
 
   app.post("/signup", signup);
   app.post("/login", login);
@@ -155,6 +165,10 @@ const router = (app) => {
   app.post("/comment_dislike", comment_dislike);
   app.post("/comment_heart", comment_heart);
   app.post("/comment_rating", comment_rating);
+  app.post("/new_sponsor", new_sponsor);
+  app.post("/update_sponsor", update_sponsor);
+  app.post("/remove_sponsor/:sponsor", remove_sponsor);
+  app.post("/update_event_sponsors", update_event_sponsors);
 
   app.post("/add_speaker", add_speaker);
   app.post("/update_speaker", update_speaker);

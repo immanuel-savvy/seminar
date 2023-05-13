@@ -9,6 +9,7 @@ import Manage_articles from "../sections/dashboard/manage_articles";
 import Manage_conferences from "../sections/dashboard/manage_conferences";
 import Manage_seminars from "../sections/dashboard/manage_seminars";
 import Manage_speakers from "../sections/dashboard/manage_speakers";
+import Manage_sponsors from "../sections/dashboard/manage_sponsors";
 import Manage_team from "../sections/dashboard/manage_team";
 import Manage_testimonials from "../sections/dashboard/manage_testimonials";
 import Manage_testimonial_overview from "../sections/dashboard/manage_testimonial_overview";
@@ -52,6 +53,7 @@ class Adminstrator extends React.Component {
     new Object({
       manage_seminars: <Manage_seminars />,
       manage_speakers: <Manage_speakers />,
+      manage_sponsors: <Manage_sponsors />,
       manage_team: <Manage_team />,
       pending_talks: <Pending_talks />,
       about_statement: <Manage_about_statement />,
