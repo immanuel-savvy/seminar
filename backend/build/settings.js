@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.update_vision = exports.update_mission = exports.update_about_statement = exports.mission_vision_statement = exports.entry = exports.about_statement = exports.GLOBALS_vision_statement = exports.GLOBALS_mission_statement = exports.GLOBALS_about_statement = void 0;
+exports.update_vision = exports.update_mission = exports.update_event_highlight = exports.update_about_statement = exports.mission_vision_statement = exports.entry = exports.about_statement = exports.GLOBALS_vision_statement = exports.GLOBALS_mission_statement = exports.GLOBALS_about_statement = void 0;
 var _conn = require("../ds/conn");
 var _utils = require("./utils");
 var GLOBALS_mission_statement = "mission_statement",
@@ -124,3 +124,28 @@ var entry = function entry(req, res) {
   });
 };
 exports.entry = entry;
+var update_event_highlight = function update_event_highlight(req, res) {
+  var _req$body4 = req.body,
+    event = _req$body4.event,
+    images = _req$body4.images,
+    video = _req$body4.video;
+  images = images.map(function (img) {
+    img.url = (0, _utils.save_image)(img.url);
+    return img;
+  });
+  var Folder = event.startsWith("seminar") ? _conn.SEMINARS : _conn.CONFERENCES;
+  Folder.update(event, {
+    highlights: {
+      images: images,
+      video: video
+    }
+  });
+  res.json({
+    ok: true,
+    data: {
+      _id: event,
+      images: images
+    }
+  });
+};
+exports.update_event_highlight = update_event_highlight;

@@ -60,6 +60,7 @@ var router = function router(app) {
   app.post("/articles", _articles.articles);
   app.post("/update_testimonial_overview", _reviews.update_alumni_overview);
   app.post("/user_seminars", _seminar.user_seminars);
+  app.post("/user_conferences", _conference.user_conferences);
   app.post("/pending_talks", _speakers.pending_talks);
   app.post("/approve_talk/:talk", _speakers.approve_talk);
   app.post("/decline_talk/:talk", _speakers.decline_talk);
@@ -87,6 +88,7 @@ var router = function router(app) {
   app.post("/update_sponsor", _sponsors.update_sponsor);
   app.post("/remove_sponsor/:sponsor", _sponsors.remove_sponsor);
   app.post("/update_event_sponsors", _sponsors.update_event_sponsors);
+  app.post("/update_event_highlight", _settings.update_event_highlight);
   app.post("/add_speaker", _speakers.add_speaker);
   app.post("/update_speaker", _speakers.update_speaker);
   app.post("/remove_speaker/:speaker", _speakers.remove_speaker);
