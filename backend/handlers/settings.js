@@ -49,7 +49,8 @@ const update_vision = (req, res) => {
 };
 
 const update_about_statement = (req, res) => {
-  let { about_statement, bullets, image, image_file_hash } = req.body;
+  let { about_statement, bullets, more_details, image, image_file_hash } =
+    req.body;
 
   if (!image || !image_file_hash || !about_statement) return res.end();
 
@@ -57,7 +58,7 @@ const update_about_statement = (req, res) => {
 
   GLOBALS.update(
     { global: GLOBALS_about_statement },
-    { about_statement, image, bullets, image_file_hash }
+    { about_statement, image, bullets, more_details, image_file_hash }
   );
 
   res.json({

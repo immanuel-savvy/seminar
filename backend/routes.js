@@ -85,6 +85,7 @@ import {
   update_conference,
   conferences,
   new_conference,
+  user_conferences,
 } from "./handlers/conference";
 import {
   event_sponsors,
@@ -142,6 +143,7 @@ const router = (app) => {
   app.post("/articles", articles);
   app.post("/update_testimonial_overview", update_alumni_overview);
   app.post("/user_seminars", user_seminars);
+  app.post("/user_conferences", user_conferences);
   app.post("/pending_talks", pending_talks);
   app.post("/approve_talk/:talk", approve_talk);
   app.post("/decline_talk/:talk", decline_talk);

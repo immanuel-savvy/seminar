@@ -48,7 +48,16 @@ class Custom_nav extends React.Component {
   my_seminars = () => window.location.assign(`${client_domain}/my_seminars`);
 
   upcoming_conferences = () =>
-    window.location.assign(`${client_domain}/upcoming_conferences`);
+    window.location.assign(`${client_domain}/conferences?upcoming`);
+
+  past_conferences = () =>
+    window.location.assign(`${client_domain}/conferences?past`);
+
+  upcoming_seminars = () =>
+    window.location.assign(`${client_domain}/seminars?upcoming`);
+
+  past_seminars = () =>
+    window.location.assign(`${client_domain}/seminars?past`);
 
   my_conferences = () =>
     window.location.assign(`${client_domain}/my_conferences`);
@@ -93,7 +102,7 @@ class Custom_nav extends React.Component {
                           id="navigation"
                           className="navigation navigation-landscape"
                         >
-                          <Navbar light expand="lg">
+                          <Navbar light expand="xl">
                             <NavbarBrand href="/" className="nav-brand">
                               {/* <img
                                 src={require(`../assets/img/logo_dark.png`)}
@@ -315,13 +324,7 @@ class Custom_nav extends React.Component {
                                         </DropdownMenu>
                                       ) : null}
                                     </UncontrolledDropdown>
-                                  ) : nav.title ===
-                                    "search" ? null : //   onClick={() => // <li
-                                  //     this.setState({
-                                  //       show_search: !this.state.show_search,
-                                  //     })
-                                  //   }
-                                  // >
+                                  ) : nav.title === "search" ? null : // > //   } //     }) //       show_search: !this.state.show_search, //     this.setState({ //   onClick={() => // <li
                                   //   <Link
                                   //     to="#"
                                   //     style={{ border: "none" }}

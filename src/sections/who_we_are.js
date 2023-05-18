@@ -1,4 +1,5 @@
 import React from "react";
+import ReactMarkdown from "react-markdown";
 import { client_domain } from "../assets/js/utils/constants";
 import Preview_image from "../components/preview_image";
 import Section_header from "../components/section_headers";
@@ -18,17 +19,8 @@ class Who_we_are extends React.Component {
     let { home } = this.props;
     let { about } = this.state;
 
-    let { about_statement, datails_text, image, image_file_hash, bullets } =
+    let { about_statement, more_details, image, image_file_hash, bullets } =
       about || new Object();
-
-    if (!home)
-      datails_text =
-        datails_text ||
-        `With a focus on cutting-edge topics and emerging trends, our seminars provide attendees with valuable insights, practical skills, and transformative experiences. Whether you are a student, professional, entrepreneur, or lifelong learner, our foundation welcomes you to join our community of like-minded individuals driven by a thirst for knowledge and a desire to make a positive impact.
-
-    Through our commitment to excellence, we strive to deliver seminars that empower individuals to reach their full potential, challenge conventional thinking, and drive positive change in their lives and communities. We believe that education is the key to personal and societal growth, and our foundation is dedicated to providing a platform where learning becomes a transformative journey.
-    
-    Join us on this exciting quest for knowledge, as we embark together on a mission to build a brighter future through education and inspiration. Together, let's unlock the power of seminars and pave the way for meaningful change.`;
 
     return (
       <>
@@ -50,7 +42,9 @@ class Who_we_are extends React.Component {
                       <h2 className="mb-3">What We Do & Our Aim</h2>
                     </>
                   )}
-                  <p>{about_statement}</p>
+                  {about_statement?.split("\n").map((s, i) => (
+                    <p key={i}>{s}</p>
+                  ))}
 
                   {bullets
                     ? bullets.map((bull, i) => (
@@ -59,7 +53,9 @@ class Who_we_are extends React.Component {
                             <div className="rounded-circle bg-light-success theme-cl p-2 small d-flex align-items-center justify-content-center">
                               <i className="fas fa-check"></i>
                             </div>
-                            <h6 className="mb-0 ml-3">{bull}</h6>
+                            <span className="mb-0 ml-3">
+                              <ReactMarkdown children={bull} />
+                            </span>
                           </div>
                         </div>
                       ))
@@ -83,10 +79,12 @@ class Who_we_are extends React.Component {
               </div>
             </div>
           </div>
-          {home ? null : (
+          {home || !more_details ? null : (
             <div className="container mt-5">
-              {datails_text.split("\n").map((t, index) => (
-                <p key={index}>{t}</p>
+              {more_details.split("\n").map((t, index) => (
+                <p className="text-justify" key={index}>
+                  <ReactMarkdown children={t} />
+                </p>
               ))}
             </div>
           )}

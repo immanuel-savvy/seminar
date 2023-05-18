@@ -30,8 +30,10 @@ import Sponsors from "./pages/Sponsors";
 import Conferences from "./pages/Conferences";
 import New_conference from "./pages/New_conference";
 import My_conferences from "./pages/My_conferences";
-import Upcoming_conferences from "./pages/Upcoming_conferences";
 import Conference from "./pages/Conference";
+import Mentorship from "./pages/Mentorship";
+import Internship from "./pages/Internship";
+import Seminars from "./pages/Seminars";
 
 const emitter = new Emitter();
 
@@ -59,9 +61,19 @@ class Seminar extends React.Component {
         {
           title: "seminars",
           path: "/seminars",
-          submenu: new Array({
-            title: "my_seminars",
-          }),
+          submenu: new Array(
+            {
+              title: "upcoming_seminars",
+              path: "/upcoming_seminars",
+            },
+            {
+              title: "my_seminars",
+            },
+            {
+              title: "past_seminars",
+              path: "/past_seminars",
+            }
+          ),
         },
         {
           title: "conferences",
@@ -73,6 +85,10 @@ class Seminar extends React.Component {
             },
             {
               title: "my_conferences",
+            },
+            {
+              title: "past_conferences",
+              path: "/past_conferences",
             }
           ),
         },
@@ -85,7 +101,15 @@ class Seminar extends React.Component {
           path: "/sponsors",
         },
         {
-          title: "news room",
+          title: "mentorship",
+          path: "/mentorship",
+        },
+        {
+          title: "internship",
+          path: "/internship",
+        },
+        {
+          title: "news",
           path: "/newsroom",
         },
         {
@@ -251,15 +275,14 @@ class Seminar extends React.Component {
                 <Route path="newsroom" element={<Blog />} />
                 <Route path="article" element={<Article />} />
                 <Route path="testimonials" element={<Testimonials />} />
-                <Route path="conferences" element={<Conferences />} />
                 <Route path="conference" element={<Conference />} />
                 <Route path="new_conference" element={<New_conference />} />
                 <Route path="sponsors" element={<Sponsors />} />
+                <Route path="seminars" element={<Seminars />} />
+                <Route path="mentorship" element={<Mentorship />} />
+                <Route path="internship" element={<Internship />} />
                 <Route path="new_seminar" element={<New_seminar />} />
-                <Route
-                  path="upcoming_conferences"
-                  element={<Upcoming_conferences />}
-                />
+                <Route path="conferences" element={<Conferences />} />
                 <Route path="my_conferences" element={<My_conferences />} />
                 <Route
                   path="edit_seminar"

@@ -48,6 +48,7 @@ class Testimonials_header extends React.Component {
         {testimonials ? (
           <Col lg={6} md={6} sm={12} className="align-items-center">
             <Video
+              no_controls
               url={`${domain}/videos/${testimonials.video}`}
               thumbnail={testimonials.thumbnail}
             />

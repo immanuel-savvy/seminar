@@ -1,157 +1,91 @@
 import React from "react";
-import { organisation_name } from "../assets/js/utils/constants";
 import { post_request } from "../assets/js/utils/services";
-import Contact_us from "../components/contact_us_today";
+import Conference from "../components/conference";
+import Conferences_header from "../components/conferences_header";
+import Conferences_sidebar from "../components/conferences_sidebar";
 import Listempty from "../components/listempty";
 import Loadindicator from "../components/loadindicator";
 import Padder from "../components/padder";
-import Section_header from "../components/section_headers";
 import Breadcrumb_banner from "../sections/breadcrumb_banner";
 import Footer from "../sections/footer";
-import Custom_nav from "../sections/nav";
+import Nav from "../sections/nav";
 
 class Conferences extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      page_size: 12,
-      page: 0,
+      limit: 15,
+      page: 1,
     };
   }
 
-  fetch_conferences = async (page = this.state.page) => {
-    let { page_size } = this.state;
+  componentDidMount = async () => {
+    let { limit, page } = this.state;
+    let href = window.location.href;
+    href = href.split("?").slice(-1)[0];
 
-    let { conferences, total_conferences } = await post_request("conferences", {
-      skip: page_size * page,
-      limit: page_size,
-      total_conferences: true,
+    let { conferences, total } = await post_request(`conferences`, {
+      query: {
+        date: { [href && href === "past" ? "$lte" : "$gt"]: Date.now() },
+      },
+      show_total: true,
+      limit,
+      skip: (page - 1) * limit,
     });
 
-    let i = 0;
-    for (let p = 0; p < total_conferences; p += page_size) i++;
-
-    this.setState({ conferences, page, total_conferences, total_pages: i });
-  };
-
-  componentDidMount = async () => {
-    document.title = `Conferences | ${organisation_name}`;
-    await this.fetch_conferences();
-  };
-
-  page = async (page) => {
-    await this.fetch_conferences(page);
-
-    scroll_to_top();
-  };
-
-  next_page = async () => {
-    let { page, total_pages } = this.state;
-    page < total_pages - 1 && (await this.fetch_conferences(page + 1));
-  };
-
-  prev_page = async () => {
-    let { page } = this.state;
-    page > 0 && (await this.fetch_conferences(page - 1));
-  };
-
-  render_pagers = () => {
-    let { page_size, page, total_conferences } = this.state,
-      mapper = new Array(),
-      i = 0;
-    for (let p = 0; p < total_conferences; p += page_size) mapper.push(i++);
-
-    return mapper.map((pager, index) => (
-      <li
-        className={`page-item ${index === page ? "active" : ""}`}
-        onClick={() => this.page(index)}
-      >
-        <a className="page-link" href="#">
-          {pager + 1}
-        </a>
-      </li>
-    ));
-  };
-
-  render_pagination = () => {
-    let { page, page_size, total_pages, conferences, total_conferences } =
-      this.state;
-
-    return (
-      <div className="row align-items-center justify-content-between">
-        <div className="col-xl-6 col-lg-6 col-md-12">
-          <p className="p-0">{`Showing ${page * page_size + 1} to ${
-            page * page_size + conferences.length
-          } of ${total_conferences} entire`}</p>
-        </div>
-        <div className="col-xl-6 col-lg-6 col-md-12">
-          <nav className="float-right">
-            <ul className="pagination smalls m-0">
-              <li
-                onClick={this.prev_page}
-                className={`page-item ${page === 0 ? "disabled" : ""}`}
-              >
-                <a className="page-link" href="#" tabindex="-1">
-                  <i className="fas fa-arrow-circle-left"></i>
-                </a>
-              </li>
-
-              {this.render_pagers()}
-
-              <li
-                className={`page-item ${
-                  total_pages - 1 === page ? "disabled" : ""
-                }`}
-                onClick={this.next_page}
-              >
-                <a className="page-link" href="#">
-                  <i className="fas fa-arrow-circle-right"></i>
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-    );
+    this.setState({ conferences, total });
   };
 
   render() {
-    let { conferences } = this.state;
+    let { conferences, total, page, limit } = this.state;
 
     return (
       <div>
-        <Custom_nav page="speakers" />
+        <Nav page="conferences" />
+
         <Padder />
+        <Breadcrumb_banner page="conferences" />
 
-        <Breadcrumb_banner title="Upcoming Conferences" page="Conferences" />
-
-        <section>
+        <section className="gray">
           <div className="container">
-            <Section_header
-              title="Unleash Your "
-              color_title="Potential"
-              description="Immerse yourself in engaging keynote speeches, thought-provoking panel discussions, interactive workshops, and networking opportunities that foster connections and collaborations."
-            />
+            <div className="row">
+              <Conferences_sidebar />
 
-            <div className="row align-items-center justify-content-center">
-              {conferences ? (
-                conferences.length ? (
-                  conferences.map()
-                ) : (
-                  <Listempty />
-                )
-              ) : (
-                <Loadindicator />
-              )}
+              <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
+                <Conferences_header
+                  length={conferences && conferences.length}
+                  total={total}
+                  page={page}
+                  limit={limit}
+                />
+
+                <div class="row justify-content-center">
+                  {conferences ? (
+                    conferences.length ? (
+                      conferences.map((conference, index) => (
+                        <Conference
+                          conference={conference}
+                          in_conferences
+                          key={index}
+                        />
+                      ))
+                    ) : (
+                      <Listempty />
+                    )
+                  ) : (
+                    <Loadindicator />
+                  )}
+                </div>
+              </div>
             </div>
-
-            {conferences ? this.render_pagination() : null}
           </div>
         </section>
-
-        <Contact_us />
         <Footer />
+
+        {/* <Modal ref={(create_voucher) => (this.create_voucher = create_voucher)}>
+          <Create_open_voucher toggle={this.toggle_create_voucher} />
+        </Modal> */}
       </div>
     );
   }

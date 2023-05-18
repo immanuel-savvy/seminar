@@ -15,7 +15,9 @@ class Breadcrumb_banner extends React.Component {
       <section
         className="page-title bg-cover"
         style={{
-          backgroundImage: `url(${bg || require("../assets/img/speaker.png")})`,
+          backgroundImage: `url(${
+            bg || require("../assets/img/submit_a_talk.png")
+          })`,
           backgroundRepeat: "no-repeat",
         }}
         data-overlay="8"

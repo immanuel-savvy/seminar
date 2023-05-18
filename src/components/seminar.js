@@ -114,7 +114,7 @@ class Seminar extends React.Component {
           class_name ||
           (in_seminars
             ? "col-xl-6 col-lg-6 col-md-6 col-sm-12"
-            : "col-xl-4 col-lg-4 col-md-6 col-sm-12")
+            : "col-xl-3 col-lg-4 col-md-6 col-sm-12")
         }
       >
         <div className="crs_grid">

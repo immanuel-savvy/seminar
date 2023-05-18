@@ -1,18 +1,19 @@
 import React from "react";
+import ReactMarkdown from "react-markdown";
 import { organisation_name } from "../assets/js/utils/constants";
 import { get_request } from "../assets/js/utils/services";
 import Alert_box from "../components/alert_box";
 import Contact_us from "../components/contact_us_today";
-import Listempty from "../components/listempty";
 import Loadindicator from "../components/loadindicator";
 import Modal from "../components/modal";
 import Padder from "../components/padder";
+import Preview_image from "../components/preview_image";
 import Section_header from "../components/section_headers";
 import Small_btn from "../components/small_btn";
 import Speaker from "../components/speaker";
 import Submit_a_talk from "../components/submit_a_talk";
 import Breadcrumb_banner from "../sections/breadcrumb_banner";
-import Footer from "../sections/footer";
+import Footer, { scroll_to_top } from "../sections/footer";
 import Custom_nav from "../sections/nav";
 
 class Speakers extends React.Component {
@@ -25,11 +26,21 @@ class Speakers extends React.Component {
   componentDidMount = async () => {
     document.title = `Speakers | ${organisation_name}`;
 
+    scroll_to_top();
+
     let speakers = await get_request("speakers");
     this.setState({ speakers });
   };
 
   submit_a_talk = () => this.talk?.toggle();
+
+  fields = new Array(
+    "Your name, title, and organization",
+    "A brief bio and summary of your experience and expertise",
+    "A title and brief description of your proposed talk",
+    "A brief outline of your talk and key takeaways for the audience",
+    "Any additional information or resources that you would like to provide"
+  );
 
   render() {
     let { speakers, talking } = this.state;
@@ -39,31 +50,110 @@ class Speakers extends React.Component {
         <Custom_nav page="speakers" />
         <Padder />
 
-        <Breadcrumb_banner title="Our Hosts" page="Speakers" />
+        <Breadcrumb_banner title="Dear Speaker" page="Speakers" />
 
-        {speakers ? (
-          <section>
+        <section>
+          <div className="container">
+            {/* <Section_header title="Dear" color_title="Speaker" /> */}
+
+            <div className="row">
+              <div className="container">
+                <div className="row align-items-center justify-content-between">
+                  <div className="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                    <div className="lmp_caption">
+                      <p>
+                        Thank you for your interest in submitting a talk for
+                        GIIT ICT Foundation. We are always looking for industry
+                        professionals, educators, and community leaders to share
+                        their knowledge, expertise, and insights with our
+                        audience.
+                      </p>
+                      <p>
+                        At GIIT Foundation, we are dedicated to positively
+                        impacting the underprivileged through educational
+                        initiatives and employability skill development
+                        programs. We believe that education is the key to
+                        breaking the cycle of poverty and improving the quality
+                        of life for individuals and communities.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="col-xl-5 col-lg-5 col-md-12 col-sm-12">
+                    <div className="lmp_thumb">
+                      <Preview_image
+                        class_name="rounded"
+                        style={{ width: "100%" }}
+                        image={require("../assets/img/submit_a_talk.png")}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br />
+          <br />
+
+          <section className="">
             <div className="container">
               <Section_header
-                title="our"
-                color_title="Speakers"
-                description="Discover our Speakers featuring renowned industry experts, thought leaders, and innovators. "
+                title="Become a"
+                color_title="Speaker"
+                description=""
               />
 
-              <div className="row align-items-center justify-content-center">
-                {speakers.length ? (
-                  speakers.map((speaker) => (
-                    <Speaker speaker={speaker} key={speaker._id} />
-                  ))
-                ) : (
-                  <Listempty />
-                )}
+              <div className="row">
+                <p>
+                  Our seminars, conferences, and training programs cover a range
+                  of topics, including cyber security, AI, machine learning,
+                  cloud computing, data science, software, UI/UX design, and
+                  more. We are always interested in hearing from experts who are
+                  passionate about sharing their knowledge and experiences with
+                  our audience.
+                </p>
+
+                <p>
+                  To submit a talk, please provide us with the following
+                  information:
+                </p>
+
+                {this.fields.map((s, i) => {
+                  return (
+                    <div className="mb-3 mr-4 ml-lg-0 mr-lg-4" key={i}>
+                      <div className="d-flex align-items-center">
+                        <div className="rounded-circle bg-light-success theme-cl p-2 small d-flex align-items-center justify-content-center">
+                          <i className="fas fa-check"></i>
+                        </div>
+                        <span className="mb-0 ml-3">
+                          <ReactMarkdown children={s} />
+                        </span>
+                      </div>
+                    </div>
+                  );
+                })}
+
+                <p>
+                  Once we have received your submission, we will review it and
+                  get back to you as soon as possible. We appreciate your
+                  interest in speaking at GIIT ICT Foundation and look forward
+                  to hearing from you.{" "}
+                  <a
+                    href="mailto://speaker@giitfoundation.org"
+                    className="theme-cl"
+                    target="_blank"
+                  >
+                    speaker@giitfoundation.org
+                  </a>
+                </p>
+                <p>
+                  Thank you for your support and commitment to education and
+                  community development.
+                </p>
               </div>
             </div>
           </section>
-        ) : (
-          <Loadindicator contained />
-        )}
+        </section>
 
         <section className="gray">
           <Section_header
@@ -111,6 +201,28 @@ class Speakers extends React.Component {
             </div>
           </div>
         </section>
+
+        {speakers ? (
+          speakers.length ? (
+            <section>
+              <div className="container">
+                <Section_header
+                  title="our"
+                  color_title="Speakers"
+                  description="Discover our Speakers featuring renowned industry experts, thought leaders, and innovators. "
+                />
+
+                <div className="row align-items-center justify-content-center">
+                  {speakers.map((speaker) => (
+                    <Speaker speaker={speaker} key={speaker._id} />
+                  ))}
+                </div>
+              </div>
+            </section>
+          ) : null
+        ) : (
+          <Loadindicator contained />
+        )}
 
         <Contact_us />
 

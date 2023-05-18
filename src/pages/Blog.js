@@ -35,6 +35,7 @@ class Blog extends React.Component {
   };
 
   componentDidMount = async () => {
+    scroll_to_top();
     await this.fetch_articles();
   };
 
@@ -120,7 +121,7 @@ class Blog extends React.Component {
       <div id="main-wrapper">
         <Custom_nav page="blog" />
         <Padder />
-        <Breadcrumb_banner title="Latest News" page="News Room" />
+        <Breadcrumb_banner title="Latest News" page="News" />
         <section class="min">
           <div class="container">
             <div class="row justify-content-center">

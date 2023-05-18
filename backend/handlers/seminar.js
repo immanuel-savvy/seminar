@@ -2,11 +2,16 @@ import { ATTENDANT, SEMINARS, USER_SEMINARS } from "../ds/conn";
 import { save_image } from "./utils";
 
 const seminars = (req, res) => {
-  let { limit, skip, query } = req.body;
+  let { limit, skip, query, show_total } = req.body;
+
+  let data = SEMINARS.read(query, { limit, skip });
+
+  if (show_total)
+    data = { seminars: data, total: SEMINARS.config.total_entries };
 
   res.json({
     ok: true,
-    data: SEMINARS.read(query, { limit, skip }),
+    data,
   });
 };
 

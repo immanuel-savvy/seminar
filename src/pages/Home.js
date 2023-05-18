@@ -23,9 +23,9 @@ class Home extends React.Component {
 
   componentDidMount = () => {
     let heros = new Array({
-      main_text: "GIIT Seminar 2023: The Future of Technology",
+      main_text: "GIIT ICT Foundation:",
       sub_text:
-        "Explore the cutting-edge of tech innovation at GIIT Seminar 2023 – Where the Future is Now!",
+        "Empowering Underprivileged Communities Through Education and Employability Skills",
       bg: require("../assets/img/hero1.jpg"),
     });
 

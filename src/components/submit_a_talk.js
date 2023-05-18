@@ -64,11 +64,11 @@ class Submit_a_talk extends React.Component {
                     <p className="lead text-center">
                       You can write to use via email at{" "}
                       <a
-                        className="lead"
+                        className="lead theme-cl"
                         target="_blank"
-                        href={`mailto://${"ngo@giitfoundation.org"}`}
+                        href={`mailto://${"speaker@giitfoundation.org"}`}
                       >
-                        ngo@giitfoundation.org
+                        speaker@giitfoundation.org
                       </a>
                     </p>
                     <p className="text-center">

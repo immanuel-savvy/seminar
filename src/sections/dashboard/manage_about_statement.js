@@ -22,7 +22,8 @@ class Manage_about_statement extends Handle_file_upload {
   };
 
   update = async () => {
-    let { image, image_file_hash, bullets, about_statement } = this.state;
+    let { image, image_file_hash, more_details, bullets, about_statement } =
+      this.state;
 
     this.setState({ updating: true });
 
@@ -30,6 +31,7 @@ class Manage_about_statement extends Handle_file_upload {
       about_statement,
       image,
       image_file_hash,
+      more_details,
       bullets,
     });
 
@@ -54,6 +56,7 @@ class Manage_about_statement extends Handle_file_upload {
       bullets: features,
       about_statement,
       feature_in_edit,
+      more_details,
     } = this.state;
 
     return (
@@ -170,6 +173,21 @@ class Manage_about_statement extends Handle_file_upload {
                             </div>
                           ))
                         : null}
+
+                      <div className="col-12">
+                        <div className="form-group">
+                          <label>More Details</label>
+                          <textarea
+                            className="form-control"
+                            type="number"
+                            placeholder="More details..."
+                            value={more_details}
+                            onChange={({ target }) =>
+                              this.setState({ more_details: target.value })
+                            }
+                          ></textarea>
+                        </div>
+                      </div>
                     </div>
 
                     <Stretch_button

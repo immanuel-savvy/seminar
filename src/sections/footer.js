@@ -4,13 +4,7 @@ import { organisation_name } from "../assets/js/utils/constants";
 import Toaster from "../components/toast";
 import { emitter } from "../Seminar";
 
-let navs = new Array(
-  "seminar",
-  "conferences",
-  "speakers",
-  "newsroom",
-  "sponsors"
-);
+let navs = new Array("seminar", "conferences", "speakers", "news", "sponsors");
 
 const rewards = new Object({
   create_voucher: 100,
@@ -119,6 +113,12 @@ class Footer extends React.Component {
                       <ul className="footer-menu">
                         <li>
                           <Link to={`/about`}>About</Link>
+                        </li>
+                        <li>
+                          <Link to={`/mentorship`}>Mentorship</Link>
+                        </li>
+                        <li>
+                          <Link to={`/internship`}>Internship</Link>
                         </li>
                         <li>
                           <Link to={`/contact`}>Contact</Link>
