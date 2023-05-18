@@ -1,4 +1,4 @@
-import { GLOBALS, TEAM_MEMBER } from "../ds/conn";
+import { CONFERENCES, GLOBALS, SEMINARS, TEAM_MEMBER } from "../ds/conn";
 import { save_image } from "./utils";
 
 const GLOBALS_mission_statement = "mission_statement",
@@ -85,6 +85,21 @@ const entry = (req, res) => {
   });
 };
 
+const update_event_highlight = (req, res) => {
+  let { event, images, video } = req.body;
+
+  images = images.map((img) => {
+    img.url = save_image(img.url);
+
+    return img;
+  });
+
+  let Folder = event.startsWith("seminar") ? SEMINARS : CONFERENCES;
+  Folder.update(event, { highlights: { images, video } });
+
+  res.json({ ok: true, data: { _id: event, images } });
+};
+
 export {
   GLOBALS_mission_statement,
   GLOBALS_vision_statement,
@@ -94,5 +109,6 @@ export {
   update_about_statement,
   about_statement,
   GLOBALS_about_statement,
+  update_event_highlight,
   entry,
 };

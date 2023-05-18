@@ -14,7 +14,12 @@ class Seminar_media extends React.Component {
   render() {
     let { active_image } = this.state;
     let { seminar } = this.props;
-    let { images, video } = seminar;
+    let { images, video, highlights, date } = seminar;
+
+    if (date < Date.now() && highlights) {
+      if (highlights.images?.length) images = highlights.images;
+      if (highlights.video) video = highlights.video;
+    }
 
     return (
       <>
@@ -28,6 +33,10 @@ class Seminar_media extends React.Component {
         </div>
 
         <div class="edu_wraper">
+          {date < Date.now() && highlights ? (
+            <h4 class="edu_title">Event Highlights</h4>
+          ) : null}
+
           {video ? (
             <span class="bb-video-box">
               <span
@@ -43,6 +52,7 @@ class Seminar_media extends React.Component {
                 <span class="bb-video-box-innerup">
                   <a
                     href={video}
+                    target="_blank"
                     data-toggle="modal"
                     data-target="#popup-video"
                     class="theme-cl"

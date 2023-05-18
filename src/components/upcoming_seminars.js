@@ -13,7 +13,7 @@ class Upcoming_seminars extends React.Component {
 
   componentDidMount = async () => {
     let upcoming_seminars = await post_request("seminars", {
-      // query: { done: true },
+      query: { date: { $gt: Date.now() } },
       limit: 10,
     });
     this.setState({ upcoming_seminars });

@@ -26,6 +26,7 @@ import {
   entry,
   mission_vision_statement,
   update_about_statement,
+  update_event_highlight,
   update_mission,
   update_vision,
 } from "./handlers/settings";
@@ -171,6 +172,7 @@ const router = (app) => {
   app.post("/update_sponsor", update_sponsor);
   app.post("/remove_sponsor/:sponsor", remove_sponsor);
   app.post("/update_event_sponsors", update_event_sponsors);
+  app.post("/update_event_highlight", update_event_highlight);
 
   app.post("/add_speaker", add_speaker);
   app.post("/update_speaker", update_speaker);

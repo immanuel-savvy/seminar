@@ -14,6 +14,7 @@ import Login from "./login";
 import Countdown from "./countdown";
 import { client_domain } from "../assets/js/utils/constants";
 import Update_sponsors from "../sections/dashboard/update_sponsors";
+import Event_highlights from "../sections/dashboard/event_highlights";
 
 class Seminar extends React.Component {
   constructor(props) {
@@ -79,6 +80,8 @@ class Seminar extends React.Component {
 
   update_sponsors = () => this.sponsors.toggle();
 
+  event_highlights = () => this.highlights?.toggle();
+
   render() {
     let { full, in_attendance, in_meeting } = this.state;
     let {
@@ -113,7 +116,7 @@ class Seminar extends React.Component {
         className={
           class_name ||
           (in_seminars
-            ? "col-xl-6 col-lg-6 col-md-6 col-sm-12"
+            ? "col-xl-4 col-lg-6 col-md-6 col-sm-12"
             : "col-xl-3 col-lg-4 col-md-6 col-sm-12")
         }
       >
@@ -243,12 +246,21 @@ class Seminar extends React.Component {
               <div className="crs_fl_last">
                 <div className="crs_price">
                   {edit ? (
-                    <h3
-                      className="cursor-pointer"
-                      onClick={() => this.update_sponsors()}
-                    >
-                      <span className="theme-cl">Add Sponsors</span>
-                    </h3>
+                    date < Date.now() ? (
+                      <h3
+                        className="cursor-pointer"
+                        onClick={() => this.event_highlights()}
+                      >
+                        <span className="theme-cl">Event Highlights</span>
+                      </h3>
+                    ) : (
+                      <h3
+                        className="cursor-pointer"
+                        onClick={() => this.update_sponsors()}
+                      >
+                        <span className="theme-cl">Add Sponsors</span>
+                      </h3>
+                    )
                   ) : in_attendance === "fetching" ? null : in_attendance ? (
                     date < Date.now() ? (
                       date + duration * 60 * 1000 > Date.now() ? (
@@ -307,6 +319,10 @@ class Seminar extends React.Component {
 
         <Modal ref={(attendees) => (this.attendees = attendees)}>
           <Attendees seminar={seminar} toggle={this.toggle_Attendees} />
+        </Modal>
+
+        <Modal ref={(highlights) => (this.highlights = highlights)}>
+          <Event_highlights event={seminar} toggle={this.event_highlights} />
         </Modal>
       </div>
     );
