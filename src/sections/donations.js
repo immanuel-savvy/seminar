@@ -1,10 +1,13 @@
 import React from "react";
+import ReactMarkdown from "react-markdown";
+import { get_request } from "../assets/js/utils/services";
 import Alert_box from "../components/alert_box";
 import Make_a_donation from "../components/make_a_donation";
 import Modal from "../components/modal";
 import Preview_image from "../components/preview_image";
 import Section_header from "../components/section_headers";
 import Small_btn from "../components/small_btn";
+import { A_tag, Img_tag } from "./who_we_are";
 
 class Donations extends React.Component {
   constructor(props) {
@@ -13,16 +16,28 @@ class Donations extends React.Component {
     this.state = {};
   }
 
+  componentDidMount = async () => {
+    let donation = await get_request("donation_section");
+
+    this.setState({ donation });
+  };
+
   toggle = () => this.donation?.toggle();
 
   render() {
-    let { donated } = this.state;
+    let { donated, donation } = this.state;
+    if (!donation) return;
+
+    let { title, text, image, image_file_hash } = donation;
+
+    text = text.split("\n");
+    title = title.split(",");
 
     return (
       <section className="">
         <Section_header
-          title="Make a Difference,"
-          color_title="Support Our Cause"
+          title={title.slice(0, -1).join(",") + ","}
+          color_title={title.slice(-1)[0]}
         />
 
         <div className="container">
@@ -30,11 +45,7 @@ class Donations extends React.Component {
             <div className="col-xl-6 col-lg-6 col-md-12 col-sm-12">
               <div className="lmp_caption">
                 <p className="lead text-justify">
-                  At GIIT, we believe that education is the key to breaking the
-                  cycle of poverty and improving the quality of life for
-                  individuals and communities. With your support, we can
-                  continue to provide access to quality education, training, and
-                  skill development programs for underprivileged communities.
+                  {<ReactMarkdown children={text[0]} />}
                 </p>
               </div>
             </div>
@@ -43,34 +54,23 @@ class Donations extends React.Component {
                 <Preview_image
                   class_name="rounded"
                   style={{ width: "100%" }}
-                  image={require("../assets/img/donations.webp")}
+                  image_hash={image_file_hash}
+                  image={image}
                 />
               </div>
             </div>
           </div>
           <div className="row ">
-            <p className="lead text-justify">
-              Your donation will go a long way in helping us to achieve our
-              mission and provide life-changing opportunities to those who need
-              it most. Every dollar counts and will be used to support our
-              educational initiatives, provide training and employability
-              skills, and expand access to education for underprivileged
-              communities.
-            </p>
-
-            <p className="lead text-justify">
-              We offer several ways to donate, including online through our
-              secure donation page on our website. We also accept donations by{" "}
-              <a
-                className="theme-cl"
-                href="mailto://donations@giitfoundation.org"
-                target="_blank"
-              >
-                mail
-              </a>{" "}
-              or phone, and we are happy to answer any questions you may have
-              about our programs or how to donate.
-            </p>
+            {text.slice(1).map((t, i) => {
+              return (
+                <p key={i} className="lead text-justify">
+                  <ReactMarkdown
+                    children={t}
+                    components={{ a: A_tag, img: Img_tag }}
+                  />
+                </p>
+              );
+            })}
 
             <div
               style={{

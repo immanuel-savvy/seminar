@@ -5,6 +5,26 @@ import Preview_image from "../components/preview_image";
 import Section_header from "../components/section_headers";
 import Small_btn from "../components/small_btn";
 
+const Img_tag = ({ src }) => {
+  return (
+    <img
+      src={src}
+      className="img-fluid rounded"
+      style={{
+        width: "100%",
+      }}
+    />
+  );
+};
+
+const A_tag = ({ href, children }) => {
+  return (
+    <a href={href} className="theme-cl" target="_blank">
+      {children}
+    </a>
+  );
+};
+
 class Who_we_are extends React.Component {
   constructor(props) {
     super(props);
@@ -43,7 +63,17 @@ class Who_we_are extends React.Component {
                     </>
                   )}
                   {about_statement?.split("\n").map((s, i) => (
-                    <p key={i}>{s}</p>
+                    <p key={i}>
+                      {
+                        <ReactMarkdown
+                          children={s}
+                          components={{
+                            img: Img_tag,
+                            a: A_tag,
+                          }}
+                        />
+                      }
+                    </p>
                   ))}
 
                   {bullets
@@ -54,7 +84,13 @@ class Who_we_are extends React.Component {
                               <i className="fas fa-check"></i>
                             </div>
                             <span className="mb-0 ml-3">
-                              <ReactMarkdown children={bull} />
+                              <ReactMarkdown
+                                children={bull}
+                                components={{
+                                  img: Img_tag,
+                                  a: A_tag,
+                                }}
+                              />
                             </span>
                           </div>
                         </div>
@@ -83,7 +119,13 @@ class Who_we_are extends React.Component {
             <div className="container mt-5">
               {more_details.split("\n").map((t, index) => (
                 <p className="text-justify" key={index}>
-                  <ReactMarkdown children={t} />
+                  <ReactMarkdown
+                    children={t}
+                    components={{
+                      img: Img_tag,
+                      a: A_tag,
+                    }}
+                  />
                 </p>
               ))}
             </div>
@@ -95,3 +137,4 @@ class Who_we_are extends React.Component {
 }
 
 export default Who_we_are;
+export { Img_tag, A_tag };

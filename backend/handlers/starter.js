@@ -11,6 +11,9 @@ import {
   GLOBALS_about_statement,
   GLOBALS_mission_statement,
   GLOBALS_vision_statement,
+  GLOBAL_donation_section,
+  GLOBAL_live_training,
+  GLOBAL_mentorship,
 } from "./settings";
 import { GLOBAL_pending_talks } from "./speakers";
 
@@ -58,6 +61,15 @@ const create_default_admin = () => {
 
   !GLOBALS.readone({ global: GLOBAL_alumni_overview }) &&
     GLOBALS.write({ global: GLOBAL_alumni_overview });
+
+  !GLOBALS.readone({ global: GLOBAL_live_training }) &&
+    GLOBALS.write({ global: GLOBAL_live_training });
+
+  !GLOBALS.readone({ global: GLOBAL_donation_section }) &&
+    GLOBALS.write({ global: GLOBAL_donation_section });
+
+  !GLOBALS.readone({ global: GLOBAL_mentorship }) &&
+    GLOBALS.write({ global: GLOBAL_mentorship });
 };
 
 export { create_default_admin, default_user };

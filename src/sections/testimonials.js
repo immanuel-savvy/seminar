@@ -1,12 +1,9 @@
 import React from "react";
-import { Col } from "react-bootstrap";
 import Explore_more from "../components/explore_more";
 import Add_student_review from "../components/add_review_form";
-import { domain } from "../assets/js/utils/constants";
-import { get_request, post_request } from "../assets/js/utils/services";
+import { post_request } from "../assets/js/utils/services";
 import Loadindicator from "../components/loadindicator";
 import Review from "../components/review";
-import Video from "../components/video";
 import Testimonials_header from "../components/testimonials_header";
 Explore_more;
 

@@ -93,7 +93,7 @@ const alumni_overview = (req, res) => {
 };
 
 const update_alumni_overview = (req, res) => {
-  let { video, thumbnail, image_hash } = req.body;
+  let { video, thumbnail, text, title, image_hash } = req.body;
 
   (video = save_video(video)), (thumbnail = save_image(thumbnail));
 
@@ -108,6 +108,8 @@ const update_alumni_overview = (req, res) => {
       video,
       thumbnail,
       image_hash,
+      text,
+      title,
     }
   );
 

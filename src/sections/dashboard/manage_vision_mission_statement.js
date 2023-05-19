@@ -10,7 +10,10 @@ class Manage_vision_mission_statement extends Handle_file_upload {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      vision_title: "Vision Statement",
+      mission_title: "Mission Statement",
+    };
   }
 
   componentDidMount = async () => {
@@ -20,13 +23,15 @@ class Manage_vision_mission_statement extends Handle_file_upload {
   };
 
   update_vision = async () => {
-    let { vision_statement, vision, vision_file_hash } = this.state;
+    let { vision_statement, vision, vision_title, vision_file_hash } =
+      this.state;
 
     this.setState({ updating_vision: true });
 
     let res = await post_request("update_vision", {
       vision_statement,
       vision,
+      vision_title,
       vision_file_hash,
     });
 
@@ -34,13 +39,15 @@ class Manage_vision_mission_statement extends Handle_file_upload {
   };
 
   update_mission = async () => {
-    let { mission_statement, mission, mission_file_hash } = this.state;
+    let { mission_statement, mission_title, mission, mission_file_hash } =
+      this.state;
 
     this.setState({ updating_mission: true });
 
     let res = await post_request("update_mission", {
       mission_statement,
       mission,
+      mission_title,
       mission_file_hash,
     });
 
@@ -57,10 +64,12 @@ class Manage_vision_mission_statement extends Handle_file_upload {
       mission_file_loading,
       updating_mission,
       updating_vision,
+      vision_title,
+      mission_title,
     } = this.state;
 
     return (
-      <div className="col-lg-9 col-md-9 col-sm-12">
+      <div className="col-12">
         <Dashboard_breadcrumb crumb="manage vision - mission statement" />
         <div className="row justify-content-center">
           <div className="col-md-8 col-lg-8 col-xl-6 col-sm-12">
@@ -73,6 +82,27 @@ class Manage_vision_mission_statement extends Handle_file_upload {
                 <div className="login-form">
                   <form>
                     <div className="row">
+                      <div className="col-12">
+                        <div className="form-group">
+                          <label>Title</label>
+                          <div className="input-with-icon">
+                            <input
+                              type="text"
+                              className="form-control"
+                              value={vision_title}
+                              onChange={({ target }) =>
+                                this.setState({
+                                  vision_title: target.value,
+                                  message: "",
+                                })
+                              }
+                              placeholder="Full Name"
+                            />
+                            <i className="ti-text"></i>
+                          </div>
+                        </div>
+                      </div>
+
                       <div className="col-12">
                         <div className="form-group">
                           <label>Vision Statement</label>
@@ -149,6 +179,27 @@ class Manage_vision_mission_statement extends Handle_file_upload {
                 <div className="login-form">
                   <form>
                     <div className="row">
+                      <div className="col-12">
+                        <div className="form-group">
+                          <label>Title</label>
+                          <div className="input-with-icon">
+                            <input
+                              type="text"
+                              className="form-control"
+                              value={mission_title}
+                              onChange={({ target }) =>
+                                this.setState({
+                                  mission_title: target.value,
+                                  message: "",
+                                })
+                              }
+                              placeholder="Full Name"
+                            />
+                            <i className="ti-text"></i>
+                          </div>
+                        </div>
+                      </div>
+
                       <div className="col-12">
                         <div className="form-group">
                           <label>Mission Statement</label>

@@ -4,7 +4,6 @@ import Padder from "../components/padder";
 import { Logged_admin } from "../Contexts";
 import Admin_login from "../sections/dashboard/admin_login";
 import Dashboard_navbar from "../sections/dashboard/dashboard_navbar";
-import Manage_about_statement from "../sections/dashboard/manage_about_statement";
 import Manage_articles from "../sections/dashboard/manage_articles";
 import Manage_conferences from "../sections/dashboard/manage_conferences";
 import Manage_seminars from "../sections/dashboard/manage_seminars";
@@ -12,11 +11,10 @@ import Manage_speakers from "../sections/dashboard/manage_speakers";
 import Manage_sponsors from "../sections/dashboard/manage_sponsors";
 import Manage_team from "../sections/dashboard/manage_team";
 import Manage_testimonials from "../sections/dashboard/manage_testimonials";
-import Manage_testimonial_overview from "../sections/dashboard/manage_testimonial_overview";
-import Manage_vision_mission_statement from "../sections/dashboard/manage_vision_mission_statement";
 import New_article from "../sections/dashboard/new_article";
 import Pending_reviews from "../sections/dashboard/pending_reviews";
 import Pending_talks from "../sections/dashboard/pending_talks";
+import Settings from "../sections/dashboard/settings";
 import Footer, { scroll_to_top } from "../sections/footer";
 import Nav from "../sections/nav";
 import { emitter } from "../Seminar";
@@ -56,14 +54,12 @@ class Adminstrator extends React.Component {
       manage_sponsors: <Manage_sponsors />,
       manage_team: <Manage_team />,
       pending_talks: <Pending_talks />,
-      about_statement: <Manage_about_statement />,
       manage_articles: <Manage_articles />,
       new_article: <New_article />,
       manage_testimonials: <Manage_testimonials />,
       pending_testimonies: <Pending_reviews />,
       manage_conferences: <Manage_conferences />,
-      testimonial_overview: <Manage_testimonial_overview />,
-      vision_mission_statement: <Manage_vision_mission_statement />,
+      settings: <Settings />,
     });
 
   render() {

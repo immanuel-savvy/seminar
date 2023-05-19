@@ -60,7 +60,7 @@ class Manage_about_statement extends Handle_file_upload {
     } = this.state;
 
     return (
-      <div className="col-lg-9 col-md-9 col-sm-12">
+      <div className="col-12">
         <Dashboard_breadcrumb crumb="about statement" />
         <div className="row justify-content-center">
           <div className="col-md-8 col-lg-8 col-xl-6 col-sm-12">

@@ -234,7 +234,7 @@ class New_article extends Handle_file_upload {
 
               {sections.map((section, index) =>
                 section.type === this.type[0] ? (
-                  <div className="form-group">
+                  <div key={index} className="form-group">
                     <span>
                       <label>{`Paragraph - (${index + 1})`}</label>
                       <a
@@ -253,7 +253,7 @@ class New_article extends Handle_file_upload {
                     ></textarea>
                   </div>
                 ) : (
-                  <div className="form-group">
+                  <div key={iindex} className="form-group">
                     <span>
                       <label>Block Quote* </label>
                       <a

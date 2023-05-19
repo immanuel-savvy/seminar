@@ -27,8 +27,14 @@ import {
   mission_vision_statement,
   update_about_statement,
   update_event_highlight,
+  live_training,
+  update_live_training,
   update_mission,
   update_vision,
+  donation_section,
+  update_donation_section,
+  mentorship,
+  update_mentorship,
 } from "./handlers/settings";
 import {
   add_team_member,
@@ -114,6 +120,9 @@ const router = (app) => {
   app.get("/article_categories", article_categories);
   app.get("/testimonials", alumni_overview);
   app.get("/sponsors", sponsors);
+  app.get("/live_training", live_training);
+  app.get("/donation_section", donation_section);
+  app.get("/mentorship", mentorship);
   app.get("/event_sponsors/:event", event_sponsors);
 
   app.post("/signup", signup);
@@ -130,6 +139,9 @@ const router = (app) => {
   app.post("/conferences", conferences);
   app.post("/update_seminar", update_seminar);
   app.post("/update_conference", update_conference);
+  app.post("/update_donation_section", update_donation_section);
+  app.post("/update_live_training", update_live_training);
+  app.post("/update_mentorship", update_mentorship);
   app.post("/remove_seminar/:seminar", remove_seminar);
   app.post("/remove_conference/:conference", remove_conference);
   app.post("/register_attendance", register_attendance);

@@ -20,10 +20,15 @@ class Vision_mission_stuff extends React.Component {
       action_url,
       features,
       vision: image,
+      vision_title,
+      mission_title,
     } = details;
+    title = vision_title;
 
     if (!image) image = details.mission;
     if (!description) description = details.mission_statement;
+
+    if (!title) title = mission_title;
 
     return (
       <div className={gray ? "container-fluid gray" : "container-fluid"}>

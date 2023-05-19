@@ -13,13 +13,13 @@ class Testimonials_header extends React.Component {
   componentDidMount = async () => {
     let testimonials = await get_request("testimonials");
 
-    console.log(testimonials);
-
     this.setState({ testimonials });
   };
 
   render() {
     let { testimonials } = this.state;
+    let { title, text, video, thumbnail, thumbnail_hash } =
+      testimonials || new Object();
 
     return (
       <div className="row mb-3">
@@ -31,15 +31,16 @@ class Testimonials_header extends React.Component {
           } col-sm-12 align-items-center d-flex`}
         >
           <div className="">
-            <h2>Discover the Voices of Our Valued Community</h2>
+            <h2>{title || "Discover the Voices of Our Valued Community"}</h2>
             <p className="lead">
-              Dive into a world of inspiring testimonials that highlight the
+              {text ||
+                `Dive into a world of inspiring testimonials that highlight the
               positive impact our services have had on their lives. From
               life-changing transformations to memorable moments of success,
               these stories serve as a testament to the quality and
               effectiveness of our offerings. Join us in celebrating the
               journeys and achievements of our community members and get
-              inspired to embark on your own path to success.
+              inspired to embark on your own path to success.`}
             </p>
             <br />
             <br />
@@ -49,8 +50,9 @@ class Testimonials_header extends React.Component {
           <Col lg={6} md={6} sm={12} className="align-items-center">
             <Video
               no_controls
-              url={`${domain}/videos/${testimonials.video}`}
-              thumbnail={testimonials.thumbnail}
+              url={`${domain}/videos/${video}`}
+              thumbnail={thumbnail}
+              thumbnail_hash={thumbnail_hash}
             />
           </Col>
         ) : null}

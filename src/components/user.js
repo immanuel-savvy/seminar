@@ -10,6 +10,9 @@ class User extends React.Component {
 
   render() {
     let { user } = this.props;
+
+    if (!user) return;
+
     let { firstname, lastname, email } = user;
 
     return (

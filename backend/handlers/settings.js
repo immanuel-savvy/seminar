@@ -1,5 +1,5 @@
 import { CONFERENCES, GLOBALS, SEMINARS, TEAM_MEMBER } from "../ds/conn";
-import { save_image } from "./utils";
+import { save_image, save_video } from "./utils";
 
 const GLOBALS_mission_statement = "mission_statement",
   GLOBALS_vision_statement = "vision_statement",
@@ -13,7 +13,8 @@ const mission_vision_statement = (req, res) => {
 };
 
 const update_mission = (req, res) => {
-  let { mission_statement, mission, mission_file_hash } = req.body;
+  let { mission_statement, mission_title, mission, mission_file_hash } =
+    req.body;
 
   if (!mission || !mission_file_hash || !mission_statement) return res.end();
 
@@ -21,7 +22,7 @@ const update_mission = (req, res) => {
 
   GLOBALS.update(
     { global: GLOBALS_mission_statement },
-    { mission_statement, mission, mission_file_hash }
+    { mission_statement, mission_title, mission, mission_file_hash }
   );
 
   res.json({
@@ -31,7 +32,7 @@ const update_mission = (req, res) => {
 };
 
 const update_vision = (req, res) => {
-  let { vision_statement, vision, vision_file_hash } = req.body;
+  let { vision_statement, vision_title, vision, vision_file_hash } = req.body;
 
   if (!vision || !vision_file_hash || !vision_statement) return res.end();
 
@@ -39,7 +40,7 @@ const update_vision = (req, res) => {
 
   GLOBALS.update(
     { global: GLOBALS_vision_statement },
-    { vision_statement, vision, vision_file_hash }
+    { vision_statement, vision_title, vision, vision_file_hash }
   );
 
   res.json({
@@ -100,10 +101,95 @@ const update_event_highlight = (req, res) => {
   res.json({ ok: true, data: { _id: event, images } });
 };
 
+const GLOBAL_live_training = "live_training";
+
+const update_live_training = (req, res) => {
+  let { title, description, video, thumbnail, thumbnail_hash } = req.body;
+
+  video = save_video(video);
+  thumbnail = save_image(thumbnail);
+
+  GLOBALS.update(
+    { global: GLOBAL_live_training },
+    { title, description, video, thumbnail, thumbnail_hash }
+  );
+
+  res.json({
+    ok: true,
+    data: { video, thumbnail },
+  });
+};
+
+const live_training = (req, res) => {
+  res.json({
+    ok: true,
+    data: GLOBALS.readone({ global: GLOBAL_live_training }),
+  });
+};
+
+const GLOBAL_donation_section = "donation_section";
+
+const donation_section = (req, res) => {
+  res.json({
+    ok: true,
+    data: GLOBALS.readone({ global: GLOBAL_donation_section }),
+  });
+};
+
+const update_donation_section = (req, res) => {
+  let { title, text, image, image_file_hash } = req.body;
+
+  image = save_image(image);
+
+  GLOBALS.update(
+    { global: GLOBAL_donation_section },
+    { title, text, image, image_file_hash }
+  );
+
+  res.json({
+    ok: true,
+    data: { image },
+  });
+};
+
+const GLOBAL_mentorship = "mentorship";
+
+const mentorship = (req, res) => {
+  res.json({
+    ok: true,
+    data: GLOBALS.readone({ global: GLOBAL_mentorship }),
+  });
+};
+
+const update_mentorship = (req, res) => {
+  let { sections, title, image, image_file_hash } = req.body;
+
+  image = save_image(image);
+
+  let result = GLOBALS.update(
+    { global: GLOBAL_mentorship },
+    { title, sections, image, image_file_hash }
+  );
+
+  res.json({
+    ok: true,
+    data: { image, message: !result ? "Something went wrong!" : null },
+  });
+};
+
 export {
   GLOBALS_mission_statement,
   GLOBALS_vision_statement,
+  donation_section,
+  update_donation_section,
+  GLOBAL_donation_section,
+  update_live_training,
+  live_training,
+  GLOBAL_live_training,
   update_mission,
+  update_mentorship,
+  mentorship,
+  GLOBAL_mentorship,
   update_vision,
   mission_vision_statement,
   update_about_statement,

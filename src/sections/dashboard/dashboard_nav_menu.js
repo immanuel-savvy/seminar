@@ -36,12 +36,6 @@ class Dashboard_nav_menu extends React.Component {
           title: "manage_speakers",
         },
         {
-          title: "about_statement",
-        },
-        {
-          title: "vision_mission_statement",
-        },
-        {
           title: "new_article",
         },
         {
@@ -53,7 +47,7 @@ class Dashboard_nav_menu extends React.Component {
         {
           title: "pending_testimonies",
         },
-        { title: "testimonial_overview" }
+        { title: "settings" }
       ),
     };
   }

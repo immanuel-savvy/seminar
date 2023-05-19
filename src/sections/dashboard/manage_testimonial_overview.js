@@ -22,13 +22,16 @@ class Manage_testimonial_overview extends Handle_file_upload {
 
   submit = async () => {
     this.setState({ uploading: true });
-    let { image, thumbnail, video, image_file_hash, image_hash } = this.state;
+    let { image, thumbnail, video, image_file_hash, text, title, image_hash } =
+      this.state;
     image = image || image;
 
     await post_request("update_testimonial_overview", {
       thumbnail: image || thumbnail,
       video,
       image_hash: image_file_hash || image_hash,
+      text,
+      title,
     });
 
     this.setState({ uploading: false });
@@ -44,12 +47,14 @@ class Manage_testimonial_overview extends Handle_file_upload {
       thumbnail,
       video,
       image,
+      text,
+      title,
     } = this.state;
     image = image || thumbnail;
 
     let video_ = video;
     return (
-      <div className="col-lg-9 col-md-9 col-sm-12">
+      <div className="col-12">
         <Dashboard_breadcrumb crumb="alumni overview" />
 
         <div className="row justify-content-center mb-3">
@@ -112,6 +117,40 @@ class Manage_testimonial_overview extends Handle_file_upload {
                     </label>
                   </div>
                 )}
+              </div>
+
+              <div className="form-group">
+                <label>Title</label>
+                <div className="input-with-icon">
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={title}
+                    onChange={({ target }) =>
+                      this.setState({
+                        title: target.value,
+                        message: "",
+                      })
+                    }
+                    placeholder="Title"
+                  />
+                  <i className="ti-text"></i>
+                </div>
+              </div>
+
+              <div className="col-12">
+                <div className="form-group">
+                  <label>Text</label>
+                  <textarea
+                    className="form-control"
+                    type="number"
+                    placeholder="Text..."
+                    value={text}
+                    onChange={({ target }) =>
+                      this.setState({ text: target.value })
+                    }
+                  ></textarea>
+                </div>
               </div>
 
               <div class="col-lg-12 col-md-12 col-sm-12">

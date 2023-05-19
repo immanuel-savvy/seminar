@@ -8,6 +8,7 @@ import Articles from "../sections/articles";
 import Donations from "../sections/donations";
 import Footer from "../sections/footer";
 import Hero_banner from "../sections/hero_banner";
+import Live_training from "../sections/live_training";
 import Management_team from "../sections/management_team";
 import Nav from "../sections/nav";
 import Testimonials from "../sections/testimonials";
@@ -79,6 +80,8 @@ class Home extends React.Component {
                 <Donations />
 
                 <Testimonials />
+
+                <Live_training />
 
                 <Articles />
 

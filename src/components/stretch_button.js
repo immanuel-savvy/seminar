@@ -30,7 +30,7 @@ class Stretch_button extends React.Component {
             : "btn full-width btn-md theme-bg text-white"
         }
         disabled={disabled}
-        onClick={() => !disabled && action()}
+        onClick={() => !disabled && action && action()}
         style={{ textTransform: "capitalize", ...style }}
       >
         {title}
