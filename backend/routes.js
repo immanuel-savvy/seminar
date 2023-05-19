@@ -35,6 +35,12 @@ import {
   update_donation_section,
   mentorship,
   update_mentorship,
+  update_internship,
+  update_speakers,
+  update_sponsors,
+  internship,
+  speakers_page,
+  sponsors_page,
 } from "./handlers/settings";
 import {
   add_team_member,
@@ -123,6 +129,9 @@ const router = (app) => {
   app.get("/live_training", live_training);
   app.get("/donation_section", donation_section);
   app.get("/mentorship", mentorship);
+  app.get("/internship", internship);
+  app.get("/speakers_page", speakers_page);
+  app.get("/sponsors_page", sponsors_page);
   app.get("/event_sponsors/:event", event_sponsors);
 
   app.post("/signup", signup);
@@ -142,6 +151,9 @@ const router = (app) => {
   app.post("/update_donation_section", update_donation_section);
   app.post("/update_live_training", update_live_training);
   app.post("/update_mentorship", update_mentorship);
+  app.post("/update_internship", update_internship);
+  app.post("/update_speakers", update_speakers);
+  app.post("/update_sponsors", update_sponsors);
   app.post("/remove_seminar/:seminar", remove_seminar);
   app.post("/remove_conference/:conference", remove_conference);
   app.post("/register_attendance", register_attendance);

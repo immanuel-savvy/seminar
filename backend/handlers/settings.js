@@ -177,7 +177,91 @@ const update_mentorship = (req, res) => {
   });
 };
 
+const GLOBAL_internship = "internship";
+
+const internship = (req, res) => {
+  res.json({
+    ok: true,
+    data: GLOBALS.readone({ global: GLOBAL_internship }),
+  });
+};
+
+const update_internship = (req, res) => {
+  let { sections, title, image, image_file_hash } = req.body;
+
+  image = save_image(image);
+
+  let result = GLOBALS.update(
+    { global: GLOBAL_internship },
+    { title, sections, image, image_file_hash }
+  );
+
+  res.json({
+    ok: true,
+    data: { image, message: !result ? "Something went wrong!" : null },
+  });
+};
+
+const GLOBAL_sponsors = "sponsors";
+
+const sponsors_page = (req, res) => {
+  res.json({
+    ok: true,
+    data: GLOBALS.readone({ global: GLOBAL_sponsors }),
+  });
+};
+
+const update_sponsors = (req, res) => {
+  let { sections, title, image, image_file_hash } = req.body;
+
+  image = save_image(image);
+
+  let result = GLOBALS.update(
+    { global: GLOBAL_sponsors },
+    { title, sections, image, image_file_hash }
+  );
+
+  res.json({
+    ok: true,
+    data: { image, message: !result ? "Something went wrong!" : null },
+  });
+};
+
+const GLOBAL_speakers = "speakers";
+
+const speakers_page = (req, res) => {
+  res.json({
+    ok: true,
+    data: GLOBALS.readone({ global: GLOBAL_speakers }),
+  });
+};
+
+const update_speakers = (req, res) => {
+  let { sections, title, image, image_file_hash } = req.body;
+
+  image = save_image(image);
+
+  let result = GLOBALS.update(
+    { global: GLOBAL_speakers },
+    { title, sections, image, image_file_hash }
+  );
+
+  res.json({
+    ok: true,
+    data: { image, message: !result ? "Something went wrong!" : null },
+  });
+};
+
 export {
+  GLOBAL_sponsors,
+  GLOBAL_speakers,
+  GLOBAL_internship,
+  internship,
+  sponsors_page,
+  speakers_page,
+  update_speakers,
+  update_sponsors,
+  update_internship,
   GLOBALS_mission_statement,
   GLOBALS_vision_statement,
   donation_section,

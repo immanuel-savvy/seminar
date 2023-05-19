@@ -12,13 +12,15 @@ class Manage_mentorship extends Handle_file_upload {
   constructor(props) {
     super(props);
 
-    this.state = { sections: new Array() };
+    this.state = {
+      sections: new Array(),
+      title: "Welcome To Our Mentorship Program",
+    };
   }
 
   componentDidMount = async () => {
     let mentorship = await get_request("mentorship");
 
-    console.log(mentorship);
     this.setState({ ...mentorship, mentorship });
   };
 
@@ -43,14 +45,13 @@ class Manage_mentorship extends Handle_file_upload {
   };
 
   submit = async () => {
-    let { sections, image, image_file_hash, mentorship } = this.state;
+    let { sections, image, image_file_hash, title, mentorship } = this.state;
     if (!mentorship) return;
 
     this.setState({ updating: true, message: null });
 
-    mentorship = { sections, image, image_file_hash };
+    mentorship = { sections, image, image_file_hash, title };
 
-    console.log(mentorship);
     let res = await post_request("update_mentorship", mentorship);
 
     this.setState({
@@ -61,7 +62,8 @@ class Manage_mentorship extends Handle_file_upload {
   };
 
   render() {
-    let { updating, image, image_file_loading, message, sections } = this.state;
+    let { updating, image, title, image_file_loading, message, sections } =
+      this.state;
 
     return (
       <div className="col-12">
@@ -77,6 +79,20 @@ class Manage_mentorship extends Handle_file_upload {
                 <div className="login-form">
                   <form>
                     <div className="row">
+                      <div className="col-12">
+                        <div className="form-group">
+                          <label>Page Title</label>
+                          <input
+                            className="form-control"
+                            placeholder="Page Title"
+                            value={title}
+                            onChange={({ target }) =>
+                              this.setState({ title: target.value })
+                            }
+                          />
+                        </div>
+                      </div>
+
                       {sections.map((section, index) => (
                         <div key={index} className="form-group">
                           <span>

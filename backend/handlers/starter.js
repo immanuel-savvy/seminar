@@ -12,8 +12,11 @@ import {
   GLOBALS_mission_statement,
   GLOBALS_vision_statement,
   GLOBAL_donation_section,
+  GLOBAL_internship,
   GLOBAL_live_training,
   GLOBAL_mentorship,
+  GLOBAL_speakers,
+  GLOBAL_sponsors,
 } from "./settings";
 import { GLOBAL_pending_talks } from "./speakers";
 
@@ -70,6 +73,15 @@ const create_default_admin = () => {
 
   !GLOBALS.readone({ global: GLOBAL_mentorship }) &&
     GLOBALS.write({ global: GLOBAL_mentorship });
+
+  !GLOBALS.readone({ global: GLOBAL_internship }) &&
+    GLOBALS.write({ global: GLOBAL_internship });
+
+  !GLOBALS.readone({ global: GLOBAL_sponsors }) &&
+    GLOBALS.write({ global: GLOBAL_sponsors });
+
+  !GLOBALS.readone({ global: GLOBAL_speakers }) &&
+    GLOBALS.write({ global: GLOBAL_speakers });
 };
 
 export { create_default_admin, default_user };
