@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { to_title } from "../../assets/js/utils/functions";
 import { post_request } from "../../assets/js/utils/services";
 import Padder from "../../components/padder";
+import Stretch_button from "../../components/stretch_button";
 import Footer from "../../sections/footer";
 import Nav from "../../sections/nav";
 
@@ -22,15 +23,21 @@ class Admin_login extends React.Component {
   login = async () => {
     let { email, password } = this.state;
 
+    this.setState({ loading: true });
+
     let response = await post_request("admin_login", { email, password });
 
     response && response.admin
       ? this.props.log_admin(response.admin)
-      : this.setState({ password: "", message: response.message });
+      : this.setState({
+          password: "",
+          message: response.message,
+          loading: false,
+        });
   };
 
   render() {
-    let { email, password, message } = this.state;
+    let { email, password, message, loading } = this.state;
 
     return (
       <div id="main-wrapper">
@@ -82,13 +89,11 @@ class Admin_login extends React.Component {
                           />
                         </div>
                         <div className="form-group">
-                          <button
-                            type="button"
-                            className="btn full-width btn-md theme-bg text-white"
-                            onClick={this.login}
-                          >
-                            Login
-                          </button>
+                          <Stretch_button
+                            title="Login"
+                            action={this.login}
+                            loading={loading}
+                          />
                         </div>
                       </div>
                       {message ? (

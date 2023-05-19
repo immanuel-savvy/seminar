@@ -35,6 +35,8 @@ class Internship extends React.Component {
     let { sections, image, title, image_file_hash } =
       internship || new Object();
 
+    if (!sections) sections = new Array();
+
     return (
       <div>
         <Custom_nav page="Internship" />

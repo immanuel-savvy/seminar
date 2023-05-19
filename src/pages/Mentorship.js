@@ -36,6 +36,8 @@ class Mentorship extends React.Component {
     let { sections, image, title, image_file_hash } =
       mentorship || new Object();
 
+    if (!sections) sections = new Array();
+
     return (
       <div>
         <Custom_nav page="Mentorship" />
