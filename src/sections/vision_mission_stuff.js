@@ -23,12 +23,11 @@ class Vision_mission_stuff extends React.Component {
       vision_title,
       mission_title,
     } = details;
-    title = vision_title;
+    if (vision_title) title = vision_title;
+    if (!title) title = mission_title;
 
     if (!image) image = details.mission;
     if (!description) description = details.mission_statement;
-
-    if (!title) title = mission_title;
 
     return (
       <div className={gray ? "container-fluid gray" : "container-fluid"}>

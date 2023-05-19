@@ -202,7 +202,7 @@ class Conference extends React.Component {
             </div>
             <p className="cursor-pointer" onClick={this.toggle_read_more}>
               {full ? short_description : short_description.slice(0, 70)}
-              {
+              {short_description.length >= 70 ? (
                 <span
                   className="theme-cl"
                   style={{ fontStyle: "italic", marginLeft: 5 }}
@@ -210,7 +210,7 @@ class Conference extends React.Component {
                 >
                   {full ? "Show less" : "...Read more"}
                 </span>
-              }
+              ) : null}
             </p>
             <p>
               <i className="fas fa-map-marker"></i>{" "}
