@@ -4,7 +4,7 @@ const hostname = DEV
   ? `http://${"localhost"}`
   : "https://seminar.udaralinksapp.com";
 
-const client_domain = DEV ? `${hostname}:1415` : `http://giitfoundation.org`;
+const client_domain = DEV ? `${hostname}:1415` : `https://giitfoundation.org`;
 
 const domain = DEV ? `${hostname}:1450` : `https://seminar.udaralinksapp.com`;
 

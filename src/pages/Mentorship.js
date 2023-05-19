@@ -107,3 +107,4 @@ class Mentorship extends React.Component {
 }
 
 export default Mentorship;
+export { H1_tag };

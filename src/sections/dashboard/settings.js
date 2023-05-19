@@ -8,6 +8,9 @@ import { to_title } from "../../assets/js/utils/functions";
 import Manage_live_training from "./manage_live_training";
 import Manage_donation_section from "./manage_donation_section";
 import Manage_mentorship from "./manage_mentorship";
+import Manage_internship from "./manage_internship";
+import Manage_sponsors_page from "./manage_sponsors_page";
+import Manage_speakers_page from "./manage_speakers_page";
 
 const tabs = new Object({
   about_statement: <Manage_about_statement />,
@@ -16,6 +19,9 @@ const tabs = new Object({
   live_training: <Manage_live_training />,
   donation_section: <Manage_donation_section />,
   mentorship: <Manage_mentorship />,
+  internship: <Manage_internship />,
+  sponsors: <Manage_sponsors_page />,
+  speakers: <Manage_speakers_page />,
 });
 
 class Settings extends React.Component {
