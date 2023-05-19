@@ -31,6 +31,12 @@ var router = function router(app) {
   app.get("/article_categories", _articles.article_categories);
   app.get("/testimonials", _reviews.alumni_overview);
   app.get("/sponsors", _sponsors.sponsors);
+  app.get("/live_training", _settings.live_training);
+  app.get("/donation_section", _settings.donation_section);
+  app.get("/mentorship", _settings.mentorship);
+  app.get("/internship", _settings.internship);
+  app.get("/speakers_page", _settings.speakers_page);
+  app.get("/sponsors_page", _settings.sponsors_page);
   app.get("/event_sponsors/:event", _sponsors.event_sponsors);
   app.post("/signup", _users.signup);
   app.post("/login", _users.login);
@@ -46,6 +52,12 @@ var router = function router(app) {
   app.post("/conferences", _conference.conferences);
   app.post("/update_seminar", _seminar.update_seminar);
   app.post("/update_conference", _conference.update_conference);
+  app.post("/update_donation_section", _settings.update_donation_section);
+  app.post("/update_live_training", _settings.update_live_training);
+  app.post("/update_mentorship", _settings.update_mentorship);
+  app.post("/update_internship", _settings.update_internship);
+  app.post("/update_speakers", _settings.update_speakers);
+  app.post("/update_sponsors", _settings.update_sponsors);
   app.post("/remove_seminar/:seminar", _seminar.remove_seminar);
   app.post("/remove_conference/:conference", _conference.remove_conference);
   app.post("/register_attendance", _seminar.register_attendance);
