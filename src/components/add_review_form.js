@@ -1,5 +1,6 @@
 import React from "react";
-import { post_request } from "../assets/js/utils/services";
+import { domain, post_request } from "../assets/js/utils/services";
+import Add_video_review from "../sections/dashboard/add_video_review";
 import { emitter } from "../Seminar";
 import Handle_file_upload from "./handle_file_upload";
 import Loadindicator from "./loadindicator";
@@ -71,7 +72,17 @@ class Add_student_review extends Handle_file_upload {
   };
 
   render() {
-    let { toggle } = this.props;
+    let { toggle, on_submit, review, video } = this.props;
+
+    if (video)
+      return (
+        <Add_video_review
+          review={review}
+          toggle={toggle}
+          on_submit={on_submit}
+        />
+      );
+
     let { name, email, text, image, organisation, position, posting } =
       this.state;
 

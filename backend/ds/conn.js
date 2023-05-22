@@ -17,6 +17,7 @@ let USERS,
   ARTICLE_CATEGORIES,
   COMMENTS,
   REVIEWS,
+  VIDEO_REVIEWS,
   REPLIES,
   CONFERENCES,
   TRENDING_ARTICLES,
@@ -29,6 +30,7 @@ const ds_conn = () => {
   gds = new GDS("giit_seminar").sync();
 
   REVIEWS = gds.folder("reviews");
+  VIDEO_REVIEWS = gds.folder("video_reviews");
   ARTICLES = gds.folder("articles", null, "categories");
   CONFERENCES = gds.folder("conferences");
   ARTICLE_CATEGORIES = gds.folder("article_categories");
@@ -67,6 +69,7 @@ export {
   USERS_HASH,
   PENDING_TALKS,
   TEAM_MEMBER,
+  VIDEO_REVIEWS,
   SPEAKERS,
   REVIEWS,
   SEMINARS,

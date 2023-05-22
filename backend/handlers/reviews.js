@@ -1,4 +1,4 @@
-import { GLOBALS, REVIEWS } from "../ds/conn";
+import { GLOBALS, REVIEWS, VIDEO_REVIEWS } from "../ds/conn";
 import { remove_image, remove_video, save_image, save_video } from "./utils";
 
 const GLOBALS_verified_reviews = "verified_reviews";
@@ -120,12 +120,48 @@ const update_alumni_overview = (req, res) => {
   });
 };
 
+const new_video_review = (req, res) => {
+  let { thumbnail, url, _id, image_hash } = req.body;
+
+  thumbnail = save_image(thumbnail);
+  url = save_video(url);
+
+  let result;
+  if (_id) VIDEO_REVIEWS.update(_id, { thumbnail, url, image_hash });
+  else result = VIDEO_REVIEWS.write({ thumbnail, url, image_hash });
+
+  res.json({ ok: true, data: { thumbnail, url, _id: result._id } });
+};
+
+const update_video_review = (req, res) => new_video_review(req, res);
+
+const remove_video_review = (req, res) => {
+  let { review } = req.params;
+
+  VIDEO_REVIEWS.remove(review);
+
+  res.end();
+};
+
+const video_reviews = (req, res) => {
+  let { limit } = req.body;
+
+  res.json({
+    ok: true,
+    data: VIDEO_REVIEWS.read(null, { limit: Number(limit) }),
+  });
+};
+
 export {
   update_alumni_overview,
   alumni_overview,
   GLOBAL_alumni_overview,
+  update_video_review,
   remove_review,
+  remove_video_review,
+  video_reviews,
   new_review,
   approve_review,
+  new_video_review,
   reviews,
 };

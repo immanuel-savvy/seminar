@@ -15,6 +15,7 @@ import New_article from "../sections/dashboard/new_article";
 import Pending_reviews from "../sections/dashboard/pending_reviews";
 import Pending_talks from "../sections/dashboard/pending_talks";
 import Settings from "../sections/dashboard/settings";
+import Video_reviews from "../sections/dashboard/video_reviews";
 import Footer, { scroll_to_top } from "../sections/footer";
 import Nav from "../sections/nav";
 import { emitter } from "../Seminar";
@@ -59,6 +60,7 @@ class Adminstrator extends React.Component {
       manage_testimonials: <Manage_testimonials />,
       pending_testimonies: <Pending_reviews />,
       manage_conferences: <Manage_conferences />,
+      video_reviews: <Video_reviews />,
       settings: <Settings />,
     });
 

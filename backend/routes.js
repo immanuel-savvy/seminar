@@ -85,9 +85,13 @@ import {
   alumni_overview,
   approve_review,
   new_review,
+  new_video_review,
   remove_review,
+  remove_video_review,
   reviews,
   update_alumni_overview,
+  update_video_review,
+  video_reviews,
 } from "./handlers/reviews";
 import {
   conference_attended,
@@ -145,6 +149,10 @@ const router = (app) => {
   app.post("/new_seminar", new_seminar);
   app.post("/new_conference", new_conference);
   app.post("/seminars", seminars);
+  app.post("/video_reviews", video_reviews);
+  app.post("/new_video_review", new_video_review);
+  app.post("/update_video_review", update_video_review);
+  app.post("/remove_video_review/:review", remove_video_review);
   app.post("/conferences", conferences);
   app.post("/update_seminar", update_seminar);
   app.post("/update_conference", update_conference);
