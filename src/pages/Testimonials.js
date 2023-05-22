@@ -12,6 +12,7 @@ import { organisation_name } from "../assets/js/utils/constants";
 import Section_header from "../components/section_headers";
 import Padder from "../components/padder";
 import Testimonials_header from "../components/testimonials_header";
+import Video_review from "../components/video_review";
 
 class Testimonials extends React.Component {
   constructor(props) {
@@ -37,12 +38,15 @@ class Testimonials extends React.Component {
     });
 
     this.setState({ reviews });
+
+    let videos = await post_request("video_reviews");
+    this.setState({ videos });
   };
 
   toggle_form = () => this.setState({ show_form: !this.state.show_form });
 
   render() {
-    let { reviews, show_form, review_submitted } = this.state;
+    let { reviews, show_form, review_submitted, videos } = this.state;
 
     return (
       <div id="main-wrapper">
@@ -60,6 +64,25 @@ class Testimonials extends React.Component {
         <div className="container py-5">
           <Testimonials_header />
         </div>
+
+        {videos ? (
+          videos.length ? (
+            <div className="container">
+              <Section_header title="Video" color_title="Testimonies" />
+              <div className="row mb-4">
+                {videos.map((video) => (
+                  <Video_review
+                    class_name="col-xl-3 col-lg-4 col-md-6 col-sm-12 mb-2"
+                    review={video}
+                    key={video._id}
+                  />
+                ))}
+              </div>
+            </div>
+          ) : null
+        ) : (
+          <Loadindicator />
+        )}
 
         <section className="gray">
           <div style={{ paddingTop: 20 }}>
