@@ -1,14 +1,14 @@
-const DEV = true;
+const DEV = false;
 
 const hostname = DEV
   ? `http://${"localhost"}`
-  : "https://seminar.udaralinksapp.com";
+  : "https://cet.udaralinksapp.com";
 
-const client_domain = DEV ? `${hostname}:1415` : `https://giitfoundation.org`;
+const client_domain = DEV ? `${hostname}:1415` : `https://cetfoundation.org.ng`;
 
-const domain = DEV ? `${hostname}:1450` : `https://seminar.udaralinksapp.com`;
+const domain = DEV ? `${hostname}:1450` : `https://cet.udaralinksapp.com`;
 
-const default_admin = "adminstrators~123seminar~1234567890123";
+const default_admin = "adminstrators~123cet~1234567890123";
 
 const month_index = new Object({
   0: "jan",
@@ -45,7 +45,7 @@ const dow_index_inverse = new Object({
   sunday: 7,
 });
 
-const organisation_name = "GIIT ICT Foundation";
+const organisation_name = "CET Foundation";
 
 export {
   domain,

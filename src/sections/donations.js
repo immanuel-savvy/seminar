@@ -30,14 +30,14 @@ class Donations extends React.Component {
 
     let { title, text, image, image_file_hash } = donation;
 
-    text = text.split("\n");
-    title = title.split(",");
+    text = text?.split("\n");
+    title = title?.split(",");
 
     return (
       <section className="">
         <Section_header
-          title={title.slice(0, -1).join(",") + ","}
-          color_title={title.slice(-1)[0]}
+          title={title?.slice(0, -1).join(",") + ","}
+          color_title={title?.slice(-1)[0]}
         />
 
         <div className="container">
@@ -45,7 +45,7 @@ class Donations extends React.Component {
             <div className="col-xl-6 col-lg-6 col-md-12 col-sm-12">
               <div className="lmp_caption">
                 <p className="lead text-justify">
-                  {<ReactMarkdown children={text[0]} />}
+                  {<ReactMarkdown children={text && text[0]} />}
                 </p>
               </div>
             </div>
@@ -61,7 +61,7 @@ class Donations extends React.Component {
             </div>
           </div>
           <div className="row ">
-            {text.slice(1).map((t, i) => {
+            {text?.slice(1).map((t, i) => {
               return (
                 <p key={i} className="lead text-justify">
                   <ReactMarkdown

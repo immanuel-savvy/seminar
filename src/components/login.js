@@ -59,7 +59,7 @@ class Login extends React.Component {
                   <div class="login-form">
                     <form>
                       <div class="form-group">
-                        <label>User Name</label>
+                        <label>Email</label>
                         <div class="input-with-icon">
                           <input
                             type="text"
@@ -71,7 +71,7 @@ class Login extends React.Component {
                                 message: "",
                               })
                             }
-                            placeholder="User or email"
+                            placeholder="email"
                           />
                           <i class="ti-user"></i>
                         </div>

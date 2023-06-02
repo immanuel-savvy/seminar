@@ -45,10 +45,11 @@ class Make_a_donation extends React.Component {
                   <div class="pro_product_wrap">
                     <ul>
                       <li>
-                        <strong>Account Number</strong>0123456789
+                        <strong>Account Number</strong>1013840795
                       </li>
                       <li>
-                        <strong>Account Name</strong>GIIT Africa
+                        <strong>Account Name</strong>Globalstar Innovative
+                        Information Technologies
                       </li>
                       <li>
                         <strong>Bank</strong>Zenith Bank
