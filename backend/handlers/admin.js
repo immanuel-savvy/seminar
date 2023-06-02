@@ -1,8 +1,8 @@
 import { ADMINSTRATORS, ADMIN_HASH } from "../ds/conn";
 
-const domain_name = "https://dev.semina.com";
+const domain_name = "https://dev.seminar.com";
 
-const client_domain = "http://semina.com";
+const client_domain = "http://seminar.com";
 
 const paystack_secret_key = "sk_test_8f53d8f0d9303a18a856d4aeba97603d0795fdcb";
 

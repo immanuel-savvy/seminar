@@ -54,13 +54,11 @@ class Testimonials extends React.Component {
                   loop
                   className="swiper-container"
                 >
-                  {new Array(...reviews, ...reviews, ...reviews).map(
-                    (review, index) => (
-                      <SwiperSlide key={index}>
-                        <Review review={review} />
-                      </SwiperSlide>
-                    )
-                  )}
+                  {reviews.map((review, index) => (
+                    <SwiperSlide key={index}>
+                      <Review review={review} />
+                    </SwiperSlide>
+                  ))}
                 </Swiper>
               )
             ) : (

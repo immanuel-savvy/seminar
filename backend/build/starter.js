@@ -102,5 +102,10 @@ var create_default_admin = function create_default_admin() {
   }) && _conn.GLOBALS.write({
     global: _settings.GLOBAL_speakers
   });
+  !_conn.GLOBALS.readone({
+    global: _settings.GLOBAL_logo
+  }) && _conn.GLOBALS.write({
+    global: _settings.GLOBAL_logo
+  });
 };
 exports.create_default_admin = create_default_admin;

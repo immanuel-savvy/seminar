@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { email_regex } from "../assets/js/utils/functions";
 import { post_request } from "../assets/js/utils/services";
+import Stretch_button from "../components/stretch_button";
 import { Loggeduser } from "../Contexts";
 import Footer from "../sections/footer";
 import Nav from "../sections/nav";
@@ -27,25 +28,25 @@ class Verify_email extends React.Component {
     }
   };
 
-  verify = async (e) => {
-    e.preventDefault();
-
+  verify = async () => {
     let { email, verification_code } = this.state;
     if (!email_regex.test(email) || !/[0-9]{6}/.test(verification_code))
       return this.setState({ message: "Invalid entry" });
+    this.setState({ loading: true });
 
     let result = await post_request("verify_email", {
       email,
       verification_code,
     });
-    if (!result._id) return this.setState({ message: result });
+    if (!result._id)
+      return this.setState({ message: result?.message, loading: false });
 
     this.login(result);
     document.getElementById("click_login").click();
   };
 
   render() {
-    let { email, verification_code, edited, message } = this.state;
+    let { email, verification_code, edited, message, loading } = this.state;
 
     return (
       <Loggeduser.Consumer>
@@ -130,13 +131,11 @@ class Verify_email extends React.Component {
 
                               <div className="form-group">
                                 <Link to="/" id="click_login"></Link>
-                                <button
-                                  onClick={this.verify}
-                                  type="button"
-                                  className="btn full-width btn-md theme-bg text-white"
-                                >
-                                  Verify
-                                </button>
+                                <Stretch_button
+                                  loading={loading}
+                                  title="Verify"
+                                  action={this.verify}
+                                />
                               </div>
                             </div>
                           </div>

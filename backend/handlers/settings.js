@@ -1,5 +1,5 @@
 import { CONFERENCES, GLOBALS, SEMINARS, TEAM_MEMBER } from "../ds/conn";
-import { save_image, save_video } from "./utils";
+import { remove_image, save_image, save_video } from "./utils";
 
 const GLOBALS_mission_statement = "mission_statement",
   GLOBALS_vision_statement = "vision_statement",
@@ -82,6 +82,8 @@ const entry = (req, res) => {
       about: GLOBALS.readone({ global: GLOBALS_about_statement }),
       vision: GLOBALS.readone({ global: GLOBALS_vision_statement }),
       mission: GLOBALS.readone({ global: GLOBALS_mission_statement }),
+      banners: GLOBALS.read({ global: GLOBAL_banner_stuff }),
+      logo: GLOBALS.readone({ global: GLOBAL_logo }),
     },
   });
 };
@@ -252,10 +254,87 @@ const update_speakers = (req, res) => {
   });
 };
 
+const GLOBAL_banner_stuff = "banner_stuff";
+
+const add_banner = (req, res) => {
+  let { image, title, sub_text } = req.body;
+  image = save_image(image);
+
+  let result = GLOBALS.write({
+    global: GLOBAL_banner_stuff,
+    image,
+    title,
+    sub_text,
+  });
+
+  res.json({
+    ok: true,
+    data: { _id: result._id, image, created: result.created },
+  });
+};
+
+const update_banner = (req, res) => {
+  let { image, title, _id, sub_text } = req.body;
+  image = save_image(image);
+
+  let result = GLOBALS.update(
+    { _id, global: GLOBAL_banner_stuff },
+    { image, title, sub_text }
+  );
+
+  res.json({
+    ok: true,
+    data: { _id: result._id, image, created: result.created },
+  });
+};
+
+const remove_banner = (req, res) => {
+  let { banner } = req.params;
+
+  console.log(banner);
+  GLOBALS.remove({ global: GLOBAL_banner_stuff, _id: banner });
+
+  res.end();
+};
+
+const GLOBAL_logo = "logo";
+
+const logo_update = (req, res) => {
+  let { logo } = req.body;
+
+  if (logo && logo.startsWith("data")) {
+    let prev_logo = GLOBALS.readone({ global: GLOBAL_logo });
+    remove_image(prev_logo.logo);
+  }
+
+  logo = save_image(logo);
+
+  GLOBALS.update({ global: GLOBAL_logo }, { logo });
+
+  res.json({ ok: true, data: { logo } });
+};
+
+const banners_et_logo = (req, res) => {
+  res.json({
+    ok: true,
+    data: {
+      banners: GLOBALS.read({ global: GLOBAL_banner_stuff }),
+      logo: GLOBALS.readone({ global: GLOBAL_logo }),
+    },
+  });
+};
+
 export {
   GLOBAL_sponsors,
   GLOBAL_speakers,
+  GLOBAL_banner_stuff,
+  add_banner,
+  banners_et_logo,
+  update_banner,
   GLOBAL_internship,
+  GLOBAL_logo,
+  logo_update,
+  remove_banner,
   internship,
   sponsors_page,
   speakers_page,

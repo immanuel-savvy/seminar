@@ -35,6 +35,7 @@ var router = function router(app) {
   app.get("/donation_section", _settings.donation_section);
   app.get("/mentorship", _settings.mentorship);
   app.get("/internship", _settings.internship);
+  app.get("/banners_et_logo", _settings.banners_et_logo);
   app.get("/speakers_page", _settings.speakers_page);
   app.get("/sponsors_page", _settings.sponsors_page);
   app.get("/event_sponsors/:event", _sponsors.event_sponsors);
@@ -49,6 +50,10 @@ var router = function router(app) {
   app.post("/new_seminar", _seminar.new_seminar);
   app.post("/new_conference", _conference.new_conference);
   app.post("/seminars", _seminar.seminars);
+  app.post("/video_reviews", _reviews.video_reviews);
+  app.post("/new_video_review", _reviews.new_video_review);
+  app.post("/update_video_review", _reviews.update_video_review);
+  app.post("/remove_video_review/:review", _reviews.remove_video_review);
   app.post("/conferences", _conference.conferences);
   app.post("/update_seminar", _seminar.update_seminar);
   app.post("/update_conference", _conference.update_conference);
@@ -110,6 +115,10 @@ var router = function router(app) {
   app.post("/update_vision", _settings.update_vision);
   app.post("/update_mission", _settings.update_mission);
   app.post("/update_about_statement", _settings.update_about_statement);
+  app.post("/add_banner", _settings.add_banner);
+  app.post("/update_banner", _settings.update_banner);
+  app.post("/logo_update", _settings.logo_update);
+  app.post("/remove_banner/:banner", _settings.remove_banner);
 };
 var _default = router;
 exports.default = _default;

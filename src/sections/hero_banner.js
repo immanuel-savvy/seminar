@@ -1,4 +1,5 @@
 import React from "react";
+import { domain } from "../assets/js/utils/constants";
 
 class Hero_banner extends React.Component {
   constructor(props) {
@@ -9,13 +10,13 @@ class Hero_banner extends React.Component {
 
   render() {
     let { hero } = this.props;
-    let { main_text, sub_text, bg, overlay } = hero;
+    let { title, sub_text, image, overlay } = hero;
 
     return (
       <div
         className="hero_banner image-cover image_bottom h4_bg"
         style={{
-          backgroundImage: `url(${bg})`,
+          backgroundImage: `url(${domain}/images/${image})`,
           height: "75vh",
           backgroundColor: "black",
           width: "100%",
@@ -25,7 +26,7 @@ class Hero_banner extends React.Component {
         <div className="container">
           <div className="row align-items-center mx-auto">
             <div className="align-items-center mx-auto">
-              <h1 className="banner_title mb-4 text-center">{main_text}</h1>
+              <h1 className="banner_title mb-4 text-center">{title}</h1>
               <p
                 className="font-lg mx-auto text-center mb-4"
                 style={{ width: "60%", fontSize: 20 }}

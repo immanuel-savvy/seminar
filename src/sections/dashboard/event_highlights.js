@@ -1,5 +1,5 @@
 import React from "react";
-import { post_request } from "../../assets/js/utils/services";
+import { domain, post_request } from "../../assets/js/utils/services";
 import Alert_box from "../../components/alert_box";
 import Handle_file_upload from "../../components/handle_file_upload";
 import Modal_form_title from "../../components/modal_form_title";

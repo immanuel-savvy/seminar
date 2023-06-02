@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.update_vision = exports.update_sponsors = exports.update_speakers = exports.update_mission = exports.update_mentorship = exports.update_live_training = exports.update_internship = exports.update_event_highlight = exports.update_donation_section = exports.update_about_statement = exports.sponsors_page = exports.speakers_page = exports.mission_vision_statement = exports.mentorship = exports.live_training = exports.internship = exports.entry = exports.donation_section = exports.about_statement = exports.GLOBAL_sponsors = exports.GLOBAL_speakers = exports.GLOBAL_mentorship = exports.GLOBAL_live_training = exports.GLOBAL_internship = exports.GLOBAL_donation_section = exports.GLOBALS_vision_statement = exports.GLOBALS_mission_statement = exports.GLOBALS_about_statement = void 0;
+exports.update_vision = exports.update_sponsors = exports.update_speakers = exports.update_mission = exports.update_mentorship = exports.update_live_training = exports.update_internship = exports.update_event_highlight = exports.update_donation_section = exports.update_banner = exports.update_about_statement = exports.sponsors_page = exports.speakers_page = exports.remove_banner = exports.mission_vision_statement = exports.mentorship = exports.logo_update = exports.live_training = exports.internship = exports.entry = exports.donation_section = exports.banners_et_logo = exports.add_banner = exports.about_statement = exports.GLOBAL_sponsors = exports.GLOBAL_speakers = exports.GLOBAL_mentorship = exports.GLOBAL_logo = exports.GLOBAL_live_training = exports.GLOBAL_internship = exports.GLOBAL_donation_section = exports.GLOBAL_banner_stuff = exports.GLOBALS_vision_statement = exports.GLOBALS_mission_statement = exports.GLOBALS_about_statement = void 0;
 var _conn = require("../ds/conn");
 var _utils = require("./utils");
 var GLOBALS_mission_statement = "mission_statement",
@@ -123,6 +123,12 @@ var entry = function entry(req, res) {
       }),
       mission: _conn.GLOBALS.readone({
         global: GLOBALS_mission_statement
+      }),
+      banners: _conn.GLOBALS.read({
+        global: GLOBAL_banner_stuff
+      }),
+      logo: _conn.GLOBALS.readone({
+        global: GLOBAL_logo
       })
     }
   });
@@ -365,3 +371,100 @@ var update_speakers = function update_speakers(req, res) {
   });
 };
 exports.update_speakers = update_speakers;
+var GLOBAL_banner_stuff = "banner_stuff";
+exports.GLOBAL_banner_stuff = GLOBAL_banner_stuff;
+var add_banner = function add_banner(req, res) {
+  var _req$body11 = req.body,
+    image = _req$body11.image,
+    title = _req$body11.title,
+    sub_text = _req$body11.sub_text;
+  image = (0, _utils.save_image)(image);
+  var result = _conn.GLOBALS.write({
+    global: GLOBAL_banner_stuff,
+    image: image,
+    title: title,
+    sub_text: sub_text
+  });
+  res.json({
+    ok: true,
+    data: {
+      _id: result._id,
+      image: image,
+      created: result.created
+    }
+  });
+};
+exports.add_banner = add_banner;
+var update_banner = function update_banner(req, res) {
+  var _req$body12 = req.body,
+    image = _req$body12.image,
+    title = _req$body12.title,
+    _id = _req$body12._id,
+    sub_text = _req$body12.sub_text;
+  image = (0, _utils.save_image)(image);
+  var result = _conn.GLOBALS.update({
+    _id: _id,
+    global: GLOBAL_banner_stuff
+  }, {
+    image: image,
+    title: title,
+    sub_text: sub_text
+  });
+  res.json({
+    ok: true,
+    data: {
+      _id: result._id,
+      image: image,
+      created: result.created
+    }
+  });
+};
+exports.update_banner = update_banner;
+var remove_banner = function remove_banner(req, res) {
+  var banner = req.params.banner;
+  console.log(banner);
+  _conn.GLOBALS.remove({
+    global: GLOBAL_banner_stuff,
+    _id: banner
+  });
+  res.end();
+};
+exports.remove_banner = remove_banner;
+var GLOBAL_logo = "logo";
+exports.GLOBAL_logo = GLOBAL_logo;
+var logo_update = function logo_update(req, res) {
+  var logo = req.body.logo;
+  if (logo && logo.startsWith("data")) {
+    var prev_logo = _conn.GLOBALS.readone({
+      global: GLOBAL_logo
+    });
+    (0, _utils.remove_image)(prev_logo.logo);
+  }
+  logo = (0, _utils.save_image)(logo);
+  _conn.GLOBALS.update({
+    global: GLOBAL_logo
+  }, {
+    logo: logo
+  });
+  res.json({
+    ok: true,
+    data: {
+      logo: logo
+    }
+  });
+};
+exports.logo_update = logo_update;
+var banners_et_logo = function banners_et_logo(req, res) {
+  res.json({
+    ok: true,
+    data: {
+      banners: _conn.GLOBALS.read({
+        global: GLOBAL_banner_stuff
+      }),
+      logo: _conn.GLOBALS.readone({
+        global: GLOBAL_logo
+      })
+    }
+  });
+};
+exports.banners_et_logo = banners_et_logo;

@@ -14,6 +14,7 @@ import {
   GLOBAL_donation_section,
   GLOBAL_internship,
   GLOBAL_live_training,
+  GLOBAL_logo,
   GLOBAL_mentorship,
   GLOBAL_speakers,
   GLOBAL_sponsors,
@@ -82,6 +83,9 @@ const create_default_admin = () => {
 
   !GLOBALS.readone({ global: GLOBAL_speakers }) &&
     GLOBALS.write({ global: GLOBAL_speakers });
+
+  !GLOBALS.readone({ global: GLOBAL_logo }) &&
+    GLOBALS.write({ global: GLOBAL_logo });
 };
 
 export { create_default_admin, default_user };

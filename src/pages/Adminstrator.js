@@ -19,6 +19,7 @@ import Video_reviews from "../sections/dashboard/video_reviews";
 import Footer, { scroll_to_top } from "../sections/footer";
 import Nav from "../sections/nav";
 import { emitter } from "../Seminar";
+import Dashboard from "../sections/dashboard/dashboard";
 
 class Adminstrator extends React.Component {
   constructor(props) {
@@ -56,6 +57,7 @@ class Adminstrator extends React.Component {
       manage_team: <Manage_team />,
       pending_talks: <Pending_talks />,
       manage_articles: <Manage_articles />,
+      dashboard: <Dashboard />,
       new_article: <New_article />,
       manage_testimonials: <Manage_testimonials />,
       pending_testimonies: <Pending_reviews />,

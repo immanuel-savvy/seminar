@@ -255,6 +255,7 @@ class Seminar extends React.Component {
               set_subnav: this.set_subnav,
               load_subnavs: this.load_subnavs,
               submenus,
+              logo: entry?.logo,
             }}
           >
             <BrowserRouter>

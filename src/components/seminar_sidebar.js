@@ -138,7 +138,7 @@ class Seminar_sidebar extends React.Component {
                   <Countdown date={date} />
                 </h2>
               )
-            ) : (
+            ) : date < Date.now() ? null : (
               <>
                 <div className="btn theme-light enroll-btn">
                   <h2

@@ -24,9 +24,8 @@ class Home extends React.Component {
 
   componentDidMount = () => {
     let heros = new Array({
-      main_text: "GIIT ICT Foundation:",
-      sub_text:
-        "Empowering Underprivileged Communities Through Education and Employability Skills",
+      main_text: "",
+      sub_text: "",
       bg: require("../assets/img/hero1.jpg"),
     });
 
@@ -44,14 +43,14 @@ class Home extends React.Component {
             <div>
               <Nav page="" />
               <div className="body">
-                {heros ? (
+                {entry || heros ? (
                   <div
                     style={{
                       backgroundImage: `url(${require("../assets/img/hero1.png")})`,
                     }}
                   >
                     <Carousel fade nextLabel="" prevLabel="" indicators={false}>
-                      {heros.map((hero, index) => (
+                      {(entry?.banners || heros).map((hero, index) => (
                         <Carousel.Item>
                           <Hero_banner hero={hero} key={index} />
                         </Carousel.Item>

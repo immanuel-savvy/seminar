@@ -73,7 +73,7 @@ class Footer extends React.Component {
                       alt=""
                     /> */}
 
-                    <h2 className="text-white">Giit Foundation</h2>
+                    <h2 className="text-white">{organisation_name}</h2>
                   </Link>
 
                   <h6 className="extream text-light mb-3">Nigeria</h6>

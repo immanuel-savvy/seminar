@@ -14,7 +14,7 @@ app.use(bodyParser.json({ limit: "100mb" }));
 router(app);
 
 app.get("/", (req, res) =>
-  res.send("<div><h1>Hi, its Voucher Africa.</h1></div>")
+  res.send("<div><h1>Hi, its GIIT ICT Foundation.</h1></div>")
 );
 
 app.get("/developer", (req, res) => {

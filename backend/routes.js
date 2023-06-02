@@ -41,6 +41,11 @@ import {
   internship,
   speakers_page,
   sponsors_page,
+  remove_banner,
+  add_banner,
+  update_banner,
+  logo_update,
+  banners_et_logo,
 } from "./handlers/settings";
 import {
   add_team_member,
@@ -134,6 +139,7 @@ const router = (app) => {
   app.get("/donation_section", donation_section);
   app.get("/mentorship", mentorship);
   app.get("/internship", internship);
+  app.get("/banners_et_logo", banners_et_logo);
   app.get("/speakers_page", speakers_page);
   app.get("/sponsors_page", sponsors_page);
   app.get("/event_sponsors/:event", event_sponsors);
@@ -215,6 +221,11 @@ const router = (app) => {
   app.post("/update_vision", update_vision);
   app.post("/update_mission", update_mission);
   app.post("/update_about_statement", update_about_statement);
+
+  app.post("/add_banner", add_banner);
+  app.post("/update_banner", update_banner);
+  app.post("/logo_update", logo_update);
+  app.post("/remove_banner/:banner", remove_banner);
 };
 
 export default router;

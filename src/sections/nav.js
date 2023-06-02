@@ -12,7 +12,11 @@ import {
   DropdownToggle,
   DropdownMenu,
 } from "reactstrap";
-import { client_domain, organisation_name } from "../assets/js/utils/constants";
+import {
+  client_domain,
+  domain,
+  organisation_name,
+} from "../assets/js/utils/constants";
 import { to_title } from "../assets/js/utils/functions";
 import Loadindicator from "../components/loadindicator";
 import Login from "../components/login";
@@ -82,7 +86,7 @@ class Custom_nav extends React.Component {
 
           return (
             <Nav_context.Consumer>
-              {({ navs, set_subnav }) => {
+              {({ navs, logo, set_subnav }) => {
                 this.navs = navs;
                 this.set_subnav = set_subnav;
 
@@ -104,13 +108,19 @@ class Custom_nav extends React.Component {
                         >
                           <Navbar light expand="xl">
                             <NavbarBrand href="/" className="nav-brand">
-                              {/* <img
-                                src={require(`../assets/img/logo_dark.png`)}
-                                className="logo"
-                                id="logo_white"
-                                alt=""
-                              /> */}
-                              <h2 className="text-dark">GIIT Foundation</h2>
+                              {logo ? (
+                                <img
+                                  src={`${domain}/images/${logo.logo}`}
+                                  className="logo"
+                                  id="logo_white"
+                                  style={{ maxHeight: 75 }}
+                                  alt=""
+                                />
+                              ) : (
+                                <h2 className="text-dark">
+                                  {organisation_name}
+                                </h2>
+                              )}
                             </NavbarBrand>
                             <NavbarToggler
                               style={{ color: "#000" }}
@@ -324,10 +334,8 @@ class Custom_nav extends React.Component {
                                         </DropdownMenu>
                                       ) : null}
                                     </UncontrolledDropdown>
-                                  ) : nav.title === "search" ? null : // > //   } //     }) //       show_search: !this.state.show_search, //     this.setState({ //   onClick={() => // <li
-                                  //   <Link
-                                  //     to="#"
-                                  //     style={{ border: "none" }}
+                                  ) : nav.title ===
+                                    "search" ? null : //     style={{ border: "none" }} //     to="#" //   <Link // > //   } //     }) //       show_search: !this.state.show_search, //     this.setState({ //   onClick={() => // <li
                                   //     className="btn btn-action"
                                   //   >
                                   //     <i className="ti-search"></i>
