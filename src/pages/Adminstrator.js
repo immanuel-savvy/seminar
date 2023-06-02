@@ -26,7 +26,7 @@ class Adminstrator extends React.Component {
     super(props);
 
     this.state = {
-      current_nav: "manage_seminars",
+      current_nav: "dashboard",
     };
   }
 
