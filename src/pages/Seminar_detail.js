@@ -7,6 +7,7 @@ import Seminar_sidebar from "../components/seminar_sidebar";
 import { Loggeduser } from "../Contexts";
 import Footer, { get_session } from "../sections/footer";
 import Custom_nav from "../sections/nav";
+import { get_request } from "../assets/js/utils/services";
 
 class Seminar_detail extends React.Component {
   constructor(props) {
@@ -15,8 +16,17 @@ class Seminar_detail extends React.Component {
     this.state = {};
   }
 
-  componentDidMount = () => {
+  componentDidMount = async () => {
     let seminar = get_session("seminar");
+
+    if (!seminar) {
+      let seminar_id = window.location.search.slice(1);
+      if (!seminar_id) return window.history.go(-1);
+
+      seminar = await get_request(`seminar/${seminar_id}`);
+      if (!seminar) return window.history.go(-1);
+    }
+
     this.setState({ seminar });
   };
 

@@ -13,10 +13,28 @@ import Footer, { get_session } from "../sections/footer";
 import Custom_Nav from "../sections/nav";
 import { emitter } from "../Seminar";
 
-const categories = new Array({
-  title: "Artificial Intelligence",
-  _id: "artificial_intelligence",
-});
+const categories = new Array(
+  {
+    title: "Artificial Intelligence",
+    _id: "artificial_intelligence",
+  },
+  {
+    title: "Design",
+    _id: "design",
+  },
+  {
+    title: "Digital Marketing",
+    _id: "digital_marketing",
+  },
+  {
+    title: "Cybersecurity",
+    _id: "cybersecurity",
+  },
+  {
+    title: "Data Science",
+    _id: "data_science",
+  }
+);
 
 class New_seminar extends Handle_file_upload {
   constructor(props) {

@@ -2,7 +2,7 @@ import React from "react";
 import Loadindicator from "./loadindicator";
 import Seminar from "./seminar";
 import { post_request } from "../assets/js/utils/services";
-import Section_header from "./section_headers";
+import Explore_more from "./explore_more";
 
 class Upcoming_seminars extends React.Component {
   constructor(props) {
@@ -58,9 +58,9 @@ class Upcoming_seminars extends React.Component {
                 )}
               </>
             </div>
-            {/* {upcoming_seminars && upcoming_seminars.length ? (
-            <Explore_more to="seminars" />
-          ) : null} */}
+            {upcoming_seminars && upcoming_seminars.length ? (
+              <Explore_more to="seminars?upcoming" />
+            ) : null}
           </div>
         </section>
       </>

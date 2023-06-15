@@ -47,21 +47,26 @@ const new_review = (req, res) => {
 
   review.image = save_image(review.image);
 
-  let result = REVIEWS.write(review);
+  let result;
+
+  if (review._id) result = REVIEWS.update(review._id, review);
+  else result = REVIEWS.write(review);
+
   review._id = result._id;
   review.created = result.created;
 
-  if (review.verified)
-    if (!!GLOBALS.readone({ global: GLOBALS_verified_reviews }))
-      GLOBALS.update(
-        { global: GLOBALS_verified_reviews },
-        { reviews: { $push: review._id } }
-      );
-    else
-      GLOBALS.write({
-        global: GLOBALS_verified_reviews,
-        reviews: new Array(review._id),
-      });
+  if (!req.body._id)
+    if (review.verified)
+      if (!!GLOBALS.readone({ global: GLOBALS_verified_reviews }))
+        GLOBALS.update(
+          { global: GLOBALS_verified_reviews },
+          { reviews: { $push: review._id } }
+        );
+      else
+        GLOBALS.write({
+          global: GLOBALS_verified_reviews,
+          reviews: new Array(review._id),
+        });
 
   res.json({ ok: true, message: "review added", data: review });
 };
@@ -127,7 +132,7 @@ const new_video_review = (req, res) => {
   url = save_video(url);
 
   let result;
-  if (_id) VIDEO_REVIEWS.update(_id, { thumbnail, url, image_hash });
+  if (_id) result = VIDEO_REVIEWS.update(_id, { thumbnail, url, image_hash });
   else result = VIDEO_REVIEWS.write({ thumbnail, url, image_hash });
 
   res.json({ ok: true, data: { thumbnail, url, _id: result._id } });

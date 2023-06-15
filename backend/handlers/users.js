@@ -29,18 +29,17 @@ const send_mail = ({
 
   text = text || "";
   html = html || "";
-  let sender = "voucherafrica@digitaladplanet.com";
-  sender_name = sender_name || "Voucher Africa";
+  let sender = "signup@giitafrica.com";
+  sender_name = sender_name || "GIIT ICT Foundation";
 
   try {
     transporter = nodemailer.createTransport({
-      host: "mail.digitaladplanet.com",
-      name: "digitaladplanet.com",
+      host: "premium217.web-hosting.com",
       port: 465,
       secure: true,
       auth: {
         user: sender,
-        pass: "voucherdigiadplanet",
+        pass: "signupgiitafrica",
       },
     });
 
@@ -81,7 +80,6 @@ const signup = (req, res) => {
 
   let user_exists = USERS.readone({ email: user.email });
 
-  console.log(user_exists, user.email);
   if (user_exists)
     return res.json({
       ok: false,

@@ -13,7 +13,7 @@ class Review extends React.Component {
   toggle_full_text = () => this.setState({ full_text: !this.state.full_text });
 
   render() {
-    let { review, remove, testimonials, approve_review } = this.props;
+    let { review, remove, testimonials, edit, approve_review } = this.props;
     let { full_text } = this.state;
     let { image, name, organisation, image_hash, position, rating, text } =
       review;
@@ -66,6 +66,11 @@ class Review extends React.Component {
                 )}
               </div>
             </div>
+            {edit ? (
+              <a onClick={edit} className="btn btn-action px-2">
+                <i className={`fas fa-edit`}></i>
+              </a>
+            ) : null}
             {remove ? (
               <a
                 onClick={() => window.confirm("Remove review?") && remove()}

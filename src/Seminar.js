@@ -117,10 +117,6 @@ class Seminar extends React.Component {
           path: "/testimonials",
         },
         {
-          title: "login",
-          path: "",
-        },
-        {
           title: "get_started",
           path: "/signup",
         }

@@ -9,9 +9,12 @@ class Add_student_review extends Handle_file_upload {
   constructor(props) {
     super(props);
 
+    let { review } = this.props;
+
     this.default_image = "user_image_placeholder.png";
     this.state = {
       image: require("../assets/img/user_image_placeholder.png"),
+      ...review,
     };
   }
 
@@ -42,6 +45,7 @@ class Add_student_review extends Handle_file_upload {
       organisation,
       position,
       posting,
+      _id,
     } = this.state;
     if (posting) return;
 
@@ -56,6 +60,7 @@ class Add_student_review extends Handle_file_upload {
       organisation,
       position,
       verified: !!admin,
+      _id,
     };
 
     let result = await post_request("new_review", review);
@@ -65,7 +70,7 @@ class Add_student_review extends Handle_file_upload {
     review.image = result.image;
     review.created = result.created;
 
-    admin && emitter.emit("new_review", review);
+    admin && emitter.emit(_id ? "review_updated" : "new_alumni_review", review);
 
     on_submit && on_submit(review);
     toggle();
@@ -73,6 +78,7 @@ class Add_student_review extends Handle_file_upload {
 
   render() {
     let { toggle, on_submit, review, video } = this.props;
+    console.log(review);
 
     if (video)
       return (

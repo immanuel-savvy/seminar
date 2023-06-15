@@ -34,7 +34,6 @@ class Seminars extends React.Component {
       skip: (page - 1) * limit,
     });
 
-    console.log(seminars);
     this.setState({ seminars, total });
   };
 

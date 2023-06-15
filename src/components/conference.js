@@ -110,7 +110,6 @@ class Conference extends React.Component {
       speaker,
       speaker_linkedin,
       images,
-      short_description,
       date,
       duration,
       category,
@@ -200,18 +199,7 @@ class Conference extends React.Component {
                 </Link>
               </h4>
             </div>
-            <p className="cursor-pointer" onClick={this.toggle_read_more}>
-              {full ? short_description : short_description.slice(0, 70)}
-              {short_description.length >= 70 ? (
-                <span
-                  className="theme-cl"
-                  style={{ fontStyle: "italic", marginLeft: 5 }}
-                  onClick={this.toggle_read_more}
-                >
-                  {full ? "Show less" : "...Read more"}
-                </span>
-              ) : null}
-            </p>
+
             <p>
               <i className="fas fa-map-marker"></i>{" "}
               <b>
