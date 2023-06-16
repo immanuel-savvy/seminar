@@ -34,6 +34,8 @@ const reviews = (req, res) => {
   if (!verified_reviews) reviews = new Array();
   else reviews = verified_reviews.reviews;
 
+  if (Number(limit) > 0 && reviews.length) reviews = reviews.slice(0, limit);
+
   reviews = REVIEWS.read(verified ? reviews : null, {
     exclude: verified ? null : reviews,
     limit,
