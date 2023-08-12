@@ -1,5 +1,5 @@
 import React from "react";
-import { domain, post_request } from "../assets/js/utils/services";
+import { post_request } from "../assets/js/utils/services";
 import Add_video_review from "../sections/dashboard/add_video_review";
 import { emitter } from "../Seminar";
 import Handle_file_upload from "./handle_file_upload";

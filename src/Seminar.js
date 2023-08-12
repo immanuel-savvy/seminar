@@ -12,9 +12,9 @@ import Forgot_password from "./pages/Forgot_password";
 import Signup from "./pages/Signup";
 import Page_not_found from "./pages/404";
 import Adminstrator from "./pages/Adminstrator";
-import { client_domain } from "./assets/js/utils/constants";
+import { client_domain, organisation_name } from "./assets/js/utils/constants";
 import { get_request, post_request } from "./assets/js/utils/services";
-import { save_to_session } from "./sections/footer";
+import { get_session, save_to_session } from "./sections/footer";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Verify_email from "./pages/Verify_email";
@@ -125,24 +125,12 @@ class Seminar extends React.Component {
   }
 
   componentDidMount = async () => {
-    let loggeduser = window.sessionStorage.getItem("loggeduser");
-    if (loggeduser) {
-      try {
-        this.setState({ loggeduser: JSON.parse(loggeduser) });
-      } catch (e) {}
-    }
+    let loggeduser = get_session("loggeduser");
+    loggeduser && this.setState({ loggeduser });
+
+    document.title = organisation_name;
 
     emitter.single_listener("is_logged_in", this.is_logged_in);
-
-    this.reward_interval = setInterval(() => {
-      let { loggeduser } = this.state;
-      if (this.log_timestamp && loggeduser) {
-        if (Date.now() - this.log_timestamp >= 10 * 60 * 1000) {
-          post_request(`claim_daily_reward_token/${loggeduser._id}`);
-          clearInterval(this.reward_interval);
-        }
-      }
-    }, 60 * 1000);
 
     this.edit_seminar = (seminar) =>
       this.setState({ seminar_in_edit: seminar }, () => {
@@ -157,9 +145,7 @@ class Seminar extends React.Component {
     this.setState({ entry });
   };
 
-  componentWillUnmount = () => {
-    clearInterval(this.reward_interval);
-  };
+  componentWillUnmount = () => {};
 
   set_subnav = async (nav) => {
     let { subnavs } = this.state;

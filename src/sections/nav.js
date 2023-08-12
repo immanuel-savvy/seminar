@@ -178,36 +178,8 @@ class Custom_nav extends React.Component {
                                           {nav.submenu.map((subnav, index) => {
                                             subnav = { ...subnav };
 
-                                            if (
-                                              !loggeduser &&
-                                              new Array(
-                                                "my_vouchers",
-                                                "my_coupons",
-                                                "my_tickets",
-                                                "wishlist",
-                                                "my_subcriptions",
-                                                "create_event"
-                                              ).includes(subnav.title)
-                                            )
-                                              return;
-
-                                            if (
-                                              subnav.title === "create_event" &&
-                                              !loggeduser.vendor
-                                            )
-                                              return;
-
-                                            if (
-                                              subnav.title ===
-                                                "become_a_vendor" &&
-                                              loggeduser &&
-                                              loggeduser.vendor
-                                            ) {
-                                              subnav.title = "vendor_profile";
-                                              subnav.path = `/vendor?${loggeduser.vendor}`;
-                                            } else
-                                              subnav.path =
-                                                this.quick_paths[subnav.title];
+                                            subnav.path =
+                                              this.quick_paths[subnav.title];
 
                                             return (
                                               <li
@@ -335,8 +307,7 @@ class Custom_nav extends React.Component {
                                       ) : null}
                                     </UncontrolledDropdown>
                                   ) : nav.title ===
-                                    "search" ? null : //     style={{ border: "none" }} //     to="#" //   <Link // > //   } //     }) //       show_search: !this.state.show_search, //     this.setState({ //   onClick={() => // <li
-                                  //     className="btn btn-action"
+                                    "search" ? null : //     className="btn btn-action" //     style={{ border: "none" }} //     to="#" //   <Link // > //   } //     }) //       show_search: !this.state.show_search, //     this.setState({ //   onClick={() => // <li
                                   //   >
                                   //     <i className="ti-search"></i>
                                   //   </Link>

@@ -1,6 +1,5 @@
 import React from "react";
 import { get_request } from "../assets/js/utils/services";
-import { emitter } from "../Seminar";
 import Comment from "./comment";
 import Loadindicator from "./loadindicator";
 import Submit_review from "./submit_review";

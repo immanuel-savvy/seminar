@@ -28,7 +28,6 @@ var router = function router(app) {
   app.get("/article/:article", _articles.article);
   app.get("/comments/:article/:skip", _articles.comments);
   app.get("/article_categories", _articles.article_categories);
-  app.get("/article_categories", _articles.article_categories);
   app.get("/testimonials", _reviews.alumni_overview);
   app.get("/sponsors", _sponsors.sponsors);
   app.get("/live_training", _settings.live_training);

@@ -132,7 +132,6 @@ const router = (app) => {
   app.get("/article/:article", article);
   app.get("/comments/:article/:skip", comments);
   app.get("/article_categories", article_categories);
-  app.get("/article_categories", article_categories);
   app.get("/testimonials", alumni_overview);
   app.get("/sponsors", sponsors);
   app.get("/live_training", live_training);

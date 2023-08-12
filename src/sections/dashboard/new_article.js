@@ -253,7 +253,7 @@ class New_article extends Handle_file_upload {
                     ></textarea>
                   </div>
                 ) : (
-                  <div key={iindex} className="form-group">
+                  <div key={index} className="form-group">
                     <span>
                       <label>Block Quote* </label>
                       <a

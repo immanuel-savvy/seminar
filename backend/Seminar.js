@@ -17,10 +17,6 @@ app.get("/", (req, res) =>
   res.send("<div><h1>Hi, its GIIT ICT Foundation.</h1></div>")
 );
 
-app.get("/developer", (req, res) => {
-  res.sendFile(__dirname + "/assets/docs/index.html");
-});
-
 app.listen(1450, () => {
   ds_conn();
 

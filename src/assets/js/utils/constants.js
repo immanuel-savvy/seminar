@@ -1,12 +1,10 @@
-const DEV = true;
+const DEV = false;
 
-const hostname = DEV
-  ? `http://${"localhost"}`
-  : "https://seminar.udaralinksapp.com";
+const hostname = DEV ? `http://${"localhost"}` : "https://cet.giitafrica.com";
 
 const client_domain = DEV ? `${hostname}:1415` : `https://giitfoundation.org`;
 
-const domain = DEV ? `${hostname}:1450` : `https://seminar.udaralinksapp.com`;
+const domain = DEV ? `${hostname}:1450` : `https://cet.giitafrica.com`;
 
 const default_admin = "adminstrators~123seminar~1234567890123";
 
@@ -60,7 +58,10 @@ const dow_index_inverse = new Object({
   sunday: 7,
 });
 
-const organisation_name = "GIIT ICT Foundation";
+const organisation_name =
+  domain === "https://seminar.giitafrica.com"
+    ? "GIIT ICT Foundation"
+    : "CET Foundation";
 
 export {
   domain,

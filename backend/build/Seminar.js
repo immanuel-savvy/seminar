@@ -21,9 +21,6 @@ app.use(_bodyParser.default.json({
 app.get("/", function (req, res) {
   return res.send("<div><h1>Hi, its GIIT ICT Foundation.</h1></div>");
 });
-app.get("/developer", function (req, res) {
-  res.sendFile(__dirname + "/assets/docs/index.html");
-});
 app.listen(1450, function () {
   (0, _conn.default)();
   (0, _starter.create_default_admin)();
